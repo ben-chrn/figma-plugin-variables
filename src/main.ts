@@ -1,187 +1,459 @@
-import { on, showUI, emit } from '@create-figma-plugin/utilities'
-import chroma from 'chroma-js'
+import { on, showUI, emit } from "@create-figma-plugin/utilities";
+import chroma, { Color } from "chroma-js";
 
-import {
-  ImportTokensHandler,
-  ReportErrorHandler,
-  ReportSuccessHandler,
-  GetVariableCollectionsHandler,
-  GetVariableCollectionsResultHandler
-} from './types'
+import { CreateTokenHandler, TokenCreatedHandler } from "./types";
 
-interface CollectionsStore {
-  [key: string]: VariableCollection
+interface ProcessedTokens {
+  collectionName: string;
+  tokensList: {
+    type:
+      | "coreColor"
+      | "aliasColor"
+      | "coreBorderRadius"
+      | "aliasBorderRadius"
+      | "coreSpace"
+      | "aliasSpace";
+    value: ColorToken | SizeToken;
+  }[];
 }
 
-interface ResolveTokenType {
-  properties: any
-  name: string[]
-  collection: string
-  category: string
-  value: any
+export interface TokenProperties {
+  type: string;
+  value: ColorToken | SizeToken;
+  collection: string;
 }
 
-interface TokenProperties {
-  [key: string]: {value: string; group: string} | TokenProperties
+interface MultiModeValue {
+  lightmc: string | undefined;
+  darkmc: string | undefined;
+  lightparthb: string | undefined;
+  darkparthb: string | undefined;
+  lightprohb: string | undefined;
+  darkprohb: string | undefined;
+  mc: string | undefined;
+  hb: string | undefined;
 }
 
-const traverseTokens = (properties: TokenProperties, prefix: string[], collections: CollectionsStore, category: string, importMode: 'new' | 'replace' = 'new') => {
-  const createdVariables: {name: string, variable: Variable}[] = []
-  const aliases: ResolveTokenType[] = []
+interface ColorToken {
+  dls: string;
+  branch: string | undefined;
+  value: MultiModeValue;
+  tokenName: string;
+  linkedColorCoreToken: MultiModeValue;
+}
 
-  for (const [key, value] of Object.entries(properties)) {
-    const prefixedKey = [...prefix, key]
-    if (value.value === undefined) {
-      const recursiveResult = traverseTokens(value as TokenProperties, prefixedKey, collections, category, importMode)
-      createdVariables.push(...recursiveResult.variables)
-      aliases.push(...recursiveResult.aliases)
-      continue
+interface SizeToken {
+  dls: string;
+  branch: string | undefined;
+  value: string;
+  tokenName: string;
+  linkedSpaceToken?: MultiModeValue;
+  linkedBorderRadiusToken?: MultiModeValue;
+}
+
+interface TokenCollection {
+  spacings?: SizeToken[];
+  spacingAliases?: SizeToken[];
+  borderRadius?: SizeToken[];
+  borderRadiusAliases?: SizeToken[];
+  core?: ColorToken[];
+  aliases?: ColorToken[];
+}
+
+interface TokenFile {
+  size?: TokenCollection;
+  color?: TokenCollection;
+}
+
+const createSizingToken = (spaceToken: SizeToken, collectionName: string) => {
+  if (spaceToken.tokenName === undefined) {
+    console.log("undefined token");
+    console.log(spaceToken);
+    return;
+  }
+
+  // Handle creating collection
+  let collection: VariableCollection;
+  const existingCollection = figma.variables
+    .getLocalVariableCollections()
+    .find((c) => c.name.toLowerCase() === collectionName.toLowerCase());
+
+  if (!existingCollection) {
+    collection = figma.variables.createVariableCollection(collectionName);
+  } else {
+    collection = existingCollection;
+  }
+
+  // Handle creating Variable
+  let variable: Variable;
+
+  const finalName = spaceToken.tokenName.replace(/--gy-native-/gi, "");
+
+  const existingVariable = figma.variables
+    .getLocalVariables()
+    .find((v) => v.name.toLowerCase() === finalName);
+
+  if (!existingVariable) {
+    variable = figma.variables.createVariable(
+      finalName,
+      collection.id,
+      "FLOAT"
+    );
+  } else {
+    variable = existingVariable;
+  }
+
+  const size = spaceToken.value;
+  variable.setValueForMode(collection.defaultModeId, parseFloat(size));
+};
+
+const createSizingAlias = (sizeAlias: SizeToken, collectionName: string) => {
+  const spaceAlias: Boolean = sizeAlias.linkedSpaceToken !== null;
+  const radiusAlias: Boolean = sizeAlias.linkedBorderRadiusToken !== null;
+
+  if (!sizeAlias.value && (spaceAlias || radiusAlias)) {
+    let collection: VariableCollection;
+    const existingCollection = figma.variables
+      .getLocalVariableCollections()
+      .find((c) => c.name.toLowerCase() === collectionName.toLowerCase());
+
+    if (!existingCollection) {
+      collection = figma.variables.createVariableCollection(collectionName);
+    } else {
+      collection = existingCollection;
     }
 
-    const collectionName = value.group ? category : value.group
+    const finalName = sizeAlias.tokenName
+      .replace(/--gy-native-/gi, "")
+      .replace(/-/gi, "/");
 
-    if (typeof value.value === 'string' && value.value.startsWith('{')) {
-      aliases.push({
-        properties: value,
-        name: prefixedKey,
-        collection: collectionName,
-        category,
-        value: value.value
-      })
-      continue
+    let variable: Variable;
+    const existingVariable = figma.variables
+      .getLocalVariables()
+      .find((v) => v.name.toLowerCase() === finalName);
+
+    if (!existingVariable) {
+      variable = figma.variables.createVariable(
+        finalName,
+        collection.id,
+        "FLOAT"
+      );
+    } else {
+      variable = existingVariable;
     }
 
-    if (collections[collectionName] === undefined) {
-      if (importMode === 'new') {
-        collections[collectionName] = figma.variables.createVariableCollection(collectionName)
-      } else {
-        // Find variable collection by name
-        const existingCollection = figma.variables
-          .getLocalVariableCollections()
-          .find(c => c.name.toLowerCase() === collectionName.toLowerCase());
+    if (spaceAlias || radiusAlias) {
+      let modeValues;
+      let aliasPrefix;
+      if (spaceAlias) {
+        modeValues = sizeAlias.linkedSpaceToken;
+        aliasPrefix = "spacings";
+      }
+      if (radiusAlias) {
+        modeValues = sizeAlias.linkedBorderRadiusToken;
+        aliasPrefix = "borderRadius";
+      }
 
-        if (!existingCollection) {
-          collections[collectionName] = figma.variables.createVariableCollection(collectionName)
-        } else {
-          collections[collectionName] = existingCollection
+      if (modeValues) {
+        for (const [modeName, modeValue] of Object.entries(modeValues)) {
+          if (collection.modes[0].name === "Mode 1") {
+            collection.renameMode(collection.modes[0].modeId, "mc");
+          }
+
+          const existingMode = collection.modes.find(
+            (m) => m.name === modeName
+          );
+
+          let modeId: string;
+
+          if (!existingMode) {
+            modeId = collection.addMode(modeName);
+          } else {
+            modeId = existingMode.modeId;
+          }
+
+          // finding aliasVar
+          const pattern = `{size.${aliasPrefix}.`;
+          const regex = new RegExp(pattern, "gi");
+          const coreTokenName = modeValue
+            ?.replace(regex, "")
+            .replace(/}/gi, "")
+            .replace(/--gy-native-/gi, "")
+            .replace(/.value/gi, "");
+
+          const coreVariable = figma.variables
+            .getLocalVariables()
+            .find((v) => v.name.toLowerCase() === coreTokenName);
+
+          if (coreVariable) {
+            variable.setValueForMode(
+              modeId,
+              figma.variables.createVariableAlias(coreVariable)
+            );
+          }
+
+          return;
         }
       }
     }
+  }
+};
 
-    switch(category) {
-      case 'size': {
-        const variable = figma.variables.createVariable(prefixedKey.join('/'), collections[collectionName].id, 'FLOAT')
-
-        variable.setValueForMode(collections[collectionName].defaultModeId, parseInt(value.value as string))
-        createdVariables.push({
-          name: prefixedKey.join('/'),
-          variable,
-        })
-        break
-      }
-      case 'color': {
-        const variable = figma.variables.createVariable(prefixedKey.join('/'), collections[collectionName].id, 'COLOR')
-
-        const rgbColor = chroma(value.value as string).rgba();
-
-        variable.setValueForMode(collections[collectionName].defaultModeId, {
-          r: rgbColor[0] / 255,
-          g: rgbColor[1] / 255,
-          b: rgbColor[2] / 255,
-          a: rgbColor[3],
-        })
-        createdVariables.push({
-          name: prefixedKey.join('/'),
-          variable,
-        })
-        break
-      }
-      case 'content': {
-        const variable = figma.variables.createVariable(prefixedKey.join('/'), collections[collectionName].id, 'STRING')
-
-        variable.setValueForMode(collections[collectionName].defaultModeId, value.value as string)
-        createdVariables.push({
-          name: prefixedKey.join('/'),
-          variable,
-        })
-        break
-      }
-    }
+const createColorToken = (colorToken: ColorToken, collectionName: string) => {
+  if (colorToken.tokenName === undefined) {
+    console.log("undefined token");
+    console.log(colorToken);
+    return;
   }
 
-  return {
-    variables: createdVariables,
-    aliases,
-  }
-}
+  // Handle creating Collection
+  let collection: VariableCollection;
+  const existingCollection = figma.variables
+    .getLocalVariableCollections()
+    .find((c) => c.name.toLowerCase() === collectionName.toLowerCase());
 
-const resolveVariableAliases = (variables: {name: string, variable: Variable}[], aliases: ResolveTokenType[], collections: CollectionsStore, category: string) => {
-  const createdVariables: Variable[] = []
-
-  const figmaType: {size: VariableResolvedDataType, color: VariableResolvedDataType, content: VariableResolvedDataType} = {
-    size: 'FLOAT',
-    color: 'COLOR',
-    content: 'STRING',
+  if (!existingCollection) {
+    collection = figma.variables.createVariableCollection(collectionName);
+  } else {
+    collection = existingCollection;
   }
 
-  for (const alias of aliases) {
-    const normalizedAliasName = alias.value.replace('color.', '').replace('{', '').replace('}', '').replace(/\./g, '/')
+  let variable: Variable;
 
-    const findVariable = variables.find(
-      v => v.name === normalizedAliasName
-    )
+  const finalName = colorToken.tokenName
+    .replace(/--gy-color-/gi, "")
+    .replace(/-/gi, "/");
 
-    console.log(findVariable)
-    if (!findVariable) {
-      continue
+  const existingVariable = figma.variables
+    .getLocalVariables()
+    .find((v) => v.name.toLowerCase() === finalName);
+
+  if (!existingVariable) {
+    variable = figma.variables.createVariable(
+      finalName,
+      collection.id,
+      "COLOR"
+    );
+  } else {
+    variable = existingVariable;
+  }
+  // Handle creating modes
+  let modeId: string;
+
+  for (const [modeName, valueForMode] of Object.entries(colorToken.value)) {
+    if (modeName.includes("pro")) {
+      continue;
     }
 
-    const aliasedVariable = figma.variables.createVariable(
-      alias.name.join('/'),
-      collections[alias.collection].id,
-      figmaType[category as 'size' | 'color' | 'content']
-    )
+    // replace first default mode
+    if (collection.modes[0].name === "Mode 1") {
+      collection.renameMode(collection.modes[0].modeId, "lightmc");
+    }
 
-    aliasedVariable.setValueForMode(
-      collections[alias.collection].defaultModeId,
-      figma.variables.createVariableAlias(findVariable.variable)
-    )
+    const existingMode = collection.modes.find((m) => m.name === modeName);
 
-    createdVariables.push(aliasedVariable)
+    if (!existingMode) {
+      modeId = collection.addMode(modeName);
+    } else {
+      modeId = existingMode.modeId;
+    }
+
+    if (valueForMode) {
+      const rgbColor = chroma(valueForMode as string).rgba();
+      variable.setValueForMode(modeId, {
+        r: rgbColor[0] / 255,
+        g: rgbColor[1] / 255,
+        b: rgbColor[2] / 255,
+        a: rgbColor[3],
+      });
+    }
   }
+};
 
-  return createdVariables
-}
+const createColorAlias = (colorAlias: ColorToken, collectionName: string) => {
+  if (!colorAlias.value && colorAlias.linkedColorCoreToken) {
+    let collection: VariableCollection;
+    const existingCollection = figma.variables
+      .getLocalVariableCollections()
+      .find((c) => c.name.toLowerCase() === collectionName.toLowerCase());
+
+    if (!existingCollection) {
+      collection = figma.variables.createVariableCollection(collectionName);
+    } else {
+      collection = existingCollection;
+    }
+
+    const finalName = colorAlias.tokenName
+      .replace(/--gy-native-/gi, "")
+      .replace(/color-/gi, "")
+      .replace(/-/gi, "/");
+
+    let variable: Variable;
+    const existingVariable = figma.variables
+      .getLocalVariables()
+      .find((v) => v.name.toLowerCase() === finalName);
+
+    if (!existingVariable) {
+      variable = figma.variables.createVariable(
+        finalName,
+        collection.id,
+        "COLOR"
+      );
+    } else {
+      variable = existingVariable;
+    }
+
+    for (const [modeName, modeValue] of Object.entries(
+      colorAlias.linkedColorCoreToken
+    )) {
+      if (collection.modes[0].name === "Mode 1") {
+        collection.renameMode(collection.modes[0].modeId, "mc");
+      }
+
+      const existingMode = collection.modes.find((m) => m.name === modeName);
+
+      let modeId: string;
+
+      if (!existingMode) {
+        modeId = collection.addMode(modeName);
+      } else {
+        modeId = existingMode.modeId;
+      }
+
+      // finding aliasVar
+      const coreTokenName = modeValue
+        ?.replace(/{color.core./gi, "")
+        .replace(/}/gi, "")
+        .replace(/--gy-color-/gi, "")
+        .replace(/-/gi, "/");
+
+      const coreVariable = figma.variables
+        .getLocalVariables()
+        .find((v) => v.name.toLowerCase() === coreTokenName);
+
+      if (coreVariable) {
+        variable.setValueForMode(
+          modeId,
+          figma.variables.createVariableAlias(coreVariable)
+        );
+      }
+
+      return;
+    }
+  }
+};
 
 export default function () {
-  on<ImportTokensHandler>('IMPORT_TOKENS', async (tokens, importMode) => {
-    const file = JSON.parse(tokens)
-
-    const [category, properties] = Object.entries(file)[0]
-    const collections: CollectionsStore = {}
-
-    const allowCategories = ['size', 'color', 'content']
-
-    if (!allowCategories.includes(category)) {
-      emit<ReportErrorHandler>('REPORT_ERROR', `We currently only support the following categories: ${allowCategories.join(', ')}`)
+  on<CreateTokenHandler>("CREATE_TOKEN", async (token: TokenProperties) => {
+    switch (token.type) {
+      case "coreColor":
+        //@ts-expect-error
+        createColorToken(token.value, token.collection);
+        break;
+      case "aliasColor":
+        //@ts-expect-error
+        createColorAlias(token.value, token.collection);
+        break;
+      case "coreBorderRadius":
+        //@ts-expect-error
+        createSizingToken(token.value, token.collection);
+        break;
+      case "aliasBorderRadius":
+        //@ts-expect-error
+        createSizingAlias(token.value, token.collection);
+        break;
+      case "coreSpace":
+        //@ts-expect-error
+        createSizingToken(token.value, token.collection);
+        break;
+      case "aliasSpace":
+        //@ts-expect-error
+        createSizingAlias(token.value, token.collection);
+        break;
+      default:
+        break;
     }
 
-    const totalTokens = traverseTokens(properties as TokenProperties, [], collections, category, importMode)
+    emit<TokenCreatedHandler>("TOKEN_CREATED", token.value.tokenName);
+  });
 
-    const totalAliased = resolveVariableAliases(totalTokens.variables, totalTokens.aliases, collections, category)
+  showUI({ height: 300, width: 320 });
+}
 
-    if (totalTokens.variables.length > 0) {
-      emit<ReportSuccessHandler>('REPORT_SUCCESS', `Imported ${totalTokens.variables.length + totalAliased.length} tokens as variables.`)
+export function processTokens(tokens: string) {
+  const file: TokenFile = JSON.parse(tokens);
+  let processedTokens: ProcessedTokens = {
+    collectionName: "",
+    tokensList: [],
+  };
+
+  if (file.color) {
+    processedTokens.collectionName = Object.keys(file.color)[0];
+
+    if (file.color.core) {
+      let tokensList = Object.entries(file.color.core);
+      for (const [tokenName, tokenValue] of tokensList) {
+        processedTokens.tokensList.push({
+          type: "coreColor",
+          value: tokenValue,
+        });
+      }
     }
-  })
-  on<GetVariableCollectionsHandler>('GET_COLLECTIONS', () => {
-    emit<GetVariableCollectionsResultHandler>(
-      'GET_COLLECTIONS_RESULT',
-      figma.variables.getLocalVariableCollections().map(c => ({
-        id: c.id,
-        name: c.name,
-      }))
-    )
-  })
-  showUI({ height: 300, width: 320 })
+
+    if (file.color.aliases) {
+      let tokensList = Object.entries(file.color.aliases);
+      for (const [tokenName, tokenValue] of tokensList) {
+        processedTokens.tokensList.push({
+          type: "aliasColor",
+          value: tokenValue,
+        });
+      }
+    }
+  }
+
+  if (file.size) {
+    processedTokens.collectionName = Object.keys(file.size)[0];
+
+    if (file.size.spacings) {
+      let tokensList = Object.entries(file.size.spacings);
+      for (const [tokenName, tokenValue] of tokensList) {
+        processedTokens.tokensList.push({
+          type: "coreSpace",
+          value: tokenValue,
+        });
+      }
+    }
+
+    if (file.size.spacingAliases) {
+      let tokensList = Object.entries(file.size.spacingAliases);
+      for (const [tokenName, tokenValue] of tokensList) {
+        processedTokens.tokensList.push({
+          type: "aliasSpace",
+          value: tokenValue,
+        });
+      }
+    }
+
+    if (file.size.borderRadius) {
+      let tokensList = Object.entries(file.size.borderRadius);
+      for (const [tokenName, tokenValue] of tokensList) {
+        processedTokens.tokensList.push({
+          type: "coreBorderRadius",
+          value: tokenValue,
+        });
+      }
+    }
+
+    if (file.size.borderRadiusAliases) {
+      let tokensList = Object.entries(file.size.borderRadiusAliases);
+      for (const [tokenName, tokenValue] of tokensList) {
+        processedTokens.tokensList.push({
+          type: "aliasBorderRadius",
+          value: tokenValue,
+        });
+      }
+    }
+  }
+
+  return processedTokens;
 }

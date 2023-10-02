@@ -1,0 +1,516 @@
+{
+  "color": {
+    "Primary": {
+      "Black": {
+        "value": "#000000",
+        "group": "Component aliases"
+      },
+      "White": {
+        "value": "#FFFFFF",
+        "group": "Component aliases"
+      },
+      "Purple": {
+        "value": "{color.Purple.700}",
+        "group": "Component aliases"
+      },
+      "Red": {
+        "value": "{color.Red.700}",
+        "group": "Component aliases"
+      },
+      "Orange": {
+        "value": "{color.Orange.700}",
+        "group": "Component aliases"
+      },
+      "Yellow": {
+        "value": "{color.Yellow.700}",
+        "group": "Component aliases"
+      },
+      "Green": {
+        "value": "{color.Green.700}",
+        "group": "Component aliases"
+      },
+      "Teal": {
+        "value": "{color.Teal.700}",
+        "group": "Component aliases"
+      },
+      "Blue": {
+        "value": "{color.Blue.700}",
+        "group": "Component aliases"
+      }
+    },
+    "Background": {
+      "Primary": {
+        "value": "{color.Primary.White}",
+        "group": "Component aliases"
+      },
+      "Secondary": {
+        "value": "{color.Slate.50}",
+        "group": "Component aliases"
+      },
+      "Button": {
+        "Default": {
+          "value": "{color.Slate.100}",
+          "group": "Component aliases"
+        },
+        "Default Active": {
+          "value": "{color.Slate.300}",
+          "group": "Component aliases"
+        },
+        "Default Disabled": {
+          "value": "{color.Slate.100}",
+          "group": "Component aliases"
+        },
+        "Text": {
+          "value": "{color.Primary.White}",
+          "group": "Component aliases"
+        },
+        "Text Active": {
+          "value": "{color.Purple.100}",
+          "group": "Component aliases"
+        },
+        "Text Disabled": {
+          "value": "{color.Slate.50}",
+          "group": "Component aliases"
+        },
+        "Primary": {
+          "value": "{color.Primary.Purple}",
+          "group": "Component aliases"
+        },
+        "Primary Active": {
+          "value": "{color.Purple.900}",
+          "group": "Component aliases"
+        },
+        "Primary Disabled": {
+          "value": "{color.Purple.400}",
+          "group": "Component aliases"
+        },
+        "Danger": {
+          "value": "{color.Red.800}",
+          "group": "Component aliases"
+        },
+        "Danger Active": {
+          "value": "{color.Red.900}",
+          "group": "Component aliases"
+        },
+        "Danger Disabled": {
+          "value": "{color.Red.400}",
+          "group": "Component aliases"
+        }
+      },
+      "Input": {
+        "Default": {
+          "value": "{color.Background.Primary}",
+          "group": "Component aliases"
+        },
+        "Disabled": {
+          "value": "{color.Slate.50}",
+          "group": "Component aliases"
+        },
+        "Checkbox": {
+          "value": "{color.Primary.White}",
+          "group": "Component aliases"
+        },
+        "Checkbox Checked": {
+          "value": "{color.Primary.Blue}",
+          "group": "Component aliases"
+        },
+        "Checkbox Disabled": {
+          "value": "{color.Slate.300}",
+          "group": "Component aliases"
+        },
+        "Toggle": {
+          "value": "{color.Slate.800}",
+          "group": "Component aliases"
+        },
+        "Toggle Disabled": {
+          "value": "{color.Slate.300}",
+          "group": "Component aliases"
+        },
+        "Toggle Checked": {
+          "value": "{color.Primary.Purple}",
+          "group": "Component aliases"
+        },
+        "Toggle Checked Disabled": {
+          "value": "{color.Purple.300}",
+          "group": "Component aliases"
+        },
+        "Toggle Danger": {
+          "value": "{color.Red.800}",
+          "group": "Component aliases"
+        },
+        "Toggle Danger Disabled": {
+          "value": "{color.Red.400}",
+          "group": "Component aliases"
+        }
+      },
+      "Label": {
+        "Grey": {
+          "value": "{color.Slate.100}",
+          "group": "Component aliases"
+        },
+        "Grey Hover": {
+          "value": "{color.Slate.400}",
+          "group": "Component aliases"
+        },
+        "Grey Disabled": {
+          "value": "{color.Slate.50}",
+          "group": "Component aliases"
+        },
+        "Dark Grey": {
+          "value": "{color.Slate.300}",
+          "group": "Component aliases"
+        },
+        "Dark Grey Hover": {
+          "value": "{color.Slate.500}",
+          "group": "Component aliases"
+        },
+        "Dark Grey Disabled": {
+          "value": "{color.Slate.100}",
+          "group": "Component aliases"
+        },
+        "Purple": {
+          "value": "{color.Purple.300}",
+          "group": "Component aliases"
+        },
+        "Purple Hover": {
+          "value": "{color.Purple.500}",
+          "group": "Component aliases"
+        },
+        "Purple Disabled": {
+          "value": "{color.Purple.100}",
+          "group": "Component aliases"
+        },
+        "Red": {
+          "value": "{color.Red.300}",
+          "group": "Component aliases"
+        },
+        "Red Hover": {
+          "value": "{color.Red.500}",
+          "group": "Component aliases"
+        },
+        "Red Disabled": {
+          "value": "{color.Red.100}",
+          "group": "Component aliases"
+        },
+        "Dark Red": {
+          "value": "{color.Red.800}",
+          "group": "Component aliases"
+        },
+        "Dark Red Hover": {
+          "value": "{color.Red.900}",
+          "group": "Component aliases"
+        },
+        "Dark Red Disabled": {
+          "value": "{color.Red.300}",
+          "group": "Component aliases"
+        },
+        "Orange": {
+          "value": "{color.Orange.200}",
+          "group": "Component aliases"
+        },
+        "Orange Hover": {
+          "value": "{color.Orange.500}",
+          "group": "Component aliases"
+        },
+        "Orange Disabled": {
+          "value": "{color.Orange.100}",
+          "group": "Component aliases"
+        },
+        "Yellow": {
+          "value": "{color.Yellow.200}",
+          "group": "Component aliases"
+        },
+        "Yellow Hover": {
+          "value": "{color.Yellow.500}",
+          "group": "Component aliases"
+        },
+        "Yellow Disabled": {
+          "value": "{color.Yellow.100}",
+          "group": "Component aliases"
+        },
+        "Green": {
+          "value": "{color.Green.300}",
+          "group": "Component aliases"
+        },
+        "Green Hover": {
+          "value": "{color.Green.500}",
+          "group": "Component aliases"
+        },
+        "Green Disabled": {
+          "value": "{color.Green.100}",
+          "group": "Component aliases"
+        },
+        "Teal": {
+          "value": "{color.Teal.300}",
+          "group": "Component aliases"
+        },
+        "Teal Hover": {
+          "value": "{color.Teal.500}",
+          "group": "Component aliases"
+        },
+        "Teal Disabled": {
+          "value": "{color.Teal.100}",
+          "group": "Component aliases"
+        },
+        "Blue": {
+          "value": "{color.Blue.300}",
+          "group": "Component aliases"
+        },
+        "Blue Hover": {
+          "value": "{color.Blue.500}",
+          "group": "Component aliases"
+        },
+        "Blue Disabled": {
+          "value": "{color.Blue.100}",
+          "group": "Component aliases"
+        },
+        "White": {
+          "value": "{color.Primary.White}",
+          "group": "Component aliases"
+        },
+        "White Hover": {
+          "value": "{color.Slate.300}",
+          "group": "Component aliases"
+        },
+        "White Disabled": {
+          "value": "{color.Primary.White}",
+          "group": "Component aliases"
+        }
+      },
+      "Docs": {
+        "Note": {
+          "Default": {
+            "value": "{color.Yellow.100}",
+            "group": "Component aliases"
+          },
+          "Feedback": {
+            "value": "{color.Blue.100}",
+            "group": "Component aliases"
+          },
+          "Action Item": {
+            "value": "{color.Red.100}",
+            "group": "Component aliases"
+          },
+          "Flow": {
+            "value": "{color.Purple.100}",
+            "group": "Component aliases"
+          }
+        },
+        "Frame Label": {
+          "Slate": {
+            "value": "{color.Slate.1000}",
+            "group": "Component aliases"
+          },
+          "Purple": {
+            "value": "{color.Primary.Purple}",
+            "group": "Component aliases"
+          },
+          "Blue": {
+            "value": "{color.Primary.Blue}",
+            "group": "Component aliases"
+          },
+          "Red": {
+            "value": "{color.Primary.Red}",
+            "group": "Component aliases"
+          }
+        }
+      }
+    },
+    "Text": {
+      "Primary": {
+        "value": "{color.Slate.1000}",
+        "group": "Component aliases"
+      },
+      "Secondary": {
+        "value": "{color.Slate.800}",
+        "group": "Component aliases"
+      },
+      "Inverse": {
+        "value": "{color.Primary.White}",
+        "group": "Component aliases"
+      },
+      "Active": {
+        "value": "{color.Primary.Purple}",
+        "group": "Component aliases"
+      },
+      "Danger": {
+        "value": "{color.Red.800}",
+        "group": "Component aliases"
+      },
+      "Disabled": {
+        "value": "{color.Slate.500}",
+        "group": "Component aliases"
+      }
+    },
+    "Border": {
+      "Hairline": {
+        "value": "{color.Slate.100}",
+        "group": "Component aliases"
+      },
+      "Divider": {
+        "value": "{color.Slate.200}",
+        "group": "Component aliases"
+      },
+      "Icon": {
+        "Primary": {
+          "value": "{color.Slate.1000}",
+          "group": "Component aliases"
+        },
+        "Secondary": {
+          "value": "{color.Slate.800}",
+          "group": "Component aliases"
+        },
+        "Inverse": {
+          "value": "{color.Primary.White}",
+          "group": "Component aliases"
+        },
+        "Active": {
+          "value": "{color.Primary.Purple}",
+          "group": "Component aliases"
+        },
+        "Success": {
+          "value": "{color.Green.800}",
+          "group": "Component aliases"
+        },
+        "Warning": {
+          "value": "{color.Yellow.800}",
+          "group": "Component aliases"
+        },
+        "Danger": {
+          "value": "{color.Red.800}",
+          "group": "Component aliases"
+        },
+        "Disabled": {
+          "value": "{color.Slate.500}",
+          "group": "Component aliases"
+        },
+        "Label": {
+          "Grey": {
+            "value": "{color.Slate.800}",
+            "group": "Component aliases"
+          },
+          "Grey Disabled": {
+            "value": "{color.Slate.100}",
+            "group": "Component aliases"
+          },
+          "Dark Grey": {
+            "value": "{color.Slate.900}",
+            "group": "Component aliases"
+          },
+          "Dark Grey Disabled": {
+            "value": "{color.Slate.200}",
+            "group": "Component aliases"
+          },
+          "Purple": {
+            "value": "{color.Purple.900}",
+            "group": "Component aliases"
+          },
+          "Purple Disabled": {
+            "value": "{color.Purple.200}",
+            "group": "Component aliases"
+          },
+          "Red": {
+            "value": "{color.Red.900}",
+            "group": "Component aliases"
+          },
+          "Red Disabled": {
+            "value": "{color.Red.200}",
+            "group": "Component aliases"
+          },
+          "Dark Red": {
+            "value": "{color.Primary.White}",
+            "group": "Component aliases"
+          },
+          "Dark Red Disabled": {
+            "value": "{color.Primary.White}",
+            "group": "Component aliases"
+          },
+          "Orange": {
+            "value": "{color.Orange.900}",
+            "group": "Component aliases"
+          },
+          "Orange Disabled": {
+            "value": "{color.Orange.200}",
+            "group": "Component aliases"
+          },
+          "Yellow": {
+            "value": "{color.Yellow.900}",
+            "group": "Component aliases"
+          },
+          "Yellow Disabled": {
+            "value": "{color.Yellow.300}",
+            "group": "Component aliases"
+          },
+          "Green": {
+            "value": "{color.Green.900}",
+            "group": "Component aliases"
+          },
+          "Green Disabled": {
+            "value": "{color.Green.200}",
+            "group": "Component aliases"
+          },
+          "Teal": {
+            "value": "{color.Teal.900}",
+            "group": "Component aliases"
+          },
+          "Teal Disabled": {
+            "value": "{color.Teal.300}",
+            "group": "Component aliases"
+          },
+          "Blue": {
+            "value": "{color.Blue.900}",
+            "group": "Component aliases"
+          },
+          "Blue Disabled": {
+            "value": "{color.Blue.200}",
+            "group": "Component aliases"
+          },
+          "White": {
+            "value": "{color.Slate.700}",
+            "group": "Component aliases"
+          },
+          "White Disabled": {
+            "value": "{color.Slate.100}",
+            "group": "Component aliases"
+          }
+        }
+      },
+      "Input": {
+        "Default": {
+          "value": "{color.Slate.800}",
+          "group": "Component aliases"
+        },
+        "Active": {
+          "value": "{color.Primary.Purple}",
+          "group": "Component aliases"
+        },
+        "Danger": {
+          "value": "{color.Red.800}",
+          "group": "Component aliases"
+        },
+        "Disabled": {
+          "value": "{color.Slate.400}",
+          "group": "Component aliases"
+        }
+      },
+      "Note": {
+        "Default": {
+          "value": "{color.Yellow.600}",
+          "group": "Component aliases"
+        },
+        "Feedback": {
+          "value": "{color.Blue.600}",
+          "group": "Component aliases"
+        },
+        "Action Item": {
+          "value": "{color.Red.600}",
+          "group": "Component aliases"
+        },
+        "Flow": {
+          "value": "{color.Purple.600}",
+          "group": "Component aliases"
+        }
+      }
+    }
+  }
+}
