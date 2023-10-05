@@ -12,7 +12,7 @@ import {
   Stack,
   IconCheckCircle32,
 } from "@create-figma-plugin/ui";
-import { emit, on } from "@create-figma-plugin/utilities";
+import { emit, on, once } from "@create-figma-plugin/utilities";
 import { h } from "preact";
 import { useContext, useEffect, useMemo, useState } from "preact/hooks";
 
@@ -23,7 +23,7 @@ import {
   CreateTokenHandler,
   TokenCreatedHandler,
 } from "./types";
-import { TokenProperties, processTokens } from "./main";
+import { TokenProperties, ProcessedTokens, processTokens } from "./main";
 
 function Plugin() {
   const [errorMsg, setErrorMsg] = useState<string | null>();
@@ -36,18 +36,17 @@ function Plugin() {
     const reader = new FileReader();
     reader.readAsText(files[0]);
 
-    reader.onloadend = () => {
+    reader.onloadend = async () => {
       if (typeof reader.result === "string") {
         const tokens = processTokens(reader.result);
         setTotalCount(tokens.tokensList.length);
-
         for (const token of tokens.tokensList) {
           const tokenObj: TokenProperties = {
             type: token.type,
             value: token.value,
             collection: tokens.collectionName,
           };
-          emit<CreateTokenHandler>("CREATE_TOKEN", tokenObj);
+          await emit<CreateTokenHandler>("CREATE_TOKEN", tokenObj);
         }
       }
     };
@@ -62,10 +61,8 @@ function Plugin() {
       setSuccessMsg(msg);
     });
 
-    on<TokenCreatedHandler>("TOKEN_CREATED", (tokenName) => {
-      setCurrCount(currCount + 1);
-      setLastCreatedToken(tokenName);
-    });
+    // on<TokenCreatedHandler>("TOKEN_CREATED", (tokenName) => {
+    // });
   }, []);
 
   return (
@@ -83,6 +80,7 @@ function Plugin() {
           </Banner>
         )}
         {totalCount > 0 && <Text>Importing {totalCount} tokens</Text>}
+        {currCount == totalCount && <Text>Import finished</Text>}
         {lastCreatedToken !== "" && (
           <Text>Created token {lastCreatedToken}</Text>
         )}

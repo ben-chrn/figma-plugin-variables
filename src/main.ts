@@ -1,9 +1,17 @@
-import { on, showUI, emit } from "@create-figma-plugin/utilities";
+import { on, once, showUI, emit } from "@create-figma-plugin/utilities";
 import chroma, { Color } from "chroma-js";
 
 import { CreateTokenHandler, TokenCreatedHandler } from "./types";
+import {
+  renameCoreColorStructure,
+  renameCoreSpacingStructure,
+  renameCoreRadiusStructure,
+  renameAliasColorStructure,
+  renameAliasSpacingStructure,
+  renameAliasRadiusStructure,
+} from "./utils";
 
-interface ProcessedTokens {
+export interface ProcessedTokens {
   collectionName: string;
   tokensList: {
     type:
@@ -65,7 +73,7 @@ interface TokenFile {
   color?: TokenCollection;
 }
 
-const createSizingToken = (spaceToken: SizeToken, collectionName: string) => {
+const createSpacingToken = (spaceToken: SizeToken, collectionName: string) => {
   if (spaceToken.tokenName === undefined) {
     console.log("undefined token");
     console.log(spaceToken);
@@ -87,7 +95,9 @@ const createSizingToken = (spaceToken: SizeToken, collectionName: string) => {
   // Handle creating Variable
   let variable: Variable;
 
-  const finalName = spaceToken.tokenName.replace(/--gy-native-/gi, "");
+  const finalName = renameCoreSpacingStructure(spaceToken.tokenName);
+
+  console.log(finalName);
 
   const existingVariable = figma.variables
     .getLocalVariables()
@@ -107,11 +117,8 @@ const createSizingToken = (spaceToken: SizeToken, collectionName: string) => {
   variable.setValueForMode(collection.defaultModeId, parseFloat(size));
 };
 
-const createSizingAlias = (sizeAlias: SizeToken, collectionName: string) => {
-  const spaceAlias: Boolean = sizeAlias.linkedSpaceToken !== null;
-  const radiusAlias: Boolean = sizeAlias.linkedBorderRadiusToken !== null;
-
-  if (!sizeAlias.value && (spaceAlias || radiusAlias)) {
+const createSpacingAlias = (spaceAlias: SizeToken, collectionName: string) => {
+  if (!spaceAlias.value) {
     let collection: VariableCollection;
     const existingCollection = figma.variables
       .getLocalVariableCollections()
@@ -123,9 +130,7 @@ const createSizingAlias = (sizeAlias: SizeToken, collectionName: string) => {
       collection = existingCollection;
     }
 
-    const finalName = sizeAlias.tokenName
-      .replace(/--gy-native-/gi, "")
-      .replace(/-/gi, "/");
+    const finalName = renameAliasSpacingStructure(spaceAlias.tokenName);
 
     let variable: Variable;
     const existingVariable = figma.variables
@@ -142,58 +147,169 @@ const createSizingAlias = (sizeAlias: SizeToken, collectionName: string) => {
       variable = existingVariable;
     }
 
-    if (spaceAlias || radiusAlias) {
-      let modeValues;
-      let aliasPrefix;
-      if (spaceAlias) {
-        modeValues = sizeAlias.linkedSpaceToken;
-        aliasPrefix = "spacings";
-      }
-      if (radiusAlias) {
-        modeValues = sizeAlias.linkedBorderRadiusToken;
-        aliasPrefix = "borderRadius";
-      }
+    let modeValues;
 
-      if (modeValues) {
-        for (const [modeName, modeValue] of Object.entries(modeValues)) {
-          if (collection.modes[0].name === "Mode 1") {
-            collection.renameMode(collection.modes[0].modeId, "mc");
-          }
+    modeValues = spaceAlias.linkedSpaceToken;
+    // if (radiusAlias) {
+    //   modeValues = sizeAlias.linkedBorderRadiusToken;
+    //   aliasPrefix = "borderRadius";
+    // }
 
-          const existingMode = collection.modes.find(
-            (m) => m.name === modeName
-          );
-
-          let modeId: string;
-
-          if (!existingMode) {
-            modeId = collection.addMode(modeName);
-          } else {
-            modeId = existingMode.modeId;
-          }
-
-          // finding aliasVar
-          const pattern = `{size.${aliasPrefix}.`;
-          const regex = new RegExp(pattern, "gi");
-          const coreTokenName = modeValue
-            ?.replace(regex, "")
-            .replace(/}/gi, "")
-            .replace(/--gy-native-/gi, "")
-            .replace(/.value/gi, "");
-
-          const coreVariable = figma.variables
-            .getLocalVariables()
-            .find((v) => v.name.toLowerCase() === coreTokenName);
-
-          if (coreVariable) {
-            variable.setValueForMode(
-              modeId,
-              figma.variables.createVariableAlias(coreVariable)
-            );
-          }
-
-          return;
+    if (modeValues) {
+      for (const [modeName, modeValue] of Object.entries(modeValues)) {
+        if (collection.modes[0].name === "Mode 1") {
+          collection.renameMode(collection.modes[0].modeId, "mc");
         }
+
+        const existingMode = collection.modes.find((m) => m.name === modeName);
+
+        let modeId: string;
+
+        if (!existingMode) {
+          modeId = collection.addMode(modeName);
+        } else {
+          modeId = existingMode.modeId;
+        }
+
+        // finding aliasVar
+        const coreTokenName = renameCoreSpacingStructure(
+          modeValue.replace(/{size.spacings./gi, "").replace(/.value}/gi, "")
+        );
+
+        console.log(finalName, coreTokenName);
+
+        const coreVariable = figma.variables
+          .getLocalVariables()
+          .find((v) => v.name.toLowerCase() === coreTokenName);
+
+        if (coreVariable) {
+          variable.setValueForMode(
+            modeId,
+            figma.variables.createVariableAlias(coreVariable)
+          );
+        }
+
+        return;
+      }
+    }
+  }
+};
+
+const createRadiusToken = (radiusToken: SizeToken, collectionName: string) => {
+  if (radiusToken.tokenName === undefined) {
+    console.log("undefined token");
+    console.log(radiusToken);
+    return;
+  }
+
+  // Handle creating collection
+  let collection: VariableCollection;
+  const existingCollection = figma.variables
+    .getLocalVariableCollections()
+    .find((c) => c.name.toLowerCase() === collectionName.toLowerCase());
+
+  if (!existingCollection) {
+    collection = figma.variables.createVariableCollection(collectionName);
+  } else {
+    collection = existingCollection;
+  }
+
+  // Handle creating Variable
+  let variable: Variable;
+
+  const finalName = renameCoreRadiusStructure(radiusToken.tokenName);
+
+  console.log(finalName);
+
+  const existingVariable = figma.variables
+    .getLocalVariables()
+    .find((v) => v.name.toLowerCase() === finalName);
+
+  if (!existingVariable) {
+    variable = figma.variables.createVariable(
+      finalName,
+      collection.id,
+      "FLOAT"
+    );
+  } else {
+    variable = existingVariable;
+  }
+
+  const size = radiusToken.value;
+  variable.setValueForMode(collection.defaultModeId, parseFloat(size));
+};
+
+const createRadiusAlias = (radiusAlias: SizeToken, collectionName: string) => {
+  if (!radiusAlias.value) {
+    let collection: VariableCollection;
+    const existingCollection = figma.variables
+      .getLocalVariableCollections()
+      .find((c) => c.name.toLowerCase() === collectionName.toLowerCase());
+
+    if (!existingCollection) {
+      collection = figma.variables.createVariableCollection(collectionName);
+    } else {
+      collection = existingCollection;
+    }
+
+    const finalName = renameAliasRadiusStructure(radiusAlias.tokenName);
+
+    let variable: Variable;
+    const existingVariable = figma.variables
+      .getLocalVariables()
+      .find((v) => v.name.toLowerCase() === finalName);
+
+    if (!existingVariable) {
+      variable = figma.variables.createVariable(
+        finalName,
+        collection.id,
+        "FLOAT"
+      );
+    } else {
+      variable = existingVariable;
+    }
+
+    let modeValues;
+
+    modeValues = radiusAlias.linkedBorderRadiusToken;
+
+    if (modeValues) {
+      for (const [modeName, modeValue] of Object.entries(modeValues)) {
+        if (collection.modes[0].name === "Mode 1") {
+          collection.renameMode(collection.modes[0].modeId, "mc");
+        }
+
+        const existingMode = collection.modes.find((m) => m.name === modeName);
+
+        let modeId: string;
+
+        if (!existingMode) {
+          modeId = collection.addMode(modeName);
+        } else {
+          modeId = existingMode.modeId;
+        }
+
+        // finding aliasVar
+        const coreTokenName = renameCoreRadiusStructure(
+          modeValue
+            .replace(/{size.borderRadius./gi, "")
+            .replace(/.value}/gi, "")
+        );
+
+        console.log(finalName, coreTokenName);
+
+        const coreVariable = figma.variables
+          .getLocalVariables()
+          .find((v) => v.name.toLowerCase() === coreTokenName);
+
+        if (coreVariable) {
+          variable.setValueForMode(
+            modeId,
+            figma.variables.createVariableAlias(coreVariable)
+          );
+        }
+
+        return;
       }
     }
   }
@@ -220,9 +336,7 @@ const createColorToken = (colorToken: ColorToken, collectionName: string) => {
 
   let variable: Variable;
 
-  const finalName = colorToken.tokenName
-    .replace(/--gy-color-/gi, "")
-    .replace(/-/gi, "/");
+  const finalName = renameCoreColorStructure(colorToken.tokenName);
 
   const existingVariable = figma.variables
     .getLocalVariables()
@@ -283,10 +397,7 @@ const createColorAlias = (colorAlias: ColorToken, collectionName: string) => {
       collection = existingCollection;
     }
 
-    const finalName = colorAlias.tokenName
-      .replace(/--gy-native-/gi, "")
-      .replace(/color-/gi, "")
-      .replace(/-/gi, "/");
+    const finalName = renameAliasColorStructure(colorAlias.tokenName);
 
     let variable: Variable;
     const existingVariable = figma.variables
@@ -321,11 +432,9 @@ const createColorAlias = (colorAlias: ColorToken, collectionName: string) => {
       }
 
       // finding aliasVar
-      const coreTokenName = modeValue
-        ?.replace(/{color.core./gi, "")
-        .replace(/}/gi, "")
-        .replace(/--gy-color-/gi, "")
-        .replace(/-/gi, "/");
+      const coreTokenName = renameCoreColorStructure(
+        modeValue.replace(/{color.core./gi, "")
+      );
 
       const coreVariable = figma.variables
         .getLocalVariables()
@@ -345,6 +454,10 @@ const createColorAlias = (colorAlias: ColorToken, collectionName: string) => {
 
 export default function () {
   on<CreateTokenHandler>("CREATE_TOKEN", async (token: TokenProperties) => {
+    await createToken(token);
+  });
+
+  async function createToken(token: TokenProperties): Promise<TokenProperties> {
     switch (token.type) {
       case "coreColor":
         //@ts-expect-error
@@ -356,26 +469,25 @@ export default function () {
         break;
       case "coreBorderRadius":
         //@ts-expect-error
-        createSizingToken(token.value, token.collection);
+        createRadiusToken(token.value, token.collection);
         break;
       case "aliasBorderRadius":
         //@ts-expect-error
-        createSizingAlias(token.value, token.collection);
+        createRadiusAlias(token.value, token.collection);
         break;
       case "coreSpace":
         //@ts-expect-error
-        createSizingToken(token.value, token.collection);
+        createSpacingToken(token.value, token.collection);
         break;
       case "aliasSpace":
         //@ts-expect-error
-        createSizingAlias(token.value, token.collection);
+        createSpacingAlias(token.value, token.collection);
         break;
       default:
         break;
     }
-
-    emit<TokenCreatedHandler>("TOKEN_CREATED", token.value.tokenName);
-  });
+    return token;
+  }
 
   showUI({ height: 300, width: 320 });
 }
@@ -456,4 +568,15 @@ export function processTokens(tokens: string) {
   }
 
   return processedTokens;
+}
+
+export async function launchTokenCreation(tokens: ProcessedTokens) {
+  for (const token of tokens.tokensList) {
+    const tokenObj: TokenProperties = {
+      type: token.type,
+      value: token.value,
+      collection: tokens.collectionName,
+    };
+    emit<CreateTokenHandler>("CREATE_TOKEN", tokenObj);
+  }
 }
