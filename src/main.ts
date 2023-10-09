@@ -115,6 +115,7 @@ const createSpacingToken = (spaceToken: SizeToken, collectionName: string) => {
 
   const size = spaceToken.value;
   variable.setValueForMode(collection.defaultModeId, parseFloat(size));
+  variable.scopes = [];
 };
 
 const createSpacingAlias = (spaceAlias: SizeToken, collectionName: string) => {
@@ -146,6 +147,8 @@ const createSpacingAlias = (spaceAlias: SizeToken, collectionName: string) => {
     } else {
       variable = existingVariable;
     }
+
+    variable.scopes = ["GAP"];
 
     let modeValues;
 
@@ -237,6 +240,7 @@ const createRadiusToken = (radiusToken: SizeToken, collectionName: string) => {
 
   const size = radiusToken.value;
   variable.setValueForMode(collection.defaultModeId, parseFloat(size));
+  variable.scopes = [];
 };
 
 const createRadiusAlias = (radiusAlias: SizeToken, collectionName: string) => {
@@ -268,6 +272,8 @@ const createRadiusAlias = (radiusAlias: SizeToken, collectionName: string) => {
     } else {
       variable = existingVariable;
     }
+
+    variable.scopes = ["CORNER_RADIUS"];
 
     let modeValues;
 
@@ -351,6 +357,9 @@ const createColorToken = (colorToken: ColorToken, collectionName: string) => {
   } else {
     variable = existingVariable;
   }
+
+  variable.scopes = [];
+
   // Handle creating modes
   let modeId: string;
 
@@ -413,6 +422,13 @@ const createColorAlias = (colorAlias: ColorToken, collectionName: string) => {
     } else {
       variable = existingVariable;
     }
+
+    // Setting scrope
+    if (finalName.includes("/surface/")) variable.scopes = ["FRAME_FILL"];
+    if (finalName.includes("/border/")) variable.scopes = ["STROKE"];
+    if (finalName.includes("/text/")) variable.scopes = ["TEXT_FILL"];
+    if (finalName.includes("/icon/")) variable.scopes = ["SHAPE_FILL"];
+    if (finalName.includes("/all/")) variable.scopes = ["ALL_FILLS", "STROKE"];
 
     for (const [modeName, modeValue] of Object.entries(
       colorAlias.linkedColorCoreToken
