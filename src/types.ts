@@ -18,9 +18,9 @@ export interface ReportSuccessHandler extends EventHandler {
   handler: (msg: string) => void;
 }
 
-export interface CreateTokenHandler extends EventHandler {
-  name: "CREATE_TOKEN";
-  handler: (token: TokenProperties) => void;
+export interface CreateTokensHandler extends EventHandler {
+  name: "CREATE_TOKENS";
+  handler: (tokens: TokenProperties[]) => void;
 }
 
 export interface TokenCreatedHandler extends EventHandler {

@@ -1,7 +1,7 @@
 import { on, once, showUI, emit } from "@create-figma-plugin/utilities";
 import chroma, { Color } from "chroma-js";
 
-import { CreateTokenHandler, TokenCreatedHandler } from "./types";
+import { CreateTokensHandler, TokenCreatedHandler } from "./types";
 import {
   renameCoreColorStructure,
   renameCoreSpacingStructure,
@@ -118,7 +118,11 @@ const createSpacingToken = (spaceToken: SizeToken, collectionName: string) => {
   variable.scopes = [];
 };
 
-const createSpacingAlias = (spaceAlias: SizeToken, collectionName: string) => {
+async function createSpacingAlias(
+  spaceAlias: SizeToken,
+  collectionName: string,
+  publishedTokens: LibraryVariable[]
+): Promise<void> {
   if (!spaceAlias.value) {
     let collection: VariableCollection;
     const existingCollection = figma.variables
@@ -181,22 +185,26 @@ const createSpacingAlias = (spaceAlias: SizeToken, collectionName: string) => {
 
         console.log(finalName, coreTokenName);
 
-        const coreVariable = figma.variables
-          .getLocalVariables()
-          .find((v) => v.name.toLowerCase() === coreTokenName);
-
-        if (coreVariable) {
-          variable.setValueForMode(
-            modeId,
-            figma.variables.createVariableAlias(coreVariable)
+        const coreVariableKey = publishedTokens.find(
+          (v) => v.name.toLowerCase() === coreTokenName
+        )?.key;
+        if (coreVariableKey) {
+          const coreVariable = await figma.variables.importVariableByKeyAsync(
+            coreVariableKey
           );
+
+          if (coreVariable)
+            variable.setValueForMode(
+              modeId,
+              figma.variables.createVariableAlias(coreVariable)
+            );
         }
 
         return;
       }
     }
   }
-};
+}
 
 const createRadiusToken = (radiusToken: SizeToken, collectionName: string) => {
   if (radiusToken.tokenName === undefined) {
@@ -243,7 +251,11 @@ const createRadiusToken = (radiusToken: SizeToken, collectionName: string) => {
   variable.scopes = [];
 };
 
-const createRadiusAlias = (radiusAlias: SizeToken, collectionName: string) => {
+async function createRadiusAlias(
+  radiusAlias: SizeToken,
+  collectionName: string,
+  publishedTokens: LibraryVariable[]
+): Promise<void> {
   if (!radiusAlias.value) {
     let collection: VariableCollection;
     const existingCollection = figma.variables
@@ -304,22 +316,26 @@ const createRadiusAlias = (radiusAlias: SizeToken, collectionName: string) => {
 
         console.log(finalName, coreTokenName);
 
-        const coreVariable = figma.variables
-          .getLocalVariables()
-          .find((v) => v.name.toLowerCase() === coreTokenName);
-
-        if (coreVariable) {
-          variable.setValueForMode(
-            modeId,
-            figma.variables.createVariableAlias(coreVariable)
+        const coreVariableKey = publishedTokens.find(
+          (v) => v.name.toLowerCase() === coreTokenName
+        )?.key;
+        if (coreVariableKey) {
+          const coreVariable = await figma.variables.importVariableByKeyAsync(
+            coreVariableKey
           );
+
+          if (coreVariable)
+            variable.setValueForMode(
+              modeId,
+              figma.variables.createVariableAlias(coreVariable)
+            );
         }
 
         return;
       }
     }
   }
-};
+}
 
 const createColorToken = (colorToken: ColorToken, collectionName: string) => {
   if (colorToken.tokenName === undefined) {
@@ -393,7 +409,11 @@ const createColorToken = (colorToken: ColorToken, collectionName: string) => {
   }
 };
 
-const createColorAlias = (colorAlias: ColorToken, collectionName: string) => {
+async function createColorAlias(
+  colorAlias: ColorToken,
+  collectionName: string,
+  publishedTokens: LibraryVariable[]
+): Promise<void> {
   if (!colorAlias.value && colorAlias.linkedColorCoreToken) {
     let collection: VariableCollection;
     const existingCollection = figma.variables
@@ -423,7 +443,7 @@ const createColorAlias = (colorAlias: ColorToken, collectionName: string) => {
       variable = existingVariable;
     }
 
-    // Setting scrope
+    // Setting scope
     if (finalName.includes("/surface/")) variable.scopes = ["FRAME_FILL"];
     if (finalName.includes("/border/")) variable.scopes = ["STROKE"];
     if (finalName.includes("/text/")) variable.scopes = ["TEXT_FILL"];
@@ -452,28 +472,44 @@ const createColorAlias = (colorAlias: ColorToken, collectionName: string) => {
         modeValue.replace(/{color.core./gi, "")
       );
 
-      const coreVariable = figma.variables
-        .getLocalVariables()
-        .find((v) => v.name.toLowerCase() === coreTokenName);
-
-      if (coreVariable) {
-        variable.setValueForMode(
-          modeId,
-          figma.variables.createVariableAlias(coreVariable)
+      const coreVariableKey = publishedTokens.find(
+        (v) => v.name.toLowerCase() === coreTokenName
+      )?.key;
+      if (coreVariableKey) {
+        const coreVariable = await figma.variables.importVariableByKeyAsync(
+          coreVariableKey
         );
+
+        if (coreVariable)
+          variable.setValueForMode(
+            modeId,
+            figma.variables.createVariableAlias(coreVariable)
+          );
       }
 
+      console.log(`created alias ${finalName}`);
       return;
     }
   }
-};
+}
 
 export default function () {
-  on<CreateTokenHandler>("CREATE_TOKEN", async (token: TokenProperties) => {
-    await createToken(token);
-  });
+  on<CreateTokensHandler>(
+    "CREATE_TOKENS",
+    async (tokens: TokenProperties[]) => {
+      const publishedTokens = await importPublishedTokens();
 
-  async function createToken(token: TokenProperties): Promise<TokenProperties> {
+      console.log(publishedTokens);
+      for (const token of tokens) {
+        await createToken(token, publishedTokens);
+      }
+    }
+  );
+
+  async function createToken(
+    token: TokenProperties,
+    publishedTokens: LibraryVariable[]
+  ): Promise<TokenProperties> {
     switch (token.type) {
       case "coreColor":
         //@ts-expect-error
@@ -481,7 +517,7 @@ export default function () {
         break;
       case "aliasColor":
         //@ts-expect-error
-        createColorAlias(token.value, token.collection);
+        createColorAlias(token.value, token.collection, publishedTokens);
         break;
       case "coreBorderRadius":
         //@ts-expect-error
@@ -489,7 +525,7 @@ export default function () {
         break;
       case "aliasBorderRadius":
         //@ts-expect-error
-        createRadiusAlias(token.value, token.collection);
+        createRadiusAlias(token.value, token.collection, publishedTokens);
         break;
       case "coreSpace":
         //@ts-expect-error
@@ -497,12 +533,33 @@ export default function () {
         break;
       case "aliasSpace":
         //@ts-expect-error
-        createSpacingAlias(token.value, token.collection);
+        createSpacingAlias(token.value, token.collection, publishedTokens);
         break;
       default:
         break;
     }
     return token;
+  }
+
+  async function importPublishedTokens() {
+    const publishedTokens = [];
+    const linkedCollections =
+      await figma.teamLibrary.getAvailableLibraryVariableCollectionsAsync();
+
+    if (linkedCollections) {
+      for (const collection of linkedCollections) {
+        const linkedVars =
+          await figma.teamLibrary.getVariablesInLibraryCollectionAsync(
+            collection.key
+          );
+
+        if (linkedVars) {
+          publishedTokens.push(...linkedVars);
+        }
+      }
+    }
+
+    return publishedTokens;
   }
 
   showUI({ height: 300, width: 320 });
@@ -584,15 +641,4 @@ export function processTokens(tokens: string) {
   }
 
   return processedTokens;
-}
-
-export async function launchTokenCreation(tokens: ProcessedTokens) {
-  for (const token of tokens.tokensList) {
-    const tokenObj: TokenProperties = {
-      type: token.type,
-      value: token.value,
-      collection: tokens.collectionName,
-    };
-    emit<CreateTokenHandler>("CREATE_TOKEN", tokenObj);
-  }
 }

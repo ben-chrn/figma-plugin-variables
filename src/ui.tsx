@@ -20,7 +20,7 @@ import {
   ImportTokensHandler,
   ReportErrorHandler,
   ReportSuccessHandler,
-  CreateTokenHandler,
+  CreateTokensHandler,
   TokenCreatedHandler,
 } from "./types";
 import { TokenProperties, ProcessedTokens, processTokens } from "./main";
@@ -40,14 +40,18 @@ function Plugin() {
       if (typeof reader.result === "string") {
         const tokens = processTokens(reader.result);
         setTotalCount(tokens.tokensList.length);
+
+        const tokensArr = [];
         for (const token of tokens.tokensList) {
           const tokenObj: TokenProperties = {
             type: token.type,
             value: token.value,
             collection: tokens.collectionName,
           };
-          await emit<CreateTokenHandler>("CREATE_TOKEN", tokenObj);
+
+          tokensArr.push(tokenObj);
         }
+        await emit<CreateTokensHandler>("CREATE_TOKENS", tokensArr);
       }
     };
   };
