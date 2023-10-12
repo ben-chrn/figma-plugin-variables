@@ -445,11 +445,16 @@ async function createColorAlias(
 
     // Setting scope
     if (finalName.includes("/surface/")) variable.scopes = ["FRAME_FILL"];
-    if (finalName.includes("/border/")) variable.scopes = ["STROKE"];
+    if (finalName.includes("/ripple/")) variable.scopes = ["FRAME_FILL"];
+    //@ts-expect-error
+    if (finalName.includes("/border/")) variable.scopes = ["STROKE_COLOR"];
     if (finalName.includes("/text/")) variable.scopes = ["TEXT_FILL"];
     if (finalName.includes("/icon/")) variable.scopes = ["SHAPE_FILL"];
-    if (finalName.includes("/all/")) variable.scopes = ["ALL_FILLS", "STROKE"];
+    if (finalName.includes("/all/"))
+      //@ts-expect-error
+      variable.scopes = ["ALL_FILLS", "STROKE_COLOR"];
 
+    if (!finalName.includes("/border/")) return;
     for (const [modeName, modeValue] of Object.entries(
       colorAlias.linkedColorCoreToken
     )) {
