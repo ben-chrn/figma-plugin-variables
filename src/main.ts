@@ -450,11 +450,12 @@ async function createColorAlias(
     if (finalName.includes("/border/")) variable.scopes = ["STROKE_COLOR"];
     if (finalName.includes("/text/")) variable.scopes = ["TEXT_FILL"];
     if (finalName.includes("/icon/")) variable.scopes = ["SHAPE_FILL"];
-    if (finalName.includes("/all/"))
+    if (finalName.includes("/all/")) {
       //@ts-expect-error
       variable.scopes = ["ALL_FILLS", "STROKE_COLOR"];
+    }
 
-    if (!finalName.includes("/border/")) return;
+    // if (!finalName.includes("/border/")) return;
     for (const [modeName, modeValue] of Object.entries(
       colorAlias.linkedColorCoreToken
     )) {
@@ -485,14 +486,20 @@ async function createColorAlias(
           coreVariableKey
         );
 
-        if (coreVariable)
+        if (coreVariable) {
+          // variable.setValueForMode(modeId, {
+          //   r: 0,
+          //   g: 0,
+          //   b: 0,
+          // });
           variable.setValueForMode(
             modeId,
             figma.variables.createVariableAlias(coreVariable)
           );
+          console.log(`created alias ${finalName}`);
+        }
       }
 
-      console.log(`created alias ${finalName}`);
       return;
     }
   }
