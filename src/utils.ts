@@ -37,6 +37,111 @@ import {
   aliasRadiusModifier,
   aliasRadiusState,
 } from "../BNP_Tokens/naming-components";
+import { TokenObj } from "./main";
+
+// COLOR ALIAS
+//   branchString,
+//   componentsString,
+//   categoryString,
+//   typeString,
+//   modifierString,
+//   stateString,
+
+// COLOR CORE
+//   categoryString,
+//   typeString,
+//   modifierString,
+//   scaleString,
+
+// SPACING CORE
+//  familyString
+//  scaleString
+
+// ALIAS SPACING
+// branchString,
+// componentsString,
+// categoryString,
+// typeString,
+// modifierString
+
+// RADIUS CORE
+//  familyString
+//  scaleString
+
+// RADIUS ALIAS
+// branchString,
+// componentsString,
+// categoryString,
+// typeString,
+// modifierString,
+// stateString,
+
+const variableNamingStructure = {
+  colorCore: {
+    category: true,
+    type: true,
+    modifier: true,
+    scale: false,
+  },
+  colorAlias: {
+    branch: true,
+    component: true,
+    category: true,
+    type: true,
+    modifier: true,
+    state: true,
+  },
+  radiusCore: {
+    family: true,
+    scale: true,
+  },
+  radiusAlias: {
+    branch: true,
+    component: true,
+    category: true,
+    type: true,
+    modifier: true,
+    state: true,
+  },
+  spacingCore: {
+    family: true,
+    scale: true,
+  },
+  spacingAlias: {
+    branch: true,
+    component: true,
+    category: true,
+    type: true,
+    modifier: true,
+  },
+};
+
+export function generateVariableName(
+  token: TokenObj,
+  tokenType:
+    | "colorAlias"
+    | "colorCore"
+    | "radiusCore"
+    | "radiusAlias"
+    | "spacingCore"
+    | "spacingAlias"
+) {
+  let variableName = "";
+
+  for (const column in variableNamingStructure[tokenType]) {
+    if (token[column as keyof typeof token]) {
+      variableName = variableName.concat(
+        // @ts-expect-error
+        token[column as keyof typeof token],
+        "/"
+      );
+    }
+  }
+
+  variableName = variableName.slice(0, -1);
+
+  return variableName;
+}
 
 function smartLocate(results: string[], stringToReplace: string) {
   if (results.length === 1) return results[0];

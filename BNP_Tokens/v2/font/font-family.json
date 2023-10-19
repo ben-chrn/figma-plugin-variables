@@ -1,0 +1,60 @@
+{
+    "fontFamily": {
+        "name": {
+            "--gy-font-family-primary": {
+                "dls": "--gy",
+                "branch": null,
+                "value": {
+                    "mc": "opensans",
+                    "hb": "hellotypenext"
+                },
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": null,
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-font-family-primary",
+                "deprecated": null
+            },
+            "--gy-font-family-secondary": {
+                "dls": "--gy",
+                "branch": null,
+                "value": {
+                    "mc": "bnppsans",
+                    "hb": null
+                },
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": null,
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-font-family-secondary",
+                "deprecated": null
+            }
+        }
+    }
+}

@@ -3,7 +3,7 @@
   "editorType": ["figma"],
   "id": "1254182310197842774",
   "name": "Style Dictionary to Variables",
-  "permissions": ["teamlibrary"],
   "main": "build/main.js",
-  "ui": "build/ui.js"
+  "ui": "build/ui.js",
+  "permissions": ["teamlibrary"]
 }

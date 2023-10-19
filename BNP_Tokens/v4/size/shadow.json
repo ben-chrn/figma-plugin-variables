@@ -1,0 +1,236 @@
+{
+    "size": {
+        "shadow": {
+            "--gy-shadows-0": {
+                "dls": "--gy",
+                "branch": null,
+                "family": "shadows",
+                "type": null,
+                "category": null,
+                "modifier": null,
+                "scale": "0",
+                "state": null,
+                "component": null,
+                "value": null,
+                "dynamicType": null,
+                "spread": {
+                    "mc": "0",
+                    "hb": "0"
+                },
+                "offsetX": {
+                    "mc": "0",
+                    "hb": "0"
+                },
+                "offsetY": {
+                    "mc": "0",
+                    "hb": "0"
+                },
+                "blur": {
+                    "mc": "0",
+                    "hb": "0"
+                },
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": null,
+                "linkedColorAliasToken": {
+                    "mc": null,
+                    "hb": null
+                },
+                "tokenName": "--gy-shadows-0",
+                "deprecated": null
+            },
+            "--gy-shadows-100": {
+                "dls": "--gy",
+                "branch": null,
+                "family": "shadows",
+                "type": null,
+                "category": null,
+                "modifier": null,
+                "scale": "100",
+                "state": null,
+                "component": null,
+                "value": null,
+                "dynamicType": null,
+                "spread": {
+                    "mc": null,
+                    "hb": null
+                },
+                "offsetX": {
+                    "mc": null,
+                    "hb": null
+                },
+                "offsetY": {
+                    "mc": null,
+                    "hb": null
+                },
+                "blur": {
+                    "mc": null,
+                    "hb": null
+                },
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": null,
+                "linkedColorAliasToken": {
+                    "mc": null,
+                    "hb": null
+                },
+                "tokenName": "--gy-shadows-100",
+                "deprecated": null
+            },
+            "--gy-shadows-200": {
+                "dls": "--gy",
+                "branch": null,
+                "family": "shadows",
+                "type": null,
+                "category": null,
+                "modifier": null,
+                "scale": "200",
+                "state": null,
+                "component": null,
+                "value": null,
+                "dynamicType": null,
+                "spread": {
+                    "mc": null,
+                    "hb": null
+                },
+                "offsetX": {
+                    "mc": null,
+                    "hb": null
+                },
+                "offsetY": {
+                    "mc": null,
+                    "hb": null
+                },
+                "blur": {
+                    "mc": null,
+                    "hb": null
+                },
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": null,
+                "linkedColorAliasToken": {
+                    "mc": null,
+                    "hb": null
+                },
+                "tokenName": "--gy-shadows-200",
+                "deprecated": null
+            },
+            "--gy-shadows-300": {
+                "dls": "--gy",
+                "branch": null,
+                "family": "shadows",
+                "type": null,
+                "category": null,
+                "modifier": null,
+                "scale": "300",
+                "state": null,
+                "component": null,
+                "value": null,
+                "dynamicType": null,
+                "spread": {
+                    "mc": null,
+                    "hb": null
+                },
+                "offsetX": {
+                    "mc": null,
+                    "hb": null
+                },
+                "offsetY": {
+                    "mc": null,
+                    "hb": null
+                },
+                "blur": {
+                    "mc": null,
+                    "hb": null
+                },
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": null,
+                "linkedColorAliasToken": {
+                    "mc": null,
+                    "hb": null
+                },
+                "tokenName": "--gy-shadows-300",
+                "deprecated": null
+            },
+            "--gy-shadows-400": {
+                "dls": "--gy",
+                "branch": null,
+                "family": "shadows",
+                "type": null,
+                "category": null,
+                "modifier": null,
+                "scale": "400",
+                "state": null,
+                "component": null,
+                "value": null,
+                "dynamicType": null,
+                "spread": {
+                    "mc": null,
+                    "hb": null
+                },
+                "offsetX": {
+                    "mc": null,
+                    "hb": null
+                },
+                "offsetY": {
+                    "mc": null,
+                    "hb": null
+                },
+                "blur": {
+                    "mc": null,
+                    "hb": null
+                },
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": null,
+                "linkedColorAliasToken": {
+                    "mc": null,
+                    "hb": null
+                },
+                "tokenName": "--gy-shadows-400",
+                "deprecated": null
+            }
+        }
+    }
+}

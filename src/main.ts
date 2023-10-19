@@ -9,6 +9,7 @@ import {
   renameAliasColorStructure,
   renameAliasSpacingStructure,
   renameAliasRadiusStructure,
+  generateVariableName,
 } from "./utils";
 
 export interface ProcessedTokens {
@@ -42,17 +43,24 @@ interface MultiModeValue {
   hb: string | undefined;
 }
 
-interface ColorToken {
-  dls: string;
-  branch: string | undefined;
+export interface TokenObj {
+  dls?: string;
+  branch?: string;
+  family?: string;
+  type?: string;
+  modifier?: string;
+  scale?: string;
+  state?: string;
+  component?: string;
+}
+
+interface ColorToken extends TokenObj {
   value: MultiModeValue;
   tokenName: string;
   linkedColorCoreToken: MultiModeValue;
 }
 
-interface SizeToken {
-  dls: string;
-  branch: string | undefined;
+interface SizeToken extends TokenObj {
   value: string;
   tokenName: string;
   linkedSpaceToken?: MultiModeValue;
@@ -95,9 +103,7 @@ const createSpacingToken = (spaceToken: SizeToken, collectionName: string) => {
   // Handle creating Variable
   let variable: Variable;
 
-  const finalName = renameCoreSpacingStructure(spaceToken.tokenName);
-
-  console.log(finalName);
+  const finalName = generateVariableName(spaceToken, "spacingCore"); // TODO
 
   const existingVariable = figma.variables
     .getLocalVariables()
@@ -135,7 +141,7 @@ async function createSpacingAlias(
       collection = existingCollection;
     }
 
-    const finalName = renameAliasSpacingStructure(spaceAlias.tokenName);
+    const finalName = generateVariableName(spaceAlias, "spacingAlias"); // TODO
 
     let variable: Variable;
     const existingVariable = figma.variables
@@ -149,7 +155,9 @@ async function createSpacingAlias(
         "FLOAT"
       );
     } else {
+      // rename variable with new naming system
       variable = existingVariable;
+      variable.name = finalName;
     }
 
     variable.scopes = ["GAP"];
@@ -228,9 +236,7 @@ const createRadiusToken = (radiusToken: SizeToken, collectionName: string) => {
   // Handle creating Variable
   let variable: Variable;
 
-  const finalName = renameCoreRadiusStructure(radiusToken.tokenName);
-
-  console.log(finalName);
+  const finalName = generateVariableName(radiusToken, "radiusCore");
 
   const existingVariable = figma.variables
     .getLocalVariables()
@@ -244,6 +250,7 @@ const createRadiusToken = (radiusToken: SizeToken, collectionName: string) => {
     );
   } else {
     variable = existingVariable;
+    variable.name = finalName;
   }
 
   const size = radiusToken.value;
@@ -268,7 +275,7 @@ async function createRadiusAlias(
       collection = existingCollection;
     }
 
-    const finalName = renameAliasRadiusStructure(radiusAlias.tokenName);
+    const finalName = generateVariableName(radiusAlias, "radiusAlias"); // TODO
 
     let variable: Variable;
     const existingVariable = figma.variables
@@ -283,6 +290,7 @@ async function createRadiusAlias(
       );
     } else {
       variable = existingVariable;
+      variable.name = finalName;
     }
 
     variable.scopes = ["CORNER_RADIUS"];
@@ -358,7 +366,7 @@ const createColorToken = (colorToken: ColorToken, collectionName: string) => {
 
   let variable: Variable;
 
-  const finalName = renameCoreColorStructure(colorToken.tokenName);
+  const finalName = generateVariableName(colorToken, "colorCore");
 
   const existingVariable = figma.variables
     .getLocalVariables()
@@ -372,6 +380,7 @@ const createColorToken = (colorToken: ColorToken, collectionName: string) => {
     );
   } else {
     variable = existingVariable;
+    variable.name = finalName;
   }
 
   variable.scopes = [];
@@ -426,7 +435,7 @@ async function createColorAlias(
       collection = existingCollection;
     }
 
-    const finalName = renameAliasColorStructure(colorAlias.tokenName);
+    const finalName = generateVariableName(colorAlias, "colorAlias");
 
     let variable: Variable;
     const existingVariable = figma.variables
@@ -441,6 +450,7 @@ async function createColorAlias(
       );
     } else {
       variable = existingVariable;
+      variable.name = finalName;
     }
 
     // Setting scope
@@ -550,6 +560,8 @@ export default function () {
       default:
         break;
     }
+
+    console.log(`created token ${token.value.tokenName}`);
     return token;
   }
 
