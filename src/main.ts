@@ -3,13 +3,10 @@ import chroma, { Color } from "chroma-js";
 
 import { CreateTokensHandler, TokenCreatedHandler } from "./types";
 import {
-  renameCoreColorStructure,
-  renameCoreSpacingStructure,
-  renameCoreRadiusStructure,
-  renameAliasColorStructure,
-  renameAliasSpacingStructure,
-  renameAliasRadiusStructure,
   generateVariableName,
+  renameCoreColorStructure,
+  renameCoreRadiusStructure,
+  renameCoreSpacingStructure,
 } from "./utils";
 
 export interface ProcessedTokens {
@@ -18,6 +15,7 @@ export interface ProcessedTokens {
     type:
       | "coreColor"
       | "aliasColor"
+      | "systemColor"
       | "coreBorderRadius"
       | "aliasBorderRadius"
       | "coreSpace"
@@ -74,6 +72,7 @@ interface TokenCollection {
   borderRadiusAliases?: SizeToken[];
   core?: ColorToken[];
   aliases?: ColorToken[];
+  system?: ColorToken[];
 }
 
 interface TokenFile {
@@ -435,7 +434,12 @@ async function createColorAlias(
       collection = existingCollection;
     }
 
-    const finalName = generateVariableName(colorAlias, "colorAlias");
+    let finalName = "";
+    if (collection.name === "system")
+      finalName = generateVariableName(colorAlias, "colorSystem");
+    else finalName = generateVariableName(colorAlias, "colorAlias");
+
+    console.log(finalName);
 
     let variable: Variable;
     const existingVariable = figma.variables
@@ -454,10 +458,12 @@ async function createColorAlias(
     }
 
     // Setting scope
-    if (finalName.includes("/surface/")) variable.scopes = ["FRAME_FILL"];
+    if (finalName.includes("/surface/") || finalName.includes("/page"))
+      variable.scopes = ["FRAME_FILL"];
     if (finalName.includes("/ripple/")) variable.scopes = ["FRAME_FILL"];
-    //@ts-expect-error
-    if (finalName.includes("/border/")) variable.scopes = ["STROKE_COLOR"];
+    if (finalName.includes("/border/") || finalName.includes("divider"))
+      //@ts-expect-error
+      variable.scopes = ["STROKE_COLOR"];
     if (finalName.includes("/text/")) variable.scopes = ["TEXT_FILL"];
     if (finalName.includes("/icon/")) variable.scopes = ["SHAPE_FILL"];
     if (finalName.includes("/all/")) {
@@ -541,6 +547,10 @@ export default function () {
         //@ts-expect-error
         createColorAlias(token.value, token.collection, publishedTokens);
         break;
+      case "systemColor":
+        //@ts-expect-error
+        createColorAlias(token.value, token.collection, publishedTokens);
+        break;
       case "coreBorderRadius":
         //@ts-expect-error
         createRadiusToken(token.value, token.collection);
@@ -614,6 +624,16 @@ export function processTokens(tokens: string) {
       for (const [tokenName, tokenValue] of tokensList) {
         processedTokens.tokensList.push({
           type: "aliasColor",
+          value: tokenValue,
+        });
+      }
+    }
+
+    if (file.color.system) {
+      let tokensList = Object.entries(file.color.system);
+      for (const [tokenName, tokenValue] of tokensList) {
+        processedTokens.tokensList.push({
+          type: "systemColor",
           value: tokenValue,
         });
       }

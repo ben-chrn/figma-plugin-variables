@@ -91,6 +91,16 @@ const variableNamingStructure = {
     modifier: true,
     state: true,
   },
+  colorSystem: {
+    branch: true,
+    category: true,
+    type: true,
+    component: true,
+    modifier: true,
+    scale: true,
+    // family: true,
+    // state: true,
+  },
   radiusCore: {
     family: true,
     scale: true,
@@ -120,6 +130,7 @@ export function generateVariableName(
   token: TokenObj,
   tokenType:
     | "colorAlias"
+    | "colorSystem"
     | "colorCore"
     | "radiusCore"
     | "radiusAlias"

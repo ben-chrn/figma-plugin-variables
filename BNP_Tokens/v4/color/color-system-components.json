@@ -1,0 +1,1371 @@
+{
+  "color": {
+    "system": {
+      "--gy-neutral-color-text-primary": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "neutral",
+        "component": "text",
+        "modifier": "primary",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-neutral-1400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-neutral-color-text-primary",
+        "deprecated": null
+      },
+      "--gy-neutral-color-text-secondary": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "neutral",
+        "component": "text",
+        "modifier": "secondary",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-neutral-1100}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-neutral-color-text-secondary",
+        "deprecated": null
+      },
+      "--gy-neutral-color-text-on-soft-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "neutral",
+        "component": "text",
+        "modifier": "on-soft-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-neutral-1400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-neutral-color-text-on-soft-enabled",
+        "deprecated": null
+      },
+      "--gy-neutral-color-text-on-bold-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "neutral",
+        "component": "text",
+        "modifier": "on-bold-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-neutral-100}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-neutral-color-text-on-bold-enabled",
+        "deprecated": null
+      },
+      "--gy-neutral-color-icon-on-soft-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "neutral",
+        "component": "icon",
+        "modifier": "on-soft-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-neutral-1400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-neutral-color-icon-on-soft-enabled",
+        "deprecated": null
+      },
+      "--gy-neutral-color-icon-on-bold-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "neutral",
+        "component": "icon",
+        "modifier": "on-bold-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-neutral-100}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-neutral-color-icon-on-bold-enabled",
+        "deprecated": null
+      },
+      "--gy-neutral-color-border-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "neutral",
+        "component": "border",
+        "modifier": "enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-neutral-400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-neutral-color-border-enabled",
+        "deprecated": null
+      },
+      "--gy-neutral-color-surface-soft-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "neutral",
+        "component": "surface",
+        "modifier": "soft-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-neutral-300}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-neutral-color-surface-soft-enabled",
+        "deprecated": null
+      },
+      "--gy-neutral-color-surface-soft-hover": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "neutral",
+        "component": "surface",
+        "modifier": "soft-hover",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-neutral-400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-neutral-color-surface-soft-hover",
+        "deprecated": null
+      },
+      "--gy-neutral-color-surface-soft-pressed": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "neutral",
+        "component": "surface",
+        "modifier": "soft-pressed",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-neutral-500}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-neutral-color-surface-soft-pressed",
+        "deprecated": null
+      },
+      "--gy-neutral-color-surface-bold-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "neutral",
+        "component": "surface",
+        "modifier": "bold-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-neutral-800}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-neutral-color-surface-bold-enabled",
+        "deprecated": null
+      },
+      "--gy-neutral-color-surface-bold-hover": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "neutral",
+        "component": "surface",
+        "modifier": "bold-hover",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-neutral-900}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-neutral-color-surface-bold-hover",
+        "deprecated": null
+      },
+      "--gy-neutral-color-surface-bold-pressed": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "neutral",
+        "component": "surface",
+        "modifier": "bold-pressed",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-neutral-1000}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-neutral-color-surface-bold-pressed",
+        "deprecated": null
+      },
+      "--gy-brand-color-text-primary": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "brand",
+        "component": "text",
+        "modifier": "primary",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-brand-1400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-brand-color-text-primary",
+        "deprecated": null
+      },
+      "--gy-brand-color-text-secondary": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "brand",
+        "component": "text",
+        "modifier": "secondary",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-brand-1100}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-brand-color-text-secondary",
+        "deprecated": null
+      },
+      "--gy-brand-color-text-on-soft-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "brand",
+        "component": "text",
+        "modifier": "on-soft-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-brand-1400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-brand-color-text-on-soft-enabled",
+        "deprecated": null
+      },
+      "--gy-brand-color-text-on-bold-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "brand",
+        "component": "text",
+        "modifier": "on-bold-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-brand-100}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-brand-color-text-on-bold-enabled",
+        "deprecated": null
+      },
+      "--gy-brand-color-icon-on-soft-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "brand",
+        "component": "icon",
+        "modifier": "on-soft-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-brand-1400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-brand-color-icon-on-soft-enabled",
+        "deprecated": null
+      },
+      "--gy-brand-color-icon-on-bold-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "brand",
+        "component": "icon",
+        "modifier": "on-bold-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-brand-100}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-brand-color-icon-on-bold-enabled",
+        "deprecated": null
+      },
+      "--gy-brand-color-border-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "brand",
+        "component": "border",
+        "modifier": "enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-brand-400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-brand-color-border-enabled",
+        "deprecated": null
+      },
+      "--gy-brand-color-surface-soft-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "brand",
+        "component": "surface",
+        "modifier": "soft-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-brand-300}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-brand-color-surface-soft-enabled",
+        "deprecated": null
+      },
+      "--gy-brand-color-surface-soft-hover": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "brand",
+        "component": "surface",
+        "modifier": "soft-hover",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-brand-400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-brand-color-surface-soft-hover",
+        "deprecated": null
+      },
+      "--gy-brand-color-surface-soft-pressed": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "brand",
+        "component": "surface",
+        "modifier": "soft-pressed",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-brand-500}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-brand-color-surface-soft-pressed",
+        "deprecated": null
+      },
+      "--gy-brand-color-surface-bold-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "brand",
+        "component": "surface",
+        "modifier": "bold-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-brand-800}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-brand-color-surface-bold-enabled",
+        "deprecated": null
+      },
+      "--gy-brand-color-surface-bold-hover": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "brand",
+        "component": "surface",
+        "modifier": "bold-hover",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-brand-900}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-brand-color-surface-bold-hover",
+        "deprecated": null
+      },
+      "--gy-brand-color-surface-bold-pressed": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "brand",
+        "component": "surface",
+        "modifier": "bold-pressed",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-brand-1000}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-brand-color-surface-bold-pressed",
+        "deprecated": null
+      },
+      "--gy-accent-1-color-text-primary": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "accent-1",
+        "component": "text",
+        "modifier": "primary",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-accent-emerald-1400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-accent-1-color-text-primary",
+        "deprecated": null
+      },
+      "--gy-accent-1-color-text-secondary": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "accent-1",
+        "component": "text",
+        "modifier": "secondary",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-accent-emerald-1100}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-accent-1-color-text-secondary",
+        "deprecated": null
+      },
+      "--gy-accent-1-color-text-on-soft-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "accent-1",
+        "component": "text",
+        "modifier": "on-soft-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-accent-emerald-1400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-accent-1-color-text-on-soft-enabled",
+        "deprecated": null
+      },
+      "--gy-accent-1-color-text-on-bold-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "accent-1",
+        "component": "text",
+        "modifier": "on-bold-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-accent-emerald-100}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-accent-1-color-text-on-bold-enabled",
+        "deprecated": null
+      },
+      "--gy-accent-1-color-icon-on-soft-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "accent-1",
+        "component": "icon",
+        "modifier": "on-soft-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-accent-emerald-1400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-accent-1-color-icon-on-soft-enabled",
+        "deprecated": null
+      },
+      "--gy-accent-1-color-icon-on-bold-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "accent-1",
+        "component": "icon",
+        "modifier": "on-bold-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-accent-emerald-100}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-accent-1-color-icon-on-bold-enabled",
+        "deprecated": null
+      },
+      "--gy-accent-1-color-border-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "accent-1",
+        "component": "border",
+        "modifier": "enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-accent-emerald-400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-accent-1-color-border-enabled",
+        "deprecated": null
+      },
+      "--gy-accent-1-color-surface-soft-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "accent-1",
+        "component": "surface",
+        "modifier": "soft-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-accent-emerald-300}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-accent-1-color-surface-soft-enabled",
+        "deprecated": null
+      },
+      "--gy-accent-1-color-surface-soft-hover": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "accent-1",
+        "component": "surface",
+        "modifier": "soft-hover",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-accent-emerald-400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-accent-1-color-surface-soft-hover",
+        "deprecated": null
+      },
+      "--gy-accent-1-color-surface-soft-pressed": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "accent-1",
+        "component": "surface",
+        "modifier": "soft-pressed",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-accent-emerald-500}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-accent-1-color-surface-soft-pressed",
+        "deprecated": null
+      },
+      "--gy-accent-1-color-surface-bold-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "accent-1",
+        "component": "surface",
+        "modifier": "bold-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-accent-emerald-800}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-accent-1-color-surface-bold-enabled",
+        "deprecated": null
+      },
+      "--gy-accent-1-color-surface-bold-hover": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "accent-1",
+        "component": "surface",
+        "modifier": "bold-hover",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-accent-emerald-900}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-accent-1-color-surface-bold-hover",
+        "deprecated": null
+      },
+      "--gy-accent-1-color-surface-bold-pressed": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "accent-1",
+        "component": "surface",
+        "modifier": "bold-pressed",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-accent-emerald-1000}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-accent-1-color-surface-bold-pressed",
+        "deprecated": null
+      },
+      "--gy-accent-2-color-text-primary": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "accent-2",
+        "component": "text",
+        "modifier": "primary",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-accent-clementine-1400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-accent-2-color-text-primary",
+        "deprecated": null
+      },
+      "--gy-accent-2-color-text-secondary": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "accent-2",
+        "component": "text",
+        "modifier": "secondary",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-accent-clementine-1100}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-accent-2-color-text-secondary",
+        "deprecated": null
+      },
+      "--gy-accent-2-color-text-on-soft-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "accent-2",
+        "component": "text",
+        "modifier": "on-soft-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-accent-clementine-1400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-accent-2-color-text-on-soft-enabled",
+        "deprecated": null
+      },
+      "--gy-accent-2-color-text-on-bold-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "accent-2",
+        "component": "text",
+        "modifier": "on-bold-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-accent-clementine-100}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-accent-2-color-text-on-bold-enabled",
+        "deprecated": null
+      },
+      "--gy-accent-2-color-icon-on-soft-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "accent-2",
+        "component": "icon",
+        "modifier": "on-soft-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-accent-clementine-1400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-accent-2-color-icon-on-soft-enabled",
+        "deprecated": null
+      },
+      "--gy-accent-2-color-icon-on-bold-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "accent-2",
+        "component": "icon",
+        "modifier": "on-bold-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-accent-clementine-100}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-accent-2-color-icon-on-bold-enabled",
+        "deprecated": null
+      },
+      "--gy-accent-2-color-border-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "accent-2",
+        "component": "border",
+        "modifier": "enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-accent-clementine-400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-accent-2-color-border-enabled",
+        "deprecated": null
+      },
+      "--gy-accent-2-color-surface-soft-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "accent-2",
+        "component": "surface",
+        "modifier": "soft-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-accent-clementine-300}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-accent-2-color-surface-soft-enabled",
+        "deprecated": null
+      },
+      "--gy-accent-2-color-surface-soft-hover": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "accent-2",
+        "component": "surface",
+        "modifier": "soft-hover",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-accent-clementine-400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-accent-2-color-surface-soft-hover",
+        "deprecated": null
+      },
+      "--gy-accent-2-color-surface-soft-pressed": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "accent-2",
+        "component": "surface",
+        "modifier": "soft-pressed",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-accent-clementine-500}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-accent-2-color-surface-soft-pressed",
+        "deprecated": null
+      },
+      "--gy-accent-2-color-surface-bold-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "accent-2",
+        "component": "surface",
+        "modifier": "bold-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-accent-clementine-800}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-accent-2-color-surface-bold-enabled",
+        "deprecated": null
+      },
+      "--gy-accent-2-color-surface-bold-hover": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "accent-2",
+        "component": "surface",
+        "modifier": "bold-hover",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-accent-clementine-900}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-accent-2-color-surface-bold-hover",
+        "deprecated": null
+      },
+      "--gy-accent-2-color-surface-bold-pressed": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "accent-2",
+        "component": "surface",
+        "modifier": "bold-pressed",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-accent-clementine-1000}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-accent-2-color-surface-bold-pressed",
+        "deprecated": null
+      },
+      "--gy-semantic-success-color-text-primary": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-success",
+        "component": "text",
+        "modifier": "primary",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-success-1400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-success-color-text-primary",
+        "deprecated": null
+      },
+      "--gy-semantic-success-color-text-secondary": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-success",
+        "component": "text",
+        "modifier": "secondary",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-success-1100}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-success-color-text-secondary",
+        "deprecated": null
+      },
+      "--gy-semantic-success-color-text-on-soft-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-success",
+        "component": "text",
+        "modifier": "on-soft-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-success-1400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-success-color-text-on-soft-enabled",
+        "deprecated": null
+      },
+      "--gy-semantic-success-color-text-on-bold-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-success",
+        "component": "text",
+        "modifier": "on-bold-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-success-100}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-success-color-text-on-bold-enabled",
+        "deprecated": null
+      },
+      "--gy-semantic-success-color-icon-on-soft-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-success",
+        "component": "icon",
+        "modifier": "on-soft-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-success-1400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-success-color-icon-on-soft-enabled",
+        "deprecated": null
+      },
+      "--gy-semantic-success-color-icon-on-bold-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-success",
+        "component": "icon",
+        "modifier": "on-bold-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-success-100}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-success-color-icon-on-bold-enabled",
+        "deprecated": null
+      },
+      "--gy-semantic-success-color-border-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-success",
+        "component": "border",
+        "modifier": "enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-success-400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-success-color-border-enabled",
+        "deprecated": null
+      },
+      "--gy-semantic-success-color-surface-soft-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-success",
+        "component": "surface",
+        "modifier": "soft-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-success-300}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-success-color-surface-soft-enabled",
+        "deprecated": null
+      },
+      "--gy-semantic-success-color-surface-soft-hover": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-success",
+        "component": "surface",
+        "modifier": "soft-hover",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-success-400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-success-color-surface-soft-hover",
+        "deprecated": null
+      },
+      "--gy-semantic-success-color-surface-soft-pressed": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-success",
+        "component": "surface",
+        "modifier": "soft-pressed",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-success-500}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-success-color-surface-soft-pressed",
+        "deprecated": null
+      },
+      "--gy-semantic-success-color-surface-bold-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-success",
+        "component": "surface",
+        "modifier": "bold-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-success-800}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-success-color-surface-bold-enabled",
+        "deprecated": null
+      },
+      "--gy-semantic-success-color-surface-bold-hover": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-success",
+        "component": "surface",
+        "modifier": "bold-hover",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-success-900}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-success-color-surface-bold-hover",
+        "deprecated": null
+      },
+      "--gy-semantic-success-color-surface-bold-pressed": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-success",
+        "component": "surface",
+        "modifier": "bold-pressed",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-success-1000}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-success-color-surface-bold-pressed",
+        "deprecated": null
+      },
+      "--gy-semantic-warning-color-text-primary": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-warning",
+        "component": "text",
+        "modifier": "primary",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-warning-1400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-warning-color-text-primary",
+        "deprecated": null
+      },
+      "--gy-semantic-warning-color-text-secondary": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-warning",
+        "component": "text",
+        "modifier": "secondary",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-warning-1100}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-warning-color-text-secondary",
+        "deprecated": null
+      },
+      "--gy-semantic-warning-color-text-on-soft-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-warning",
+        "component": "text",
+        "modifier": "on-soft-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-warning-1400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-warning-color-text-on-soft-enabled",
+        "deprecated": null
+      },
+      "--gy-semantic-warning-color-text-on-bold-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-warning",
+        "component": "text",
+        "modifier": "on-bold-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-warning-100}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-warning-color-text-on-bold-enabled",
+        "deprecated": null
+      },
+      "--gy-semantic-warning-color-icon-on-soft-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-warning",
+        "component": "icon",
+        "modifier": "on-soft-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-warning-1400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-warning-color-icon-on-soft-enabled",
+        "deprecated": null
+      },
+      "--gy-semantic-warning-color-icon-on-bold-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-warning",
+        "component": "icon",
+        "modifier": "on-bold-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-warning-100}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-warning-color-icon-on-bold-enabled",
+        "deprecated": null
+      },
+      "--gy-semantic-warning-color-border-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-warning",
+        "component": "border",
+        "modifier": "enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-warning-400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-warning-color-border-enabled",
+        "deprecated": null
+      },
+      "--gy-semantic-warning-color-surface-soft-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-warning",
+        "component": "surface",
+        "modifier": "soft-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-warning-300}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-warning-color-surface-soft-enabled",
+        "deprecated": null
+      },
+      "--gy-semantic-warning-color-surface-soft-hover": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-warning",
+        "component": "surface",
+        "modifier": "soft-hover",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-warning-400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-warning-color-surface-soft-hover",
+        "deprecated": null
+      },
+      "--gy-semantic-warning-color-surface-soft-pressed": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-warning",
+        "component": "surface",
+        "modifier": "soft-pressed",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-warning-500}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-warning-color-surface-soft-pressed",
+        "deprecated": null
+      },
+      "--gy-semantic-warning-color-surface-bold-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-warning",
+        "component": "surface",
+        "modifier": "bold-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-warning-800}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-warning-color-surface-bold-enabled",
+        "deprecated": null
+      },
+      "--gy-semantic-warning-color-surface-bold-hover": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-warning",
+        "component": "surface",
+        "modifier": "bold-hover",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-warning-900}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-warning-color-surface-bold-hover",
+        "deprecated": null
+      },
+      "--gy-semantic-warning-color-surface-bold-pressed": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-warning",
+        "component": "surface",
+        "modifier": "bold-pressed",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-warning-1000}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-warning-color-surface-bold-pressed",
+        "deprecated": null
+      },
+      "--gy-semantic-error-color-text-primary": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-error",
+        "component": "text",
+        "modifier": "primary",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-error-1400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-error-color-text-primary",
+        "deprecated": null
+      },
+      "--gy-semantic-error-color-text-secondary": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-error",
+        "component": "text",
+        "modifier": "secondary",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-error-1100}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-error-color-text-secondary",
+        "deprecated": null
+      },
+      "--gy-semantic-error-color-text-on-soft-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-error",
+        "component": "text",
+        "modifier": "on-soft-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-error-1400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-error-color-text-on-soft-enabled",
+        "deprecated": null
+      },
+      "--gy-semantic-error-color-text-on-bold-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-error",
+        "component": "text",
+        "modifier": "on-bold-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-error-100}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-error-color-text-on-bold-enabled",
+        "deprecated": null
+      },
+      "--gy-semantic-error-color-icon-on-soft-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-error",
+        "component": "icon",
+        "modifier": "on-soft-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-error-1400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-error-color-icon-on-soft-enabled",
+        "deprecated": null
+      },
+      "--gy-semantic-error-color-icon-on-bold-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-error",
+        "component": "icon",
+        "modifier": "on-bold-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-error-100}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-error-color-icon-on-bold-enabled",
+        "deprecated": null
+      },
+      "--gy-semantic-error-color-border-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-error",
+        "component": "border",
+        "modifier": "enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-error-400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-error-color-border-enabled",
+        "deprecated": null
+      },
+      "--gy-semantic-error-color-surface-soft-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-error",
+        "component": "surface",
+        "modifier": "soft-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-error-300}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-error-color-surface-soft-enabled",
+        "deprecated": null
+      },
+      "--gy-semantic-error-color-surface-soft-hover": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-error",
+        "component": "surface",
+        "modifier": "soft-hover",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-error-400}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-error-color-surface-soft-hover",
+        "deprecated": null
+      },
+      "--gy-semantic-error-color-surface-soft-pressed": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-error",
+        "component": "surface",
+        "modifier": "soft-pressed",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-error-500}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-error-color-surface-soft-pressed",
+        "deprecated": null
+      },
+      "--gy-semantic-error-color-surface-bold-enabled": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-error",
+        "component": "surface",
+        "modifier": "bold-enabled",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-error-800}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-error-color-surface-bold-enabled",
+        "deprecated": null
+      },
+      "--gy-semantic-error-color-surface-bold-hover": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-error",
+        "component": "surface",
+        "modifier": "bold-hover",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-error-900}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-error-color-surface-bold-hover",
+        "deprecated": null
+      },
+      "--gy-semantic-error-color-surface-bold-pressed": {
+        "dls": "--gy",
+        "branch": "project-components",
+        "family": "color",
+        "category": "semantic-error",
+        "component": "surface",
+        "modifier": "bold-pressed",
+        "linkedColorCoreToken": {
+          "mc": "{color.core.--gy-color-interface-semantic-error-1000}",
+          "hb": null
+        },
+        "linkedColorAliasToken": null,
+        "tokenName": "--gy-semantic-error-color-surface-bold-pressed",
+        "deprecated": null
+      }
+    }
+  }
+}

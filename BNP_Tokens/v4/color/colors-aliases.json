@@ -4147,7 +4147,7 @@
                 },
                 "linkedColorAliasToken": null,
                 "tokenName": "--gy-native-common-color-surface-container-menu-item-default",
-                "deprecated": null
+                "deprecated": true
             },
             "--gy-native-common-color-surface-container-menu-item-active-indicator": {
                 "dls": "--gy",
@@ -4181,6 +4181,142 @@
                 },
                 "linkedColorAliasToken": null,
                 "tokenName": "--gy-native-common-color-surface-container-menu-item-active-indicator",
+                "deprecated": true
+            },
+            "--gy-native-common-color-surface-container-menu-item-default-enabled": {
+                "dls": "--gy",
+                "branch": "native-common",
+                "family": "color",
+                "type": "container",
+                "category": "surface",
+                "modifier": "default",
+                "scale": null,
+                "state": "enabled",
+                "component": "menu-item",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-absolute-transparent}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-common-color-surface-container-menu-item-default-enabled",
+                "deprecated": null
+            },
+            "--gy-native-common-color-surface-container-menu-item-default-hover": {
+                "dls": "--gy",
+                "branch": "native-common",
+                "family": "color",
+                "type": "container",
+                "category": "surface",
+                "modifier": "default",
+                "scale": null,
+                "state": "hover",
+                "component": "menu-item",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-neutral-alternative-alpha-75}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-common-color-surface-container-menu-item-default-hover",
+                "deprecated": null
+            },
+            "--gy-native-common-color-surface-container-menu-item-default-pressed": {
+                "dls": "--gy",
+                "branch": "native-common",
+                "family": "color",
+                "type": "container",
+                "category": "surface",
+                "modifier": "default",
+                "scale": null,
+                "state": "pressed",
+                "component": "menu-item",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-neutral-alternative-alpha-100}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-common-color-surface-container-menu-item-default-pressed",
+                "deprecated": null
+            },
+            "--gy-native-common-color-surface-container-menu-item-default-disabled": {
+                "dls": "--gy",
+                "branch": "native-common",
+                "family": "color",
+                "type": "container",
+                "category": "surface",
+                "modifier": "default",
+                "scale": null,
+                "state": "disabled",
+                "component": "menu-item",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-absolute-transparent}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-common-color-surface-container-menu-item-default-disabled",
                 "deprecated": null
             },
             "--gy-native-common-color-surface-container-badge-indeterminate": {
@@ -10573,6 +10709,108 @@
                 },
                 "linkedColorAliasToken": null,
                 "tokenName": "--gy-native-common-color-surface-container-slider-tick-mark-disabled",
+                "deprecated": null
+            },
+            "--gy-native-common-color-surface-container-sticky-container-default": {
+                "dls": "--gy",
+                "branch": "native-common",
+                "family": "color",
+                "type": "container",
+                "category": "surface",
+                "modifier": "default",
+                "scale": null,
+                "state": null,
+                "component": "sticky-container",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-common-color-surface-container-sticky-container-default",
+                "deprecated": null
+            },
+            "--gy-native-common-color-surface-container-sticky-container-alternative": {
+                "dls": "--gy",
+                "branch": "native-common",
+                "family": "color",
+                "type": "container",
+                "category": "surface",
+                "modifier": "alternative",
+                "scale": null,
+                "state": null,
+                "component": "sticky-container",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-neutral-200}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-common-color-surface-container-sticky-container-alternative",
+                "deprecated": null
+            },
+            "--gy-native-common-color-surface-container-sticky-container-reverse": {
+                "dls": "--gy",
+                "branch": "native-common",
+                "family": "color",
+                "type": "container",
+                "category": "surface",
+                "modifier": "reverse",
+                "scale": null,
+                "state": null,
+                "component": "sticky-container",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-brand-900}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-common-color-surface-container-sticky-container-reverse",
                 "deprecated": null
             },
             "--gy-native-common-color-text-heading-title-1-default": {
@@ -21958,7 +22196,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-warning-alpha-900}",
+                    "mc": "{color.core.--gy-color-interface-semantic-warning-1100}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -21992,7 +22230,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-warning-alpha-900}",
+                    "mc": "{color.core.--gy-color-interface-semantic-warning-1100}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -22026,7 +22264,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-warning-alpha-900}",
+                    "mc": "{color.core.--gy-color-interface-semantic-warning-1100}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -22060,7 +22298,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-warning-alpha-900}",
+                    "mc": "{color.core.--gy-color-interface-semantic-warning-1100}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -22094,7 +22332,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-warning-alpha-900}",
+                    "mc": "{color.core.--gy-color-interface-semantic-warning-1100}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -22128,7 +22366,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-warning-alpha-900}",
+                    "mc": "{color.core.--gy-color-interface-semantic-warning-1100}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -22162,7 +22400,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-neutral-1000}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -22196,7 +22434,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-neutral-1000}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -22230,7 +22468,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-neutral-1000}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -22264,7 +22502,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-neutral-1000}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -22298,7 +22536,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-neutral-1000}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -22332,7 +22570,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-error-1000}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -22366,7 +22604,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-error-1000}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -22400,7 +22638,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-error-1000}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -22434,7 +22672,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-error-1000}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -22468,7 +22706,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-error-1000}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -22502,7 +22740,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-success-900}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -22536,7 +22774,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-success-900}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -22570,7 +22808,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-success-900}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -22604,7 +22842,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-success-900}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -22638,7 +22876,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-warning-alpha-900}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -22672,7 +22910,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-warning-alpha-900}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -22706,7 +22944,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-warning-alpha-900}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -22740,7 +22978,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-warning-alpha-900}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -22774,7 +23012,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-warning-alpha-900}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -22808,7 +23046,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-warning-alpha-900}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -24411,7 +24649,7 @@
                 },
                 "linkedColorAliasToken": null,
                 "tokenName": "--gy-native-common-color-text-supporting-text-default",
-                "deprecated": null
+                "deprecated": true
             },
             "--gy-native-common-color-text-supporting-text-error": {
                 "dls": "--gy",
@@ -24445,7 +24683,7 @@
                 },
                 "linkedColorAliasToken": null,
                 "tokenName": "--gy-native-common-color-text-supporting-text-error",
-                "deprecated": null
+                "deprecated": true
             },
             "--gy-native-common-color-text-supporting-text-warning": {
                 "dls": "--gy",
@@ -24479,7 +24717,7 @@
                 },
                 "linkedColorAliasToken": null,
                 "tokenName": "--gy-native-common-color-text-supporting-text-warning",
-                "deprecated": null
+                "deprecated": true
             },
             "--gy-native-common-color-text-supporting-text-success": {
                 "dls": "--gy",
@@ -24513,7 +24751,7 @@
                 },
                 "linkedColorAliasToken": null,
                 "tokenName": "--gy-native-common-color-text-supporting-text-success",
-                "deprecated": null
+                "deprecated": true
             },
             "--gy-native-common-color-text-pill-variant-1-default": {
                 "dls": "--gy",
@@ -25460,7 +25698,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-neutral-500}",
+                    "mc": "{color.core.--gy-color-interface-neutral-1400}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -44160,7 +44398,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-warning-alpha-900}",
+                    "mc": "{color.core.--gy-color-interface-semantic-success-900}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -44194,7 +44432,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-warning-alpha-900}",
+                    "mc": "{color.core.--gy-color-interface-semantic-warning-1100}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -44228,7 +44466,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-warning-alpha-900}",
+                    "mc": "{color.core.--gy-color-interface-semantic-warning-1100}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -44262,7 +44500,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-warning-alpha-900}",
+                    "mc": "{color.core.--gy-color-interface-semantic-warning-1100}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -44296,7 +44534,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-warning-alpha-900}",
+                    "mc": "{color.core.--gy-color-interface-semantic-warning-1100}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -44330,7 +44568,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-warning-alpha-900}",
+                    "mc": "{color.core.--gy-color-interface-semantic-warning-1100}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -44364,7 +44602,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-neutral-1000}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -44398,7 +44636,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-neutral-1000}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -44432,7 +44670,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-neutral-1000}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -44466,7 +44704,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-neutral-1000}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -44500,7 +44738,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-neutral-1000}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -44534,7 +44772,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-error-1000}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -44568,7 +44806,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-error-1000}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -44602,7 +44840,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-error-1000}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -44636,7 +44874,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-error-1000}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -44670,7 +44908,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-error-1000}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -44704,7 +44942,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-success-900}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -44738,7 +44976,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-success-900}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -44772,7 +45010,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-success-900}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -44806,7 +45044,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-success-900}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -44840,7 +45078,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-warning-alpha-900}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -44874,7 +45112,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-warning-alpha-900}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -44908,7 +45146,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-warning-alpha-900}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -44942,7 +45180,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-warning-alpha-900}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -44976,7 +45214,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-warning-alpha-900}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -45010,7 +45248,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-semantic-warning-alpha-900}",
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -45622,7 +45860,7 @@
                 "lightValue": null,
                 "darkValue": null,
                 "linkedColorCoreToken": {
-                    "mc": "{color.core.--gy-color-interface-brand-alpha-400}",
+                    "mc": "{color.core.--gy-color-interface-brand-900}",
                     "hb": null
                 },
                 "linkedColorAliasToken": null,
@@ -45661,7 +45899,7 @@
                 },
                 "linkedColorAliasToken": null,
                 "tokenName": "--gy-native-common-color-icon-menu-item-active-indicator-enabled",
-                "deprecated": true
+                "deprecated": null
             },
             "--gy-native-common-color-icon-menu-item-active-indicator-hover": {
                 "dls": "--gy",
@@ -45695,7 +45933,7 @@
                 },
                 "linkedColorAliasToken": null,
                 "tokenName": "--gy-native-common-color-icon-menu-item-active-indicator-hover",
-                "deprecated": true
+                "deprecated": null
             },
             "--gy-native-common-color-icon-menu-item-active-indicator-pressed": {
                 "dls": "--gy",
@@ -45729,7 +45967,41 @@
                 },
                 "linkedColorAliasToken": null,
                 "tokenName": "--gy-native-common-color-icon-menu-item-active-indicator-pressed",
-                "deprecated": true
+                "deprecated": null
+            },
+            "--gy-native-common-color-icon-menu-item-active-indicator-disabled": {
+                "dls": "--gy",
+                "branch": "native-common",
+                "family": "color",
+                "type": null,
+                "category": "icon",
+                "modifier": "active-indicator",
+                "scale": null,
+                "state": "disabled",
+                "component": "menu-item",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-brand-900}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-common-color-icon-menu-item-active-indicator-disabled",
+                "deprecated": null
             },
             "--gy-native-common-color-icon-status-error-variant-1-default": {
                 "dls": "--gy",
@@ -55387,6 +55659,210 @@
                 "tokenName": "--gy-native-common-color-border-container-slider-track-container-disabled",
                 "deprecated": null
             },
+            "--gy-native-common-color-border-container-sticky-container-default-variant-1": {
+                "dls": "--gy",
+                "branch": "native-common",
+                "family": "color",
+                "type": "container",
+                "category": "border",
+                "modifier": "default-variant-1",
+                "scale": null,
+                "state": null,
+                "component": "sticky-container",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-neutral-300}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-common-color-border-container-sticky-container-default-variant-1",
+                "deprecated": null
+            },
+            "--gy-native-common-color-border-container-sticky-container-default-variant-2": {
+                "dls": "--gy",
+                "branch": "native-common",
+                "family": "color",
+                "type": "container",
+                "category": "border",
+                "modifier": "default-variant-2",
+                "scale": null,
+                "state": null,
+                "component": "sticky-container",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-absolute-transparent}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-common-color-border-container-sticky-container-default-variant-2",
+                "deprecated": null
+            },
+            "--gy-native-common-color-border-container-sticky-container-alternative-variant-1": {
+                "dls": "--gy",
+                "branch": "native-common",
+                "family": "color",
+                "type": "container",
+                "category": "border",
+                "modifier": "alternative-variant-1",
+                "scale": null,
+                "state": null,
+                "component": "sticky-container",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-absolute-transparent}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-common-color-border-container-sticky-container-alternative-variant-1",
+                "deprecated": null
+            },
+            "--gy-native-common-color-border-container-sticky-container-alternative-variant-2": {
+                "dls": "--gy",
+                "branch": "native-common",
+                "family": "color",
+                "type": "container",
+                "category": "border",
+                "modifier": "alternative-variant-2",
+                "scale": null,
+                "state": null,
+                "component": "sticky-container",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-absolute-transparent}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-common-color-border-container-sticky-container-alternative-variant-2",
+                "deprecated": null
+            },
+            "--gy-native-common-color-border-container-sticky-container-reverse-variant-1": {
+                "dls": "--gy",
+                "branch": "native-common",
+                "family": "color",
+                "type": "container",
+                "category": "border",
+                "modifier": "reverse-variant-1",
+                "scale": null,
+                "state": null,
+                "component": "sticky-container",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-absolute-transparent}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-common-color-border-container-sticky-container-reverse-variant-1",
+                "deprecated": null
+            },
+            "--gy-native-common-color-border-container-sticky-container-reverse-variant-2": {
+                "dls": "--gy",
+                "branch": "native-common",
+                "family": "color",
+                "type": "container",
+                "category": "border",
+                "modifier": "reverse-variant-2",
+                "scale": null,
+                "state": null,
+                "component": "sticky-container",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-absolute-transparent}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-common-color-border-container-sticky-container-reverse-variant-2",
+                "deprecated": null
+            },
             "--gy-native-android-color-surface-container-field-default-enabled": {
                 "dls": "--gy",
                 "branch": "native-android",
@@ -62049,7 +62525,7 @@
                 },
                 "linkedColorAliasToken": null,
                 "tokenName": "--gy-native-android-color-surface-state-layer-menu-item-active-hover",
-                "deprecated": null
+                "deprecated": true
             },
             "--gy-native-android-color-surface-state-layer-menu-item-inactive-hover": {
                 "dls": "--gy",
@@ -62083,7 +62559,7 @@
                 },
                 "linkedColorAliasToken": null,
                 "tokenName": "--gy-native-android-color-surface-state-layer-menu-item-inactive-hover",
-                "deprecated": null
+                "deprecated": true
             },
             "--gy-native-android-color-surface-state-layer-menu-item-active-pressed": {
                 "dls": "--gy",
@@ -62117,7 +62593,7 @@
                 },
                 "linkedColorAliasToken": null,
                 "tokenName": "--gy-native-android-color-surface-state-layer-menu-item-active-pressed",
-                "deprecated": null
+                "deprecated": true
             },
             "--gy-native-android-color-surface-state-layer-menu-item-inactive-pressed": {
                 "dls": "--gy",
@@ -62151,7 +62627,7 @@
                 },
                 "linkedColorAliasToken": null,
                 "tokenName": "--gy-native-android-color-surface-state-layer-menu-item-inactive-pressed",
-                "deprecated": null
+                "deprecated": true
             },
             "--gy-native-android-color-surface-ripple-unselected-default-pressed": {
                 "dls": "--gy",
@@ -62423,6 +62899,244 @@
                 },
                 "linkedColorAliasToken": null,
                 "tokenName": "--gy-native-android-color-surface-ripple-selected-error-reverse-pressed",
+                "deprecated": null
+            },
+            "--gy-native-android-color-surface-container-alert-default": {
+                "dls": "--gy",
+                "branch": "native-android",
+                "family": "color",
+                "type": "container",
+                "category": "surface",
+                "modifier": "default",
+                "scale": null,
+                "state": null,
+                "component": "alert",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-neutral-0}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-android-color-surface-container-alert-default",
+                "deprecated": null
+            },
+            "--gy-native-android-color-surface-container-alert-action-default-enabled": {
+                "dls": "--gy",
+                "branch": "native-android",
+                "family": "color",
+                "type": "container",
+                "category": "surface",
+                "modifier": "action-default",
+                "scale": null,
+                "state": "enabled",
+                "component": "alert",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-absolute-transparent}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-android-color-surface-container-alert-action-default-enabled",
+                "deprecated": null
+            },
+            "--gy-native-android-color-surface-container-alert-action-default-hover": {
+                "dls": "--gy",
+                "branch": "native-android",
+                "family": "color",
+                "type": "container",
+                "category": "surface",
+                "modifier": "action-default",
+                "scale": null,
+                "state": "hover",
+                "component": "alert",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-brand-alpha-100}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-android-color-surface-container-alert-action-default-hover",
+                "deprecated": null
+            },
+            "--gy-native-android-color-surface-container-alert-action-default-pressed": {
+                "dls": "--gy",
+                "branch": "native-android",
+                "family": "color",
+                "type": "container",
+                "category": "surface",
+                "modifier": "action-default",
+                "scale": null,
+                "state": "pressed",
+                "component": "alert",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-brand-alpha-200}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-android-color-surface-container-alert-action-default-pressed",
+                "deprecated": null
+            },
+            "--gy-native-android-color-surface-container-alert-action-destructive-enabled": {
+                "dls": "--gy",
+                "branch": "native-android",
+                "family": "color",
+                "type": "container",
+                "category": "surface",
+                "modifier": "action-destructive",
+                "scale": null,
+                "state": "enabled",
+                "component": "alert",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-absolute-transparent}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-android-color-surface-container-alert-action-destructive-enabled",
+                "deprecated": null
+            },
+            "--gy-native-android-color-surface-container-alert-action-destructive-hover": {
+                "dls": "--gy",
+                "branch": "native-android",
+                "family": "color",
+                "type": "container",
+                "category": "surface",
+                "modifier": "action-destructive",
+                "scale": null,
+                "state": "hover",
+                "component": "alert",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-semantic-error-alpha-100}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-android-color-surface-container-alert-action-destructive-hover",
+                "deprecated": null
+            },
+            "--gy-native-android-color-surface-container-alert-action-destructive-pressed": {
+                "dls": "--gy",
+                "branch": "native-android",
+                "family": "color",
+                "type": "container",
+                "category": "surface",
+                "modifier": "action-destructive",
+                "scale": null,
+                "state": "pressed",
+                "component": "alert",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-semantic-error-alpha-200}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-android-color-surface-container-alert-action-destructive-pressed",
                 "deprecated": null
             },
             "--gy-native-android-color-border-container-checkbox-unselected-default-enabled": {
@@ -73337,6 +74051,278 @@
                 },
                 "linkedColorAliasToken": null,
                 "tokenName": "--gy-native-android-color-text-search-field-search-view-value-disabled",
+                "deprecated": null
+            },
+            "--gy-native-android-color-text-alert-title": {
+                "dls": "--gy",
+                "branch": "native-android",
+                "family": "color",
+                "type": null,
+                "category": "text",
+                "modifier": "title",
+                "scale": null,
+                "state": null,
+                "component": "alert",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-neutral-1400}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-android-color-text-alert-title",
+                "deprecated": null
+            },
+            "--gy-native-android-color-text-alert-message": {
+                "dls": "--gy",
+                "branch": "native-android",
+                "family": "color",
+                "type": null,
+                "category": "text",
+                "modifier": "message",
+                "scale": null,
+                "state": null,
+                "component": "alert",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-neutral-1100}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-android-color-text-alert-message",
+                "deprecated": null
+            },
+            "--gy-native-android-color-text-alert-action-default-enabled": {
+                "dls": "--gy",
+                "branch": "native-android",
+                "family": "color",
+                "type": null,
+                "category": "text",
+                "modifier": "action-default",
+                "scale": null,
+                "state": "enabled",
+                "component": "alert",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-brand-900}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-android-color-text-alert-action-default-enabled",
+                "deprecated": null
+            },
+            "--gy-native-android-color-text-alert-action-default-hover": {
+                "dls": "--gy",
+                "branch": "native-android",
+                "family": "color",
+                "type": null,
+                "category": "text",
+                "modifier": "action-default",
+                "scale": null,
+                "state": "hover",
+                "component": "alert",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-brand-1000}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-android-color-text-alert-action-default-hover",
+                "deprecated": null
+            },
+            "--gy-native-android-color-text-alert-action-default-pressed": {
+                "dls": "--gy",
+                "branch": "native-android",
+                "family": "color",
+                "type": null,
+                "category": "text",
+                "modifier": "action-default",
+                "scale": null,
+                "state": "pressed",
+                "component": "alert",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-brand-1100}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-android-color-text-alert-action-default-pressed",
+                "deprecated": null
+            },
+            "--gy-native-android-color-text-alert-action-destructive-enabled": {
+                "dls": "--gy",
+                "branch": "native-android",
+                "family": "color",
+                "type": null,
+                "category": "text",
+                "modifier": "action-destructive",
+                "scale": null,
+                "state": "enabled",
+                "component": "alert",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-semantic-error-1000}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-android-color-text-alert-action-destructive-enabled",
+                "deprecated": null
+            },
+            "--gy-native-android-color-text-alert-action-destructive-hover": {
+                "dls": "--gy",
+                "branch": "native-android",
+                "family": "color",
+                "type": null,
+                "category": "text",
+                "modifier": "action-destructive",
+                "scale": null,
+                "state": "hover",
+                "component": "alert",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-semantic-error-1100}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-android-color-text-alert-action-destructive-hover",
+                "deprecated": null
+            },
+            "--gy-native-android-color-text-alert-action-destructive-pressed": {
+                "dls": "--gy",
+                "branch": "native-android",
+                "family": "color",
+                "type": null,
+                "category": "text",
+                "modifier": "action-destructive",
+                "scale": null,
+                "state": "pressed",
+                "component": "alert",
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": null,
+                "fontSize": null,
+                "fontLineHeight": null,
+                "fontWeight": null,
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": {
+                    "mc": "{color.core.--gy-color-interface-semantic-error-1100}",
+                    "hb": null
+                },
+                "linkedColorAliasToken": null,
+                "tokenName": "--gy-native-android-color-text-alert-action-destructive-pressed",
                 "deprecated": null
             },
             "--gy-native-ios-color-surface-container-switch-track-off-default-enabled": {
