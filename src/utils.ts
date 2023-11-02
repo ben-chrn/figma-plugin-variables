@@ -93,12 +93,12 @@ const variableNamingStructure = {
   },
   colorSystem: {
     branch: true,
+    // family: true,
     category: true,
     type: true,
     component: true,
     modifier: true,
     scale: true,
-    // family: true,
     // state: true,
   },
   radiusCore: {

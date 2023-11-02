@@ -460,7 +460,8 @@ async function createColorAlias(
     // Setting scope
     if (finalName.includes("/surface/") || finalName.includes("/page"))
       variable.scopes = ["FRAME_FILL"];
-    if (finalName.includes("/ripple/")) variable.scopes = ["FRAME_FILL"];
+    if (finalName.includes("/ripple/"))
+      variable.scopes = ["FRAME_FILL", "SHAPE_FILL"];
     if (finalName.includes("/border/") || finalName.includes("divider"))
       //@ts-expect-error
       variable.scopes = ["STROKE_COLOR"];
