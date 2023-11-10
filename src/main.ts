@@ -460,7 +460,7 @@ async function createColorAlias(
     // Setting scope
     if (finalName.includes("/surface/") || finalName.includes("/page"))
       variable.scopes = ["FRAME_FILL"];
-    if (finalName.includes("/ripple/"))
+    if (finalName.includes("/ripple/") || finalName.includes("/dataviz"))
       variable.scopes = ["FRAME_FILL", "SHAPE_FILL"];
     if (finalName.includes("/border/") || finalName.includes("divider"))
       //@ts-expect-error
@@ -498,6 +498,7 @@ async function createColorAlias(
       const coreVariableKey = publishedTokens.find(
         (v) => v.name.toLowerCase() === coreTokenName
       )?.key;
+
       if (coreVariableKey) {
         const coreVariable = await figma.variables.importVariableByKeyAsync(
           coreVariableKey
