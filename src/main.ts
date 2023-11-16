@@ -15,7 +15,7 @@ export interface ProcessedTokens {
     type:
       | "coreColor"
       | "aliasColor"
-      | "systemColor"
+      | "nativeColor"
       | "coreBorderRadius"
       | "aliasBorderRadius"
       | "coreSpace"
@@ -72,7 +72,7 @@ interface TokenCollection {
   borderRadiusAliases?: SizeToken[];
   core?: ColorToken[];
   aliases?: ColorToken[];
-  system?: ColorToken[];
+  natives?: ColorToken[];
 }
 
 interface TokenFile {
@@ -435,8 +435,8 @@ async function createColorAlias(
     }
 
     let finalName = "";
-    if (collection.name === "system")
-      finalName = generateVariableName(colorAlias, "colorSystem");
+    if (collection.name === "natives")
+      finalName = generateVariableName(colorAlias, "colorNative");
     else finalName = generateVariableName(colorAlias, "colorAlias");
 
     console.log(finalName);
@@ -472,7 +472,7 @@ async function createColorAlias(
       variable.scopes = ["ALL_FILLS", "STROKE_COLOR"];
     }
 
-    // if (!finalName.includes("/border/")) return;
+    console.log(colorAlias.linkedColorCoreToken);
     for (const [modeName, modeValue] of Object.entries(
       colorAlias.linkedColorCoreToken
     )) {
@@ -481,7 +481,6 @@ async function createColorAlias(
       }
 
       const existingMode = collection.modes.find((m) => m.name === modeName);
-
       let modeId: string;
 
       if (!existingMode) {
@@ -518,7 +517,7 @@ async function createColorAlias(
         }
       }
 
-      return;
+      // return;
     }
   }
 }
@@ -549,7 +548,7 @@ export default function () {
         //@ts-expect-error
         createColorAlias(token.value, token.collection, publishedTokens);
         break;
-      case "systemColor":
+      case "nativeColor":
         //@ts-expect-error
         createColorAlias(token.value, token.collection, publishedTokens);
         break;
@@ -631,11 +630,11 @@ export function processTokens(tokens: string) {
       }
     }
 
-    if (file.color.system) {
-      let tokensList = Object.entries(file.color.system);
+    if (file.color.natives) {
+      let tokensList = Object.entries(file.color.natives);
       for (const [tokenName, tokenValue] of tokensList) {
         processedTokens.tokensList.push({
-          type: "systemColor",
+          type: "nativeColor",
           value: tokenValue,
         });
       }
