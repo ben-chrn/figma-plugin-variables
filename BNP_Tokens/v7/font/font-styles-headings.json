@@ -1,0 +1,462 @@
+{
+    "font": {
+        "core": {
+            "--gy-native-font-style-title-1-default": {
+                "dls": "--gy",
+                "branch": "native",
+                "family": "font",
+                "type": {
+                    "": "title-1",
+                    "dynamic": null
+                },
+                "category": "style",
+                "modifier": "default",
+                "scale": null,
+                "state": null,
+                "component": null,
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": {
+                    "mc": "{fontFamily.name.--gy-font-family-secondary.value.mc}",
+                    "mineursmc": "{fontFamily.name.--gy-font-family-secondary.value.mineursmc}",
+                    "bpfmc": "{fontFamily.name.--gy-font-family-secondary.value.bpfmc}",
+                    "hb": null
+                },
+                "fontSize": {
+                    "mc": "{size.fontSize.--gy-native-font-size-heading-2.value.mc}",
+                    "mineursmc": "{size.fontSize.--gy-native-font-size-heading-2.value.mineursmc}",
+                    "bpfmc": "{size.fontSize.--gy-native-font-size-heading-2.value.bpfmc}",
+                    "hb": null
+                },
+                "fontLineHeight": {
+                    "mc": "{size.fontLineHeight.--gy-font-line-height-200.value}",
+                    "mineursmc": "{size.fontLineHeight.--gy-font-line-height-200.value}",
+                    "bpfmc": "{size.fontLineHeight.--gy-font-line-height-200.value}",
+                    "hb": null
+                },
+                "fontWeight": {
+                    "mc": "{size.fontWeight.--gy-font-weight-regular.value}",
+                    "mineursmc": "{size.fontWeight.--gy-font-weight-regular.value}",
+                    "bpfmc": "{size.fontWeight.--gy-font-weight-regular.value}",
+                    "hb": null
+                },
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": null,
+                "linkedColorAliasToken": {
+                    "mc": "{color.aliases.--gy-native-common-color-text-heading-title-1-default.linkedColorCoreToken.mc}",
+                    "hb": null
+                },
+                "tokenName": "--gy-native-font-style-title-1-default",
+                "deprecated": null
+            },
+            "--gy-native-font-style-title-1-reverse": {
+                "dls": "--gy",
+                "branch": "native",
+                "family": "font",
+                "type": {
+                    "": "title-1",
+                    "dynamic": null
+                },
+                "category": "style",
+                "modifier": "reverse",
+                "scale": null,
+                "state": null,
+                "component": null,
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": {
+                    "mc": "{fontFamily.name.--gy-font-family-secondary.value.mc}",
+                    "mineursmc": "{fontFamily.name.--gy-font-family-secondary.value.mineursmc}",
+                    "bpfmc": "{fontFamily.name.--gy-font-family-secondary.value.bpfmc}",
+                    "hb": null
+                },
+                "fontSize": {
+                    "mc": "{size.fontSize.--gy-native-font-size-heading-2.value.mc}",
+                    "mineursmc": "{size.fontSize.--gy-native-font-size-heading-2.value.mineursmc}",
+                    "bpfmc": "{size.fontSize.--gy-native-font-size-heading-2.value.bpfmc}",
+                    "hb": null
+                },
+                "fontLineHeight": {
+                    "mc": "{size.fontLineHeight.--gy-font-line-height-200.value}",
+                    "mineursmc": "{size.fontLineHeight.--gy-font-line-height-200.value}",
+                    "bpfmc": "{size.fontLineHeight.--gy-font-line-height-200.value}",
+                    "hb": null
+                },
+                "fontWeight": {
+                    "mc": "{size.fontWeight.--gy-font-weight-regular.value}",
+                    "mineursmc": "{size.fontWeight.--gy-font-weight-regular.value}",
+                    "bpfmc": "{size.fontWeight.--gy-font-weight-regular.value}",
+                    "hb": null
+                },
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": null,
+                "linkedColorAliasToken": {
+                    "mc": "{color.aliases.--gy-native-common-color-text-heading-title-1-reverse.linkedColorCoreToken.mc}",
+                    "hb": null
+                },
+                "tokenName": "--gy-native-font-style-title-1-reverse",
+                "deprecated": null
+            },
+            "--gy-native-font-style-title-2-default": {
+                "dls": "--gy",
+                "branch": "native",
+                "family": "font",
+                "type": {
+                    "": "title-2",
+                    "dynamic": null
+                },
+                "category": "style",
+                "modifier": "default",
+                "scale": null,
+                "state": null,
+                "component": null,
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": {
+                    "mc": "{fontFamily.name.--gy-font-family-secondary.value.mc}",
+                    "mineursmc": "{fontFamily.name.--gy-font-family-secondary.value.mineursmc}",
+                    "bpfmc": "{fontFamily.name.--gy-font-family-secondary.value.bpfmc}",
+                    "hb": null
+                },
+                "fontSize": {
+                    "mc": "{size.fontSize.--gy-native-font-size-heading-5.value.mc}",
+                    "mineursmc": "{size.fontSize.--gy-native-font-size-heading-5.value.mineursmc}",
+                    "bpfmc": "{size.fontSize.--gy-native-font-size-heading-5.value.bpfmc}",
+                    "hb": null
+                },
+                "fontLineHeight": {
+                    "mc": "{size.fontLineHeight.--gy-font-line-height-200.value}",
+                    "mineursmc": "{size.fontLineHeight.--gy-font-line-height-200.value}",
+                    "bpfmc": "{size.fontLineHeight.--gy-font-line-height-200.value}",
+                    "hb": null
+                },
+                "fontWeight": {
+                    "mc": "{size.fontWeight.--gy-font-weight-regular.value}",
+                    "mineursmc": "{size.fontWeight.--gy-font-weight-regular.value}",
+                    "bpfmc": "{size.fontWeight.--gy-font-weight-regular.value}",
+                    "hb": null
+                },
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": null,
+                "linkedColorAliasToken": {
+                    "mc": "{color.aliases.--gy-native-common-color-text-heading-title-2-default.linkedColorCoreToken.mc}",
+                    "hb": null
+                },
+                "tokenName": "--gy-native-font-style-title-2-default",
+                "deprecated": null
+            },
+            "--gy-native-font-style-title-2-reverse": {
+                "dls": "--gy",
+                "branch": "native",
+                "family": "font",
+                "type": {
+                    "": "title-2",
+                    "dynamic": null
+                },
+                "category": "style",
+                "modifier": "reverse",
+                "scale": null,
+                "state": null,
+                "component": null,
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": {
+                    "mc": "{fontFamily.name.--gy-font-family-secondary.value.mc}",
+                    "mineursmc": "{fontFamily.name.--gy-font-family-secondary.value.mineursmc}",
+                    "bpfmc": "{fontFamily.name.--gy-font-family-secondary.value.bpfmc}",
+                    "hb": null
+                },
+                "fontSize": {
+                    "mc": "{size.fontSize.--gy-native-font-size-heading-5.value.mc}",
+                    "mineursmc": "{size.fontSize.--gy-native-font-size-heading-5.value.mineursmc}",
+                    "bpfmc": "{size.fontSize.--gy-native-font-size-heading-5.value.bpfmc}",
+                    "hb": null
+                },
+                "fontLineHeight": {
+                    "mc": "{size.fontLineHeight.--gy-font-line-height-200.value}",
+                    "mineursmc": "{size.fontLineHeight.--gy-font-line-height-200.value}",
+                    "bpfmc": "{size.fontLineHeight.--gy-font-line-height-200.value}",
+                    "hb": null
+                },
+                "fontWeight": {
+                    "mc": "{size.fontWeight.--gy-font-weight-regular.value}",
+                    "mineursmc": "{size.fontWeight.--gy-font-weight-regular.value}",
+                    "bpfmc": "{size.fontWeight.--gy-font-weight-regular.value}",
+                    "hb": null
+                },
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": null,
+                "linkedColorAliasToken": {
+                    "mc": "{color.aliases.--gy-native-common-color-text-heading-title-2-reverse.linkedColorCoreToken.mc}",
+                    "hb": null
+                },
+                "tokenName": "--gy-native-font-style-title-2-reverse",
+                "deprecated": null
+            },
+            "--gy-native-font-style-title-3-default": {
+                "dls": "--gy",
+                "branch": "native",
+                "family": "font",
+                "type": {
+                    "": "title-3",
+                    "dynamic": null
+                },
+                "category": "style",
+                "modifier": "default",
+                "scale": null,
+                "state": null,
+                "component": null,
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": {
+                    "mc": "{fontFamily.name.--gy-font-family-primary.value.mc}",
+                    "mineursmc": "{fontFamily.name.--gy-font-family-primary.value.mineursmc}",
+                    "bpfmc": "{fontFamily.name.--gy-font-family-primary.value.bpfmc}",
+                    "hb": null
+                },
+                "fontSize": {
+                    "mc": "{size.fontSize.--gy-native-font-size-heading-6.value.mc}",
+                    "mineursmc": "{size.fontSize.--gy-native-font-size-heading-6.value.mineursmc}",
+                    "bpfmc": "{size.fontSize.--gy-native-font-size-heading-6.value.bpfmc}",
+                    "hb": null
+                },
+                "fontLineHeight": {
+                    "mc": "{size.fontLineHeight.--gy-font-line-height-400.value}",
+                    "mineursmc": "{size.fontLineHeight.--gy-font-line-height-400.value}",
+                    "bpfmc": "{size.fontLineHeight.--gy-font-line-height-400.value}",
+                    "hb": null
+                },
+                "fontWeight": {
+                    "mc": "{size.fontWeight.--gy-font-weight-bold.value}",
+                    "mineursmc": "{size.fontWeight.--gy-font-weight-bold.value}",
+                    "bpfmc": "{size.fontWeight.--gy-font-weight-bold.value}",
+                    "hb": null
+                },
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": null,
+                "linkedColorAliasToken": {
+                    "mc": "{color.aliases.--gy-native-common-color-text-heading-title-3-default.linkedColorCoreToken.mc}",
+                    "hb": null
+                },
+                "tokenName": "--gy-native-font-style-title-3-default",
+                "deprecated": null
+            },
+            "--gy-native-font-style-title-3-reverse": {
+                "dls": "--gy",
+                "branch": "native",
+                "family": "font",
+                "type": {
+                    "": "title-3",
+                    "dynamic": null
+                },
+                "category": "style",
+                "modifier": "reverse",
+                "scale": null,
+                "state": null,
+                "component": null,
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": {
+                    "mc": "{fontFamily.name.--gy-font-family-primary.value.mc}",
+                    "mineursmc": "{fontFamily.name.--gy-font-family-primary.value.mineursmc}",
+                    "bpfmc": "{fontFamily.name.--gy-font-family-primary.value.bpfmc}",
+                    "hb": null
+                },
+                "fontSize": {
+                    "mc": "{size.fontSize.--gy-native-font-size-heading-6.value.mc}",
+                    "mineursmc": "{size.fontSize.--gy-native-font-size-heading-6.value.mineursmc}",
+                    "bpfmc": "{size.fontSize.--gy-native-font-size-heading-6.value.bpfmc}",
+                    "hb": null
+                },
+                "fontLineHeight": {
+                    "mc": "{size.fontLineHeight.--gy-font-line-height-400.value}",
+                    "mineursmc": "{size.fontLineHeight.--gy-font-line-height-400.value}",
+                    "bpfmc": "{size.fontLineHeight.--gy-font-line-height-400.value}",
+                    "hb": null
+                },
+                "fontWeight": {
+                    "mc": "{size.fontWeight.--gy-font-weight-bold.value}",
+                    "mineursmc": "{size.fontWeight.--gy-font-weight-bold.value}",
+                    "bpfmc": "{size.fontWeight.--gy-font-weight-bold.value}",
+                    "hb": null
+                },
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": null,
+                "linkedColorAliasToken": {
+                    "mc": "{color.aliases.--gy-native-common-color-text-heading-title-3-reverse.linkedColorCoreToken.mc}",
+                    "hb": null
+                },
+                "tokenName": "--gy-native-font-style-title-3-reverse",
+                "deprecated": null
+            },
+            "--gy-native-font-style-title-4-default": {
+                "dls": "--gy",
+                "branch": "native",
+                "family": "font",
+                "type": {
+                    "": "title-4",
+                    "dynamic": null
+                },
+                "category": "style",
+                "modifier": "default",
+                "scale": null,
+                "state": null,
+                "component": null,
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": {
+                    "mc": "{fontFamily.name.--gy-font-family-primary.value.mc}",
+                    "mineursmc": "{fontFamily.name.--gy-font-family-primary.value.mineursmc}",
+                    "bpfmc": "{fontFamily.name.--gy-font-family-primary.value.bpfmc}",
+                    "hb": null
+                },
+                "fontSize": {
+                    "mc": "{size.fontSize.--gy-native-font-size-heading-7.value.mc}",
+                    "mineursmc": "{size.fontSize.--gy-native-font-size-heading-7.value.mineursmc}",
+                    "bpfmc": "{size.fontSize.--gy-native-font-size-heading-7.value.bpfmc}",
+                    "hb": null
+                },
+                "fontLineHeight": {
+                    "mc": "{size.fontLineHeight.--gy-font-line-height-300.value}",
+                    "mineursmc": "{size.fontLineHeight.--gy-font-line-height-300.value}",
+                    "bpfmc": "{size.fontLineHeight.--gy-font-line-height-300.value}",
+                    "hb": null
+                },
+                "fontWeight": {
+                    "mc": "{size.fontWeight.--gy-font-weight-semi-bold.value}",
+                    "mineursmc": "{size.fontWeight.--gy-font-weight-semi-bold.value}",
+                    "bpfmc": "{size.fontWeight.--gy-font-weight-semi-bold.value}",
+                    "hb": null
+                },
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": null,
+                "linkedColorAliasToken": {
+                    "mc": "{color.aliases.--gy-native-common-color-text-heading-title-4-default.linkedColorCoreToken.mc}",
+                    "hb": null
+                },
+                "tokenName": "--gy-native-font-style-title-4-default",
+                "deprecated": null
+            },
+            "--gy-native-font-style-title-4-reverse": {
+                "dls": "--gy",
+                "branch": "native",
+                "family": "font",
+                "type": {
+                    "": "title-4",
+                    "dynamic": null
+                },
+                "category": "style",
+                "modifier": "reverse",
+                "scale": null,
+                "state": null,
+                "component": null,
+                "value": null,
+                "dynamicType": null,
+                "spread": null,
+                "offsetX": null,
+                "offsetY": null,
+                "blur": null,
+                "fontFamily": {
+                    "mc": "{fontFamily.name.--gy-font-family-primary.value.mc}",
+                    "mineursmc": "{fontFamily.name.--gy-font-family-primary.value.mineursmc}",
+                    "bpfmc": "{fontFamily.name.--gy-font-family-primary.value.bpfmc}",
+                    "hb": null
+                },
+                "fontSize": {
+                    "mc": "{size.fontSize.--gy-native-font-size-heading-7.value.mc}",
+                    "mineursmc": "{size.fontSize.--gy-native-font-size-heading-7.value.mineursmc}",
+                    "bpfmc": "{size.fontSize.--gy-native-font-size-heading-7.value.bpfmc}",
+                    "hb": null
+                },
+                "fontLineHeight": {
+                    "mc": "{size.fontLineHeight.--gy-font-line-height-300.value}",
+                    "mineursmc": "{size.fontLineHeight.--gy-font-line-height-300.value}",
+                    "bpfmc": "{size.fontLineHeight.--gy-font-line-height-300.value}",
+                    "hb": null
+                },
+                "fontWeight": {
+                    "mc": "{size.fontWeight.--gy-font-weight-semi-bold.value}",
+                    "mineursmc": "{size.fontWeight.--gy-font-weight-semi-bold.value}",
+                    "bpfmc": "{size.fontWeight.--gy-font-weight-semi-bold.value}",
+                    "hb": null
+                },
+                "linkedSpaceToken": null,
+                "linkedBorderRadiusToken": null,
+                "linkedBorderWidthToken": null,
+                "linkedOpacityToken": null,
+                "lightValue": null,
+                "darkValue": null,
+                "linkedColorCoreToken": null,
+                "linkedColorAliasToken": {
+                    "mc": "{color.aliases.--gy-native-common-color-text-heading-title-4-reverse.linkedColorCoreToken.mc}",
+                    "hb": null
+                },
+                "tokenName": "--gy-native-font-style-title-4-reverse",
+                "deprecated": null
+            }
+        }
+    }
+}

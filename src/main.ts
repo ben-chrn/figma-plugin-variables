@@ -185,29 +185,29 @@ async function createSpacingAlias(
           modeId = existingMode.modeId;
         }
 
-        // finding aliasVar
-        const coreTokenName = renameCoreSpacingStructure(
-          modeValue.replace(/{size.spacings./gi, "").replace(/.value}/gi, "")
-        );
-
-        console.log(finalName, coreTokenName);
-
-        const coreVariableKey = publishedTokens.find(
-          (v) => v.name.toLowerCase() === coreTokenName
-        )?.key;
-        if (coreVariableKey) {
-          const coreVariable = await figma.variables.importVariableByKeyAsync(
-            coreVariableKey
+        if (modeValue) {
+          // finding aliasVar
+          const coreTokenName = renameCoreSpacingStructure(
+            modeValue.replace(/{size.spacings./gi, "").replace(/.value}/gi, "")
           );
 
-          if (coreVariable)
-            variable.setValueForMode(
-              modeId,
-              figma.variables.createVariableAlias(coreVariable)
-            );
-        }
+          console.log(finalName, coreTokenName);
 
-        return;
+          const coreVariableKey = publishedTokens.find(
+            (v) => v.name.toLowerCase() === coreTokenName
+          )?.key;
+          if (coreVariableKey) {
+            const coreVariable = await figma.variables.importVariableByKeyAsync(
+              coreVariableKey
+            );
+
+            if (coreVariable)
+              variable.setValueForMode(
+                modeId,
+                figma.variables.createVariableAlias(coreVariable)
+              );
+          }
+        }
       }
     }
   }
@@ -314,31 +314,31 @@ async function createRadiusAlias(
           modeId = existingMode.modeId;
         }
 
-        // finding aliasVar
-        const coreTokenName = renameCoreRadiusStructure(
-          modeValue
-            .replace(/{size.borderRadius./gi, "")
-            .replace(/.value}/gi, "")
-        );
-
-        console.log(finalName, coreTokenName);
-
-        const coreVariableKey = publishedTokens.find(
-          (v) => v.name.toLowerCase() === coreTokenName
-        )?.key;
-        if (coreVariableKey) {
-          const coreVariable = await figma.variables.importVariableByKeyAsync(
-            coreVariableKey
+        if (modeValue) {
+          // finding aliasVar
+          const coreTokenName = renameCoreRadiusStructure(
+            modeValue
+              .replace(/{size.borderRadius./gi, "")
+              .replace(/.value}/gi, "")
           );
 
-          if (coreVariable)
-            variable.setValueForMode(
-              modeId,
-              figma.variables.createVariableAlias(coreVariable)
-            );
-        }
+          console.log(finalName, coreTokenName);
 
-        return;
+          const coreVariableKey = publishedTokens.find(
+            (v) => v.name.toLowerCase() === coreTokenName
+          )?.key;
+          if (coreVariableKey) {
+            const coreVariable = await figma.variables.importVariableByKeyAsync(
+              coreVariableKey
+            );
+
+            if (coreVariable)
+              variable.setValueForMode(
+                modeId,
+                figma.variables.createVariableAlias(coreVariable)
+              );
+          }
+        }
       }
     }
   }
@@ -489,32 +489,49 @@ async function createColorAlias(
         modeId = existingMode.modeId;
       }
 
-      // finding aliasVar
-      const coreTokenName = renameCoreColorStructure(
-        modeValue.replace(/{color.core./gi, "")
-      );
-
-      const coreVariableKey = publishedTokens.find(
-        (v) => v.name.toLowerCase() === coreTokenName
-      )?.key;
-
-      if (coreVariableKey) {
-        const coreVariable = await figma.variables.importVariableByKeyAsync(
-          coreVariableKey
+      // check if value is set for mode
+      if (modeValue) {
+        // finding aliasVar
+        const coreTokenName = renameCoreColorStructure(
+          modeValue.replace(/{color.core./gi, "")
         );
 
-        if (coreVariable) {
-          // variable.setValueForMode(modeId, {
-          //   r: 0,
-          //   g: 0,
-          //   b: 0,
-          // });
-          variable.setValueForMode(
-            modeId,
-            figma.variables.createVariableAlias(coreVariable)
+        console.log(modeName);
+        console.log(modeValue);
+        console.log(coreTokenName);
+
+        const coreVariableKey = publishedTokens.find(
+          (v) => v.name.toLowerCase() === coreTokenName
+        )?.key;
+
+        if (coreVariableKey) {
+          const coreVariable = await figma.variables.importVariableByKeyAsync(
+            coreVariableKey
           );
-          console.log(`created alias ${finalName}`);
+
+          if (coreVariable) {
+            // variable.setValueForMode(modeId, {
+            //   r: 0,
+            //   g: 0,
+            //   b: 0,
+            // });
+            console.log(coreVariable.name);
+            variable.setValueForMode(
+              modeId,
+              figma.variables.createVariableAlias(coreVariable)
+            );
+            // console.log(`created alias ${finalName}`);
+          }
         }
+      } else {
+        // if value empty, set hulk value
+        const rgbColor = chroma("#AFFF04").rgba();
+        variable.setValueForMode(modeId, {
+          r: rgbColor[0] / 255,
+          g: rgbColor[1] / 255,
+          b: rgbColor[2] / 255,
+          a: rgbColor[3],
+        });
       }
 
       // return;
