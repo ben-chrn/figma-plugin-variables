@@ -4,16 +4,18 @@ import chroma, { Color } from "chroma-js";
 import {
   CreateTokensHandler,
   TokenType,
-  ColorToken,
-  SizeToken,
+  CoreToken,
+  AliasToken,
   TokenProperties,
   TokenFile,
   ProcessedTokens,
+  LoadPublishedTokensHandler,
+  PublishedTokensLoadedHandler,
 } from "./types";
 import { generateVariableName, getFigmaAPIParams } from "./utils";
 
 const createCoreToken = (
-  token: ColorToken | SizeToken,
+  token: CoreToken,
   collectionName: string,
   tokenType: TokenType
 ) => {
@@ -37,7 +39,7 @@ const createCoreToken = (
 
   // Handle creating variable
   const finalName = generateVariableName(token, tokenType); // TODO
-  const APIParams = getFigmaAPIParams(tokenType);
+  const APIParams = getFigmaAPIParams(tokenType, token.tokenName);
 
   let variable: Variable;
   const existingVariable = figma.variables
@@ -59,6 +61,7 @@ const createCoreToken = (
   // Set Code syntax for true token name
   //@ts-expect-error
   variable.setVariableCodeSyntax("WEB", token.tokenName);
+  variable.scopes = APIParams.scope;
 
   // Single value, no mode support needed
   if (typeof token.value === "string") {
@@ -111,34 +114,137 @@ const createCoreToken = (
   }
 };
 
-export default function () {
-  on<CreateTokensHandler>(
-    "CREATE_TOKENS",
-    async (tokens: TokenProperties[]) => {
-      const publishedTokens = await importPublishedTokens();
+async function createAliasToken(
+  alias: AliasToken,
+  collectionName: string,
+  tokenType: TokenType,
+  publishedTokens: Variable[]
+): Promise<void> {
+  if (!alias.value) {
+    if (alias.tokenName === undefined) {
+      console.log("undefined token");
+      console.log(alias);
+      return;
+    }
 
-      console.log(publishedTokens);
-      for (const token of tokens) {
-        await createToken(token, publishedTokens);
+    // Handle creating collection
+    let collection: VariableCollection;
+    const existingCollection = figma.variables
+      .getLocalVariableCollections()
+      .find((c) => c.name.toLowerCase() === collectionName.toLowerCase());
+
+    if (!existingCollection) {
+      collection = figma.variables.createVariableCollection(collectionName);
+    } else {
+      collection = existingCollection;
+    }
+
+    // Handle creating variable
+    const finalName = generateVariableName(alias, tokenType);
+    const APIParams = getFigmaAPIParams(tokenType, alias.tokenName);
+
+    let variable: Variable;
+    const existingVariable = figma.variables
+      .getLocalVariables()
+      .find((v) => v.name.toLowerCase() === finalName);
+
+    if (!existingVariable) {
+      variable = figma.variables.createVariable(
+        finalName,
+        collection.id,
+        APIParams.variableType
+      );
+      console.log(`creating variable ${finalName}`);
+    } else {
+      variable = existingVariable;
+      console.log(`updating variable ${finalName}`);
+    }
+
+    // Set Code syntax for true token name
+    //@ts-expect-error
+    variable.setVariableCodeSyntax("WEB", alias.tokenName);
+    variable.scopes = APIParams.scope;
+
+    let linkedCore;
+    let regexString;
+
+    switch (tokenType) {
+      case "colorAlias":
+        linkedCore = alias.linkedColorCoreToken;
+        regexString = /{color.core./gi;
+        break;
+      case "spacingAlias":
+        linkedCore = alias.linkedSpaceToken;
+        regexString = /{size.spacings./gi;
+        break;
+      case "radiusAlias":
+        linkedCore = alias.linkedBorderRadiusToken;
+        regexString = /{size.borderRadius./gi;
+        break;
+      case "borderWidthAlias":
+        linkedCore = alias.linkedBorderWidthToken;
+        regexString = /{size.borderWidth./gi;
+        break;
+      case "opacityAlias":
+        linkedCore = alias.linkedOpacityToken;
+        regexString = /{size.opacity./gi;
+        break;
+    }
+
+    if (linkedCore) {
+      for (const [modeName, modeValue] of Object.entries(linkedCore)) {
+        if (collection.modes[0].name === "Mode 1") {
+          collection.renameMode(collection.modes[0].modeId, "mc");
+        }
+
+        const existingMode = collection.modes.find((m) => m.name === modeName);
+        let modeId: string;
+
+        if (!existingMode) {
+          modeId = collection.addMode(modeName);
+        } else {
+          modeId = existingMode.modeId;
+        }
+
+        // check if value is set for mode
+        if (modeValue) {
+          // finding aliasVar
+          const coreTokenName = modeValue
+            .replace(regexString, "")
+            .replace(".value", "")
+            .replace("}", "");
+
+          const coreVariable = publishedTokens.find((v) => {
+            //@ts-expect-error
+            return v.codeSyntax["WEB"] === coreTokenName;
+          });
+
+          if (coreVariable) {
+            variable.setValueForMode(
+              modeId,
+              figma.variables.createVariableAlias(coreVariable)
+            );
+          }
+        } else {
+          // if value empty, set hulk value
+          // const rgbColor = chroma("#AFFF04").rgba();
+          // variable.setValueForMode(modeId, {
+          //   r: rgbColor[0] / 255,
+          //   g: rgbColor[1] / 255,
+          //   b: rgbColor[2] / 255,
+          //   a: rgbColor[3],
+          // });
+        }
+
+        // return;
       }
     }
-  );
-
-  async function createToken(
-    token: TokenProperties,
-    publishedTokens: LibraryVariable[]
-  ): Promise<TokenProperties> {
-    if (token.type.indexOf("Core") !== -1) {
-      createCoreToken(token.value, token.collection, token.type);
-    } else {
-      console.log("not a core token");
-    }
-
-    return token;
   }
+}
 
-  async function importPublishedTokens() {
-    const publishedTokens = [];
+export default function () {
+  on<LoadPublishedTokensHandler>("LOAD_PUBLISHED_TOKENS", async () => {
+    const publishedTokens: Variable[] = [];
     const linkedCollections =
       await figma.teamLibrary.getAvailableLibraryVariableCollectionsAsync();
 
@@ -150,7 +256,78 @@ export default function () {
           );
 
         if (linkedVars) {
-          publishedTokens.push(...linkedVars);
+          for (const linkedVar of linkedVars) {
+            const coreVariable = await figma.variables.importVariableByKeyAsync(
+              linkedVar.key
+            );
+
+            if (coreVariable) {
+              publishedTokens.push(coreVariable);
+            }
+          }
+        }
+      }
+    }
+
+    emit<PublishedTokensLoadedHandler>(
+      "PUBLISHED_TOKENS_LOADED",
+      publishedTokens
+    );
+  });
+
+  on<CreateTokensHandler>(
+    "CREATE_TOKENS",
+    async (tokens: TokenProperties[], publishedTokens: Variable[]) => {
+      // const localTokens = figma.variables.getLocalVariables();
+
+      let coreFile = false;
+      for (const token of tokens) {
+        if (token.type.indexOf("Core") !== -1) {
+          coreFile = true;
+          createCoreToken(token.value, token.collection, token.type);
+        }
+      }
+
+      if (!coreFile) {
+        const publishedTokens2 = await importPublishedTokens();
+        console.log(publishedTokens2);
+        for (const token of tokens) {
+          createAliasToken(
+            //@ts-expect-error
+            token.value,
+            token.collection,
+            token.type,
+            publishedTokens2
+          );
+        }
+      }
+    }
+  );
+
+  async function importPublishedTokens() {
+    const publishedTokens: Variable[] = [];
+    const linkedCollections =
+      await figma.teamLibrary.getAvailableLibraryVariableCollectionsAsync();
+
+    if (linkedCollections) {
+      for (const collection of linkedCollections) {
+        const linkedVars =
+          await figma.teamLibrary.getVariablesInLibraryCollectionAsync(
+            collection.key
+          );
+
+        if (linkedVars) {
+          for (const linkedVar of linkedVars) {
+            const coreVariable = await figma.variables.importVariableByKeyAsync(
+              linkedVar.key
+            );
+
+            console.log(coreVariable);
+
+            if (coreVariable.id) {
+              publishedTokens.push(coreVariable);
+            }
+          }
         }
       }
     }
@@ -275,8 +452,8 @@ export function processTokens(tokens: string) {
       }
     }
 
-    if (file.size.opacityAlias) {
-      let tokensList = Object.entries(file.size.opacityAlias);
+    if (file.size.opacityAliases) {
+      let tokensList = Object.entries(file.size.opacityAliases);
       for (const [tokenName, tokenValue] of tokensList) {
         processedTokens.tokensList.push({
           type: "opacityAlias",
@@ -286,5 +463,6 @@ export function processTokens(tokens: string) {
     }
   }
 
+  console.log(processedTokens);
   return processedTokens;
 }

@@ -1,42 +1,3 @@
-import {
-  aliasColorDLS,
-  aliasColorBranch,
-  aliasColorFamily,
-  aliasColorCategory,
-  aliasColorType,
-  aliasColorComponents,
-  aliasColorModifier,
-  aliasColorState,
-  coreColorDLS,
-  coreColorFamily,
-  coreColorCategory,
-  coreColorType,
-  coreColorModifier,
-  coreColorScale,
-  coreSpacingDLS,
-  coreSpacingBranch,
-  coreSpacingFamily,
-  coreSpacingScale,
-  aliasSpacingDLS,
-  aliasSpacingBranch,
-  aliasSpacingFamily,
-  aliasSpacingCategory,
-  aliasSpacingType,
-  aliasSpacingComponents,
-  aliasSpacingModifier,
-  coreRadiusDLS,
-  coreRadiusBranch,
-  coreRadiusFamily,
-  coreRadiusScale,
-  aliasRadiusDLS,
-  aliasRadiusBranch,
-  aliasRadiusFamily,
-  aliasRadiusCategory,
-  aliasRadiusType,
-  aliasRadiusComponents,
-  aliasRadiusModifier,
-  aliasRadiusState,
-} from "../BNP_Tokens/naming-components";
 import { TokenObj, TokenType } from "./types";
 
 const variableNamingStructure = {
@@ -131,53 +92,61 @@ export function generateVariableName(token: TokenObj, tokenType: TokenType) {
   return variableName;
 }
 
-export function getFigmaAPIParams(tokenType: TokenType) {
-  let scope: string[] = [""];
+export function getFigmaAPIParams(tokenType: TokenType, tokenName: string) {
+  let scope: VariableScope[] = ["ALL_SCOPES"];
   let variableType: VariableResolvedDataType = "COLOR";
+
+  console.log(tokenName);
 
   switch (tokenType) {
     case "colorAlias":
-      scope = [""];
-      variableType = "COLOR";
-      break;
     case "colorNative":
-      scope = [""];
+      scope = ["ALL_SCOPES"];
       variableType = "COLOR";
+      if (tokenName.includes("surface") || tokenName.includes("page"))
+        scope = ["FRAME_FILL"];
+      if (tokenName.includes("ripple") || tokenName.includes("dataviz"))
+        scope = ["FRAME_FILL", "SHAPE_FILL"];
+      if (tokenName.includes("border") || tokenName.includes("divider"))
+        scope = ["STROKE"];
+      if (tokenName.includes("text")) scope = ["TEXT_FILL"];
+      if (tokenName.includes("icon")) scope = ["SHAPE_FILL"];
+      if (tokenName.includes("all")) scope = ["ALL_FILLS", "STROKE"];
       break;
     case "colorCore":
-      scope = [""];
+      scope = ["ALL_SCOPES"];
       variableType = "COLOR";
       break;
     case "radiusCore":
-      scope = [""];
+      scope = ["ALL_SCOPES"];
       variableType = "FLOAT";
       break;
     case "radiusAlias":
-      scope = [""];
+      scope = ["CORNER_RADIUS"];
       variableType = "FLOAT";
       break;
     case "spacingCore":
-      scope = [""];
+      scope = ["ALL_SCOPES"];
       variableType = "FLOAT";
       break;
     case "spacingAlias":
-      scope = [""];
+      scope = ["GAP"];
       variableType = "FLOAT";
       break;
     case "borderWidthCore":
-      scope = [""];
+      scope = ["ALL_SCOPES"];
       variableType = "FLOAT";
       break;
     case "borderWidthAlias":
-      scope = [""];
+      scope = ["ALL_SCOPES"];
       variableType = "FLOAT";
       break;
     case "opacityCore":
-      scope = [""];
+      scope = ["ALL_SCOPES"];
       variableType = "FLOAT";
       break;
     case "opacityAlias":
-      scope = [""];
+      scope = ["ALL_SCOPES"];
       variableType = "FLOAT";
       break;
   }

@@ -19,12 +19,22 @@ export interface ReportSuccessHandler extends EventHandler {
 
 export interface CreateTokensHandler extends EventHandler {
   name: "CREATE_TOKENS";
-  handler: (tokens: TokenProperties[]) => void;
+  handler: (tokens: TokenProperties[], publishedTokens: Variable[]) => void;
 }
 
 export interface TokenCreatedHandler extends EventHandler {
   name: "TOKEN_CREATED";
   handler: (tokenName: string) => void;
+}
+
+export interface PublishedTokensLoadedHandler extends EventHandler {
+  name: "PUBLISHED_TOKENS_LOADED";
+  handler: (publishedTokens: Variable[]) => void;
+}
+
+export interface LoadPublishedTokensHandler extends EventHandler {
+  name: "LOAD_PUBLISHED_TOKENS";
+  handler: () => void;
 }
 
 export type TokenType =
@@ -44,13 +54,13 @@ export interface ProcessedTokens {
   collectionName: string;
   tokensList: {
     type: TokenType;
-    value: ColorToken | SizeToken;
+    value: CoreToken | AliasToken;
   }[];
 }
 
 export interface TokenProperties {
   type: TokenType;
-  value: ColorToken | SizeToken;
+  value: CoreToken | AliasToken;
   collection: string;
 }
 
@@ -76,32 +86,33 @@ export interface TokenObj {
   component?: string;
 }
 
-export interface ColorToken extends TokenObj {
-  value: MultiModeValue;
+export interface CoreToken extends TokenObj {
+  value: MultiModeValue | string;
   tokenName: string;
-  linkedColorCoreToken: MultiModeValue;
 }
 
-export interface SizeToken extends TokenObj {
+export interface AliasToken extends TokenObj {
   value: string;
   tokenName: string;
+  linkedColorCoreToken?: MultiModeValue;
   linkedSpaceToken?: MultiModeValue;
   linkedBorderRadiusToken?: MultiModeValue;
   linkedBorderWidthToken?: MultiModeValue;
+  linkedOpacityToken?: MultiModeValue;
 }
 
 export interface TokenCollection {
-  spacings?: SizeToken[];
-  spacingAliases?: SizeToken[];
-  borderRadius?: SizeToken[];
-  borderRadiusAliases?: SizeToken[];
-  borderWidth?: SizeToken[];
-  borderWidthAliases?: SizeToken[];
-  opacity?: SizeToken[];
-  opacityAlias?: SizeToken[];
-  core?: ColorToken[];
-  aliases?: ColorToken[];
-  natives?: ColorToken[];
+  spacings?: CoreToken[];
+  spacingAliases?: AliasToken[];
+  borderRadius?: CoreToken[];
+  borderRadiusAliases?: AliasToken[];
+  borderWidth?: CoreToken[];
+  borderWidthAliases?: AliasToken[];
+  opacity?: CoreToken[];
+  opacityAliases?: AliasToken[];
+  core?: CoreToken[];
+  aliases?: AliasToken[];
+  natives?: AliasToken[];
 }
 
 export interface TokenFile {

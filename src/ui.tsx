@@ -17,13 +17,14 @@ import { h } from "preact";
 import { useContext, useEffect, useMemo, useState } from "preact/hooks";
 
 import {
-  ImportTokensHandler,
   ReportErrorHandler,
   ReportSuccessHandler,
   CreateTokensHandler,
-  TokenCreatedHandler,
+  LoadPublishedTokensHandler,
+  PublishedTokensLoadedHandler,
 } from "./types";
-import { TokenProperties, ProcessedTokens, processTokens } from "./main";
+import { processTokens } from "./main";
+import { TokenProperties } from "./types";
 
 function Plugin() {
   const [errorMsg, setErrorMsg] = useState<string | null>();
@@ -31,6 +32,7 @@ function Plugin() {
   const [currCount, setCurrCount] = useState<number>(0);
   const [totalCount, setTotalCount] = useState<number>(0);
   const [lastCreatedToken, setLastCreatedToken] = useState<string>("");
+  const [publishedTokens, setPublishedTokens] = useState<Variable[]>([]);
 
   const handleSelectedFiles = (files: Array<File>) => {
     const reader = new FileReader();
@@ -51,12 +53,29 @@ function Plugin() {
 
           tokensArr.push(tokenObj);
         }
-        await emit<CreateTokensHandler>("CREATE_TOKENS", tokensArr);
+
+        console.log(publishedTokens);
+
+        await emit<CreateTokensHandler>(
+          "CREATE_TOKENS",
+          tokensArr,
+          publishedTokens
+        );
       }
     };
   };
 
   useEffect(() => {
+    // emit<LoadPublishedTokensHandler>("LOAD_PUBLISHED_TOKENS");
+
+    on<PublishedTokensLoadedHandler>(
+      "PUBLISHED_TOKENS_LOADED",
+      (publishedTokens) => {
+        console.log(publishedTokens);
+        setPublishedTokens(publishedTokens);
+      }
+    );
+
     on<ReportErrorHandler>("REPORT_ERROR", (errorMsg) => {
       setErrorMsg(errorMsg);
     });
@@ -64,9 +83,6 @@ function Plugin() {
     on<ReportSuccessHandler>("REPORT_SUCCESS", (msg) => {
       setSuccessMsg(msg);
     });
-
-    // on<TokenCreatedHandler>("TOKEN_CREATED", (tokenName) => {
-    // });
   }, []);
 
   return (
