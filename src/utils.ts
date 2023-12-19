@@ -37,44 +37,7 @@ import {
   aliasRadiusModifier,
   aliasRadiusState,
 } from "../BNP_Tokens/naming-components";
-import { TokenObj } from "./main";
-
-// COLOR ALIAS
-//   branchString,
-//   componentsString,
-//   categoryString,
-//   typeString,
-//   modifierString,
-//   stateString,
-
-// COLOR CORE
-//   categoryString,
-//   typeString,
-//   modifierString,
-//   scaleString,
-
-// SPACING CORE
-//  familyString
-//  scaleString
-
-// ALIAS SPACING
-// branchString,
-// componentsString,
-// categoryString,
-// typeString,
-// modifierString
-
-// RADIUS CORE
-//  familyString
-//  scaleString
-
-// RADIUS ALIAS
-// branchString,
-// componentsString,
-// categoryString,
-// typeString,
-// modifierString,
-// stateString,
+import { TokenObj, TokenType } from "./types";
 
 const variableNamingStructure = {
   colorCore: {
@@ -124,25 +87,39 @@ const variableNamingStructure = {
     type: true,
     modifier: true,
   },
+  borderWidthCore: {
+    family: true,
+    scale: true,
+  },
+  borderWidthAlias: {
+    branch: true,
+    component: true,
+    category: true,
+    type: true,
+    modifier: true,
+    state: true,
+  },
+  opacityCore: {
+    family: true,
+    scale: true,
+  },
+  opacityAlias: {
+    branch: true,
+    component: true,
+    category: true,
+    type: true,
+    modifier: true,
+    state: true,
+  },
 };
 
-export function generateVariableName(
-  token: TokenObj,
-  tokenType:
-    | "colorAlias"
-    | "colorNative"
-    | "colorCore"
-    | "radiusCore"
-    | "radiusAlias"
-    | "spacingCore"
-    | "spacingAlias"
-) {
+export function generateVariableName(token: TokenObj, tokenType: TokenType) {
   let variableName = "";
 
   for (const column in variableNamingStructure[tokenType]) {
     if (token[column as keyof typeof token]) {
       variableName = variableName.concat(
-        // @ts-expect-error
+        //@ts-expect-error
         token[column as keyof typeof token],
         "/"
       );
@@ -154,302 +131,56 @@ export function generateVariableName(
   return variableName;
 }
 
-function smartLocate(results: string[], stringToReplace: string) {
-  if (results.length === 1) return results[0];
-  else if (results.length > 1) {
-    const match = results.reduce((a, b) => {
-      return a.length > b.length ? a : b;
-    });
-    return match;
+export function getFigmaAPIParams(tokenType: TokenType) {
+  let scope: string[] = [""];
+  let variableType: VariableResolvedDataType = "COLOR";
+
+  switch (tokenType) {
+    case "colorAlias":
+      scope = [""];
+      variableType = "COLOR";
+      break;
+    case "colorNative":
+      scope = [""];
+      variableType = "COLOR";
+      break;
+    case "colorCore":
+      scope = [""];
+      variableType = "COLOR";
+      break;
+    case "radiusCore":
+      scope = [""];
+      variableType = "FLOAT";
+      break;
+    case "radiusAlias":
+      scope = [""];
+      variableType = "FLOAT";
+      break;
+    case "spacingCore":
+      scope = [""];
+      variableType = "FLOAT";
+      break;
+    case "spacingAlias":
+      scope = [""];
+      variableType = "FLOAT";
+      break;
+    case "borderWidthCore":
+      scope = [""];
+      variableType = "FLOAT";
+      break;
+    case "borderWidthAlias":
+      scope = [""];
+      variableType = "FLOAT";
+      break;
+    case "opacityCore":
+      scope = [""];
+      variableType = "FLOAT";
+      break;
+    case "opacityAlias":
+      scope = [""];
+      variableType = "FLOAT";
+      break;
   }
 
-  return "";
-}
-
-export function renameAliasColorStructure(tokenName: string): string {
-  let tempString = tokenName;
-
-  const DLS = aliasColorDLS.filter((v) => tempString.includes(v));
-  const DLSString = smartLocate(DLS, tempString);
-  tempString = tempString.replace(DLSString, "");
-
-  const branch = aliasColorBranch.filter((v) => tempString.includes(v));
-  const branchString = smartLocate(branch, tempString);
-  tempString = tempString.replace(branchString, "");
-
-  const family = aliasColorFamily.filter((v) => tempString.includes(v));
-  const familyString = smartLocate(family, tempString);
-  tempString = tempString.replace(familyString, "");
-
-  const category = aliasColorCategory.filter((v) => tempString.includes(v));
-  const categoryString = smartLocate(category, tempString);
-  tempString = tempString.replace(categoryString, "");
-
-  const type = aliasColorType.filter((v) => tempString.includes(v));
-  const typeString = smartLocate(type, tempString);
-  tempString = tempString.replace(typeString, "");
-
-  const components = aliasColorComponents.filter((v) => tempString.includes(v));
-  const componentsString = smartLocate(components, tempString);
-  tempString = tempString.replace(componentsString, "");
-
-  const modifier = aliasColorModifier.filter((v) => tempString.includes(v));
-  const modifierString = smartLocate(modifier, tempString);
-  tempString = tempString.replace(modifierString, "");
-
-  const state = aliasColorState.filter((v) => tempString.includes(v));
-  const stateString = smartLocate(state, tempString);
-  tempString = tempString.replace(stateString, "");
-
-  const finalNameArray = [
-    // DLSString,
-    branchString,
-    componentsString,
-    categoryString,
-    typeString,
-    modifierString,
-    stateString,
-  ];
-
-  let finalName = "";
-
-  for (const component of finalNameArray) {
-    if (component.length > 0) {
-      finalName = finalName.concat(component, "/");
-    }
-  }
-
-  finalName = finalName.slice(0, -1);
-  //   const finalName = `${DLSString}/${branchString}/${familyString}/${categoryString}/${typeString}/${componentsString}/${modifierString}/${state}`;
-  return finalName;
-}
-
-export function renameCoreColorStructure(tokenName: string): string {
-  let tempString = tokenName;
-
-  const DLS = coreColorDLS.filter((v) => tempString.includes(v));
-  const DLSString = smartLocate(DLS, tempString);
-  tempString = tempString.replace(DLSString, "");
-
-  const family = coreColorFamily.filter((v) => tempString.includes(v));
-  const familyString = smartLocate(family, tempString);
-  tempString = tempString.replace(familyString, "");
-
-  const category = coreColorCategory.filter((v) => tempString.includes(v));
-  const categoryString = smartLocate(category, tempString);
-  tempString = tempString.replace(categoryString, "");
-
-  const type = coreColorType.filter((v) => tempString.includes(v));
-  const typeString = smartLocate(type, tempString);
-  tempString = tempString.replace(typeString, "");
-
-  const modifier = coreColorModifier.filter((v) => tempString.includes(v));
-  const modifierString = smartLocate(modifier, tempString);
-  tempString = tempString.replace(modifierString, "");
-
-  const scale = coreColorScale.filter((v) => tempString.includes(v));
-  const scaleString = smartLocate(scale, tempString);
-  tempString = tempString.replace(scaleString, "");
-
-  const finalNameArray = [
-    categoryString,
-    typeString,
-    modifierString,
-    scaleString,
-  ];
-
-  let finalName = "";
-
-  for (const component of finalNameArray) {
-    if (component.length > 0) {
-      finalName = finalName.concat(component, "/");
-    }
-  }
-
-  finalName = finalName.slice(0, -1);
-  //   const finalName = `${DLSString}/${branchString}/${familyString}/${categoryString}/${typeString}/${componentsString}/${modifierString}/${state}`;
-  return finalName;
-}
-
-export function renameCoreSpacingStructure(tokenName: string): string {
-  let tempString = tokenName;
-
-  const DLS = coreSpacingDLS.filter((v) => tempString.includes(v));
-  const DLSString = smartLocate(DLS, tempString);
-  tempString = tempString.replace(DLSString, "");
-
-  const branch = coreSpacingBranch.filter((v) => tempString.includes(v));
-  const branchString = smartLocate(branch, tempString);
-  tempString = tempString.replace(branchString, "");
-
-  const family = coreSpacingFamily.filter((v) => tempString.includes(v));
-  const familyString = smartLocate(family, tempString);
-  tempString = tempString.replace(familyString, "");
-
-  const scale = coreSpacingScale.filter((v) => tempString.includes(v));
-  const scaleString = smartLocate(scale, tempString);
-  tempString = tempString.replace(scaleString, "");
-
-  const finalNameArray = [familyString, scaleString];
-
-  let finalName = "";
-
-  for (const component of finalNameArray) {
-    if (component.length > 0) {
-      finalName = finalName.concat(component, "/");
-    }
-  }
-
-  finalName = finalName.slice(0, -1);
-  return finalName;
-}
-
-export function renameAliasSpacingStructure(tokenName: string): string {
-  let tempString = tokenName;
-
-  const DLS = aliasSpacingDLS.filter((v) => tempString.includes(v));
-  const DLSString = smartLocate(DLS, tempString);
-  tempString = tempString.replace(DLSString, "");
-
-  const branch = aliasSpacingBranch.filter((v) => tempString.includes(v));
-  const branchString = smartLocate(branch, tempString);
-  tempString = tempString.replace(branchString, "");
-
-  const family = aliasSpacingFamily.filter((v) => tempString.includes(v));
-  const familyString = smartLocate(family, tempString);
-  tempString = tempString.replace(familyString, "");
-
-  const category = aliasSpacingCategory.filter((v) => tempString.includes(v));
-  const categoryString = smartLocate(category, tempString);
-  tempString = tempString.replace(categoryString, "");
-
-  const type = aliasSpacingType.filter((v) => tempString.includes(v));
-  const typeString = smartLocate(type, tempString);
-  tempString = tempString.replace(typeString, "");
-
-  const components = aliasSpacingComponents.filter((v) =>
-    tempString.includes(v)
-  );
-  const componentsString = smartLocate(components, tempString);
-  tempString = tempString.replace(componentsString, "");
-
-  const modifier = aliasSpacingModifier.filter((v) => tempString.includes(v));
-  const modifierString = smartLocate(modifier, tempString);
-  tempString = tempString.replace(modifierString, "");
-
-  const finalNameArray = [
-    // DLSString,
-    branchString,
-    componentsString,
-    categoryString,
-    typeString,
-    modifierString,
-  ];
-
-  let finalName = "";
-
-  for (const component of finalNameArray) {
-    if (component.length > 0) {
-      finalName = finalName.concat(component, "/");
-    }
-  }
-
-  finalName = finalName.slice(0, -1);
-  //   const finalName = `${DLSString}/${branchString}/${familyString}/${categoryString}/${typeString}/${componentsString}/${modifierString}/${state}`;
-  return finalName;
-}
-
-export function renameCoreRadiusStructure(tokenName: string): string {
-  let tempString = tokenName;
-
-  const DLS = coreRadiusDLS.filter((v) => tempString.includes(v));
-  const DLSString = smartLocate(DLS, tempString);
-  tempString = tempString.replace(DLSString, "");
-
-  const branch = coreRadiusBranch.filter((v) => tempString.includes(v));
-  const branchString = smartLocate(branch, tempString);
-  tempString = tempString.replace(branchString, "");
-
-  const family = coreRadiusFamily.filter((v) => tempString.includes(v));
-  const familyString = smartLocate(family, tempString);
-  tempString = tempString.replace(familyString, "");
-
-  const scale = coreRadiusScale.filter((v) => tempString.includes(v));
-  const scaleString = smartLocate(scale, tempString);
-  tempString = tempString.replace(scaleString, "");
-
-  const finalNameArray = [familyString, scaleString];
-
-  let finalName = "";
-
-  for (const component of finalNameArray) {
-    if (component.length > 0) {
-      finalName = finalName.concat(component, "/");
-    }
-  }
-
-  finalName = finalName.slice(0, -1);
-  //   const finalName = `${DLSString}/${branchString}/${familyString}/${categoryString}/${typeString}/${componentsString}/${modifierString}/${state}`;
-  return finalName;
-}
-
-export function renameAliasRadiusStructure(tokenName: string): string {
-  let tempString = tokenName;
-
-  const DLS = aliasRadiusDLS.filter((v) => tempString.includes(v));
-  const DLSString = smartLocate(DLS, tempString);
-  tempString = tempString.replace(DLSString, "");
-
-  const branch = aliasRadiusBranch.filter((v) => tempString.includes(v));
-  const branchString = smartLocate(branch, tempString);
-  tempString = tempString.replace(branchString, "");
-
-  const family = aliasRadiusFamily.filter((v) => tempString.includes(v));
-  const familyString = smartLocate(family, tempString);
-  tempString = tempString.replace(familyString, "");
-
-  const category = aliasRadiusCategory.filter((v) => tempString.includes(v));
-  const categoryString = smartLocate(category, tempString);
-  tempString = tempString.replace(categoryString, "");
-
-  const type = aliasRadiusType.filter((v) => tempString.includes(v));
-  const typeString = smartLocate(type, tempString);
-  tempString = tempString.replace(typeString, "");
-
-  const components = aliasRadiusComponents.filter((v) =>
-    tempString.includes(v)
-  );
-  const componentsString = smartLocate(components, tempString);
-  tempString = tempString.replace(componentsString, "");
-
-  const modifier = aliasRadiusModifier.filter((v) => tempString.includes(v));
-  const modifierString = smartLocate(modifier, tempString);
-  tempString = tempString.replace(modifierString, "");
-
-  const state = aliasRadiusState.filter((v) => tempString.includes(v));
-  const stateString = smartLocate(state, tempString);
-  tempString = tempString.replace(stateString, "");
-
-  const finalNameArray = [
-    // DLSString,
-    branchString,
-    // familyString,
-    componentsString,
-    categoryString,
-    typeString,
-    modifierString,
-    stateString,
-  ];
-
-  let finalName = "";
-
-  for (const component of finalNameArray) {
-    if (component.length > 0) {
-      finalName = finalName.concat(component, "/");
-    }
-  }
-
-  finalName = finalName.slice(0, -1);
-  //   const finalName = `${DLSString}/${branchString}/${familyString}/${categoryString}/${typeString}/${componentsString}/${modifierString}/${state}`;
-  return finalName;
+  return { variableType: variableType, scope: scope };
 }

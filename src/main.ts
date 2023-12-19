@@ -1,89 +1,25 @@
 import { on, once, showUI, emit } from "@create-figma-plugin/utilities";
 import chroma, { Color } from "chroma-js";
 
-import { CreateTokensHandler, TokenCreatedHandler } from "./types";
 import {
-  generateVariableName,
-  renameCoreColorStructure,
-  renameCoreRadiusStructure,
-  renameCoreSpacingStructure,
-} from "./utils";
+  CreateTokensHandler,
+  TokenType,
+  ColorToken,
+  SizeToken,
+  TokenProperties,
+  TokenFile,
+  ProcessedTokens,
+} from "./types";
+import { generateVariableName, getFigmaAPIParams } from "./utils";
 
-export interface ProcessedTokens {
-  collectionName: string;
-  tokensList: {
-    type:
-      | "coreColor"
-      | "aliasColor"
-      | "nativeColor"
-      | "coreBorderRadius"
-      | "aliasBorderRadius"
-      | "coreSpace"
-      | "aliasSpace";
-    value: ColorToken | SizeToken;
-  }[];
-}
-
-export interface TokenProperties {
-  type: string;
-  value: ColorToken | SizeToken;
-  collection: string;
-}
-
-interface MultiModeValue {
-  lightmc: string | undefined;
-  darkmc: string | undefined;
-  lightparthb: string | undefined;
-  darkparthb: string | undefined;
-  lightprohb: string | undefined;
-  darkprohb: string | undefined;
-  mc: string | undefined;
-  hb: string | undefined;
-}
-
-export interface TokenObj {
-  dls?: string;
-  branch?: string;
-  family?: string;
-  type?: string;
-  modifier?: string;
-  scale?: string;
-  state?: string;
-  component?: string;
-}
-
-interface ColorToken extends TokenObj {
-  value: MultiModeValue;
-  tokenName: string;
-  linkedColorCoreToken: MultiModeValue;
-}
-
-interface SizeToken extends TokenObj {
-  value: string;
-  tokenName: string;
-  linkedSpaceToken?: MultiModeValue;
-  linkedBorderRadiusToken?: MultiModeValue;
-}
-
-interface TokenCollection {
-  spacings?: SizeToken[];
-  spacingAliases?: SizeToken[];
-  borderRadius?: SizeToken[];
-  borderRadiusAliases?: SizeToken[];
-  core?: ColorToken[];
-  aliases?: ColorToken[];
-  natives?: ColorToken[];
-}
-
-interface TokenFile {
-  size?: TokenCollection;
-  color?: TokenCollection;
-}
-
-const createSpacingToken = (spaceToken: SizeToken, collectionName: string) => {
-  if (spaceToken.tokenName === undefined) {
+const createCoreToken = (
+  token: ColorToken | SizeToken,
+  collectionName: string,
+  tokenType: TokenType
+) => {
+  if (token.tokenName === undefined) {
     console.log("undefined token");
-    console.log(spaceToken);
+    console.log(token);
     return;
   }
 
@@ -99,11 +35,11 @@ const createSpacingToken = (spaceToken: SizeToken, collectionName: string) => {
     collection = existingCollection;
   }
 
-  // Handle creating Variable
+  // Handle creating variable
+  const finalName = generateVariableName(token, tokenType); // TODO
+  const APIParams = getFigmaAPIParams(tokenType);
+
   let variable: Variable;
-
-  const finalName = generateVariableName(spaceToken, "spacingCore"); // TODO
-
   const existingVariable = figma.variables
     .getLocalVariables()
     .find((v) => v.name.toLowerCase() === finalName);
@@ -112,376 +48,41 @@ const createSpacingToken = (spaceToken: SizeToken, collectionName: string) => {
     variable = figma.variables.createVariable(
       finalName,
       collection.id,
-      "FLOAT"
+      APIParams.variableType
     );
+    console.log(`creating variable ${finalName}`);
   } else {
     variable = existingVariable;
+    console.log(`updating variable ${finalName}`);
   }
 
-  const size = spaceToken.value;
-  variable.setValueForMode(collection.defaultModeId, parseFloat(size));
-  variable.scopes = [];
-};
+  // Set Code syntax for true token name
+  //@ts-expect-error
+  variable.setVariableCodeSyntax("WEB", token.tokenName);
 
-async function createSpacingAlias(
-  spaceAlias: SizeToken,
-  collectionName: string,
-  publishedTokens: LibraryVariable[]
-): Promise<void> {
-  if (!spaceAlias.value) {
-    let collection: VariableCollection;
-    const existingCollection = figma.variables
-      .getLocalVariableCollections()
-      .find((c) => c.name.toLowerCase() === collectionName.toLowerCase());
-
-    if (!existingCollection) {
-      collection = figma.variables.createVariableCollection(collectionName);
-    } else {
-      collection = existingCollection;
-    }
-
-    const finalName = generateVariableName(spaceAlias, "spacingAlias"); // TODO
-
-    let variable: Variable;
-    const existingVariable = figma.variables
-      .getLocalVariables()
-      .find((v) => v.name.toLowerCase() === finalName);
-
-    if (!existingVariable) {
-      variable = figma.variables.createVariable(
-        finalName,
-        collection.id,
-        "FLOAT"
-      );
-    } else {
-      // rename variable with new naming system
-      variable = existingVariable;
-      variable.name = finalName;
-    }
-
-    variable.scopes = ["GAP"];
-
-    let modeValues;
-
-    modeValues = spaceAlias.linkedSpaceToken;
-    // if (radiusAlias) {
-    //   modeValues = sizeAlias.linkedBorderRadiusToken;
-    //   aliasPrefix = "borderRadius";
-    // }
-
-    if (modeValues) {
-      for (const [modeName, modeValue] of Object.entries(modeValues)) {
-        if (collection.modes[0].name === "Mode 1") {
-          collection.renameMode(collection.modes[0].modeId, "mc");
-        }
-
-        const existingMode = collection.modes.find((m) => m.name === modeName);
-
-        let modeId: string;
-
-        if (!existingMode) {
-          modeId = collection.addMode(modeName);
-        } else {
-          modeId = existingMode.modeId;
-        }
-
-        if (modeValue) {
-          // finding aliasVar
-          const coreTokenName = renameCoreSpacingStructure(
-            modeValue.replace(/{size.spacings./gi, "").replace(/.value}/gi, "")
-          );
-
-          console.log(finalName, coreTokenName);
-
-          const coreVariableKey = publishedTokens.find(
-            (v) => v.name.toLowerCase() === coreTokenName
-          )?.key;
-          if (coreVariableKey) {
-            const coreVariable = await figma.variables.importVariableByKeyAsync(
-              coreVariableKey
-            );
-
-            if (coreVariable)
-              variable.setValueForMode(
-                modeId,
-                figma.variables.createVariableAlias(coreVariable)
-              );
-          }
-        }
-      }
-    }
-  }
-}
-
-const createRadiusToken = (radiusToken: SizeToken, collectionName: string) => {
-  if (radiusToken.tokenName === undefined) {
-    console.log("undefined token");
-    console.log(radiusToken);
-    return;
-  }
-
-  // Handle creating collection
-  let collection: VariableCollection;
-  const existingCollection = figma.variables
-    .getLocalVariableCollections()
-    .find((c) => c.name.toLowerCase() === collectionName.toLowerCase());
-
-  if (!existingCollection) {
-    collection = figma.variables.createVariableCollection(collectionName);
-  } else {
-    collection = existingCollection;
-  }
-
-  // Handle creating Variable
-  let variable: Variable;
-
-  const finalName = generateVariableName(radiusToken, "radiusCore");
-
-  const existingVariable = figma.variables
-    .getLocalVariables()
-    .find((v) => v.name.toLowerCase() === finalName);
-
-  if (!existingVariable) {
-    variable = figma.variables.createVariable(
-      finalName,
-      collection.id,
-      "FLOAT"
-    );
-  } else {
-    variable = existingVariable;
-    variable.name = finalName;
-  }
-
-  const size = radiusToken.value;
-  variable.setValueForMode(collection.defaultModeId, parseFloat(size));
-  variable.scopes = [];
-};
-
-async function createRadiusAlias(
-  radiusAlias: SizeToken,
-  collectionName: string,
-  publishedTokens: LibraryVariable[]
-): Promise<void> {
-  if (!radiusAlias.value) {
-    let collection: VariableCollection;
-    const existingCollection = figma.variables
-      .getLocalVariableCollections()
-      .find((c) => c.name.toLowerCase() === collectionName.toLowerCase());
-
-    if (!existingCollection) {
-      collection = figma.variables.createVariableCollection(collectionName);
-    } else {
-      collection = existingCollection;
-    }
-
-    const finalName = generateVariableName(radiusAlias, "radiusAlias"); // TODO
-
-    let variable: Variable;
-    const existingVariable = figma.variables
-      .getLocalVariables()
-      .find((v) => v.name.toLowerCase() === finalName);
-
-    if (!existingVariable) {
-      variable = figma.variables.createVariable(
-        finalName,
-        collection.id,
-        "FLOAT"
-      );
-    } else {
-      variable = existingVariable;
-      variable.name = finalName;
-    }
-
-    variable.scopes = ["CORNER_RADIUS"];
-
-    let modeValues;
-
-    modeValues = radiusAlias.linkedBorderRadiusToken;
-
-    if (modeValues) {
-      for (const [modeName, modeValue] of Object.entries(modeValues)) {
-        if (collection.modes[0].name === "Mode 1") {
-          collection.renameMode(collection.modes[0].modeId, "mc");
-        }
-
-        const existingMode = collection.modes.find((m) => m.name === modeName);
-
-        let modeId: string;
-
-        if (!existingMode) {
-          modeId = collection.addMode(modeName);
-        } else {
-          modeId = existingMode.modeId;
-        }
-
-        if (modeValue) {
-          // finding aliasVar
-          const coreTokenName = renameCoreRadiusStructure(
-            modeValue
-              .replace(/{size.borderRadius./gi, "")
-              .replace(/.value}/gi, "")
-          );
-
-          console.log(finalName, coreTokenName);
-
-          const coreVariableKey = publishedTokens.find(
-            (v) => v.name.toLowerCase() === coreTokenName
-          )?.key;
-          if (coreVariableKey) {
-            const coreVariable = await figma.variables.importVariableByKeyAsync(
-              coreVariableKey
-            );
-
-            if (coreVariable)
-              variable.setValueForMode(
-                modeId,
-                figma.variables.createVariableAlias(coreVariable)
-              );
-          }
-        }
-      }
-    }
-  }
-}
-
-const createColorToken = (colorToken: ColorToken, collectionName: string) => {
-  if (colorToken.tokenName === undefined) {
-    console.log("undefined token");
-    console.log(colorToken);
-    return;
-  }
-
-  // Handle creating Collection
-  let collection: VariableCollection;
-  const existingCollection = figma.variables
-    .getLocalVariableCollections()
-    .find((c) => c.name.toLowerCase() === collectionName.toLowerCase());
-
-  if (!existingCollection) {
-    collection = figma.variables.createVariableCollection(collectionName);
-  } else {
-    collection = existingCollection;
-  }
-
-  let variable: Variable;
-
-  const finalName = generateVariableName(colorToken, "colorCore");
-
-  const existingVariable = figma.variables
-    .getLocalVariables()
-    .find((v) => v.name.toLowerCase() === finalName);
-
-  if (!existingVariable) {
-    variable = figma.variables.createVariable(
-      finalName,
-      collection.id,
-      "COLOR"
-    );
-  } else {
-    variable = existingVariable;
-    variable.name = finalName;
-  }
-
-  variable.scopes = [];
-
-  // Handle creating modes
-  let modeId: string;
-
-  for (const [modeName, valueForMode] of Object.entries(colorToken.value)) {
-    if (modeName.includes("pro")) {
-      continue;
-    }
-
-    // replace first default mode
-    if (collection.modes[0].name === "Mode 1") {
-      collection.renameMode(collection.modes[0].modeId, "lightmc");
-    }
-
-    const existingMode = collection.modes.find((m) => m.name === modeName);
-
-    if (!existingMode) {
-      modeId = collection.addMode(modeName);
-    } else {
-      modeId = existingMode.modeId;
-    }
-
-    if (valueForMode) {
-      const rgbColor = chroma(valueForMode as string).rgba();
-      variable.setValueForMode(modeId, {
-        r: rgbColor[0] / 255,
-        g: rgbColor[1] / 255,
-        b: rgbColor[2] / 255,
-        a: rgbColor[3],
+  // Single value, no mode support needed
+  if (typeof token.value === "string") {
+    if (tokenType === "colorCore") {
+      const transformedValue = chroma(token.value as string).rgba();
+      variable.setValueForMode(collection.defaultModeId, {
+        r: transformedValue[0] / 255,
+        g: transformedValue[1] / 255,
+        b: transformedValue[2] / 255,
+        a: transformedValue[3],
       });
-    }
-  }
-};
-
-async function createColorAlias(
-  colorAlias: ColorToken,
-  collectionName: string,
-  publishedTokens: LibraryVariable[]
-): Promise<void> {
-  if (!colorAlias.value && colorAlias.linkedColorCoreToken) {
-    let collection: VariableCollection;
-    const existingCollection = figma.variables
-      .getLocalVariableCollections()
-      .find((c) => c.name.toLowerCase() === collectionName.toLowerCase());
-
-    if (!existingCollection) {
-      collection = figma.variables.createVariableCollection(collectionName);
     } else {
-      collection = existingCollection;
+      const transformedValue =
+        tokenType === "opacityCore"
+          ? parseFloat(token.value) * 100
+          : parseFloat(token.value);
+      variable.setValueForMode(collection.defaultModeId, transformedValue);
     }
+  } else {
+    // Handle creating modes
+    let modeId: string;
 
-    let finalName = "";
-    if (collection.name === "natives")
-      finalName = generateVariableName(colorAlias, "colorNative");
-    else finalName = generateVariableName(colorAlias, "colorAlias");
-
-    console.log(finalName);
-
-    let variable: Variable;
-    const existingVariable = figma.variables
-      .getLocalVariables()
-      .find((v) => v.name.toLowerCase() === finalName);
-
-    if (!existingVariable) {
-      variable = figma.variables.createVariable(
-        finalName,
-        collection.id,
-        "COLOR"
-      );
-    } else {
-      variable = existingVariable;
-      variable.name = finalName;
-    }
-
-    // Setting scope
-    if (finalName.includes("/surface/") || finalName.includes("/page"))
-      variable.scopes = ["FRAME_FILL"];
-    if (finalName.includes("/ripple/") || finalName.includes("/dataviz"))
-      variable.scopes = ["FRAME_FILL", "SHAPE_FILL"];
-    if (finalName.includes("/border/") || finalName.includes("divider"))
-      //@ts-expect-error
-      variable.scopes = ["STROKE_COLOR"];
-    if (finalName.includes("/text/")) variable.scopes = ["TEXT_FILL"];
-    if (finalName.includes("/icon/")) variable.scopes = ["SHAPE_FILL"];
-    if (finalName.includes("/all/")) {
-      //@ts-expect-error
-      variable.scopes = ["ALL_FILLS", "STROKE_COLOR"];
-    }
-
-    console.log(colorAlias.linkedColorCoreToken);
-    for (const [modeName, modeValue] of Object.entries(
-      colorAlias.linkedColorCoreToken
-    )) {
-      if (collection.modes[0].name === "Mode 1") {
-        collection.renameMode(collection.modes[0].modeId, "mc");
-      }
-
+    for (const [modeName, valueForMode] of Object.entries(token.value)) {
       const existingMode = collection.modes.find((m) => m.name === modeName);
-      let modeId: string;
 
       if (!existingMode) {
         modeId = collection.addMode(modeName);
@@ -489,55 +90,26 @@ async function createColorAlias(
         modeId = existingMode.modeId;
       }
 
-      // check if value is set for mode
-      if (modeValue) {
-        // finding aliasVar
-        const coreTokenName = renameCoreColorStructure(
-          modeValue.replace(/{color.core./gi, "")
-        );
-
-        console.log(modeName);
-        console.log(modeValue);
-        console.log(coreTokenName);
-
-        const coreVariableKey = publishedTokens.find(
-          (v) => v.name.toLowerCase() === coreTokenName
-        )?.key;
-
-        if (coreVariableKey) {
-          const coreVariable = await figma.variables.importVariableByKeyAsync(
-            coreVariableKey
-          );
-
-          if (coreVariable) {
-            // variable.setValueForMode(modeId, {
-            //   r: 0,
-            //   g: 0,
-            //   b: 0,
-            // });
-            console.log(coreVariable.name);
-            variable.setValueForMode(
-              modeId,
-              figma.variables.createVariableAlias(coreVariable)
-            );
-            // console.log(`created alias ${finalName}`);
-          }
+      if (valueForMode) {
+        if (tokenType === "colorCore") {
+          const transformedValue = chroma(valueForMode as string).rgba();
+          variable.setValueForMode(modeId, {
+            r: transformedValue[0] / 255,
+            g: transformedValue[1] / 255,
+            b: transformedValue[2] / 255,
+            a: transformedValue[3],
+          });
+        } else {
+          const transformedValue =
+            tokenType === "opacityCore"
+              ? parseFloat(valueForMode) * 100
+              : parseFloat(valueForMode);
+          variable.setValueForMode(collection.defaultModeId, transformedValue);
         }
-      } else {
-        // if value empty, set hulk value
-        const rgbColor = chroma("#AFFF04").rgba();
-        variable.setValueForMode(modeId, {
-          r: rgbColor[0] / 255,
-          g: rgbColor[1] / 255,
-          b: rgbColor[2] / 255,
-          a: rgbColor[3],
-        });
       }
-
-      // return;
     }
   }
-}
+};
 
 export default function () {
   on<CreateTokensHandler>(
@@ -556,40 +128,12 @@ export default function () {
     token: TokenProperties,
     publishedTokens: LibraryVariable[]
   ): Promise<TokenProperties> {
-    switch (token.type) {
-      case "coreColor":
-        //@ts-expect-error
-        createColorToken(token.value, token.collection);
-        break;
-      case "aliasColor":
-        //@ts-expect-error
-        createColorAlias(token.value, token.collection, publishedTokens);
-        break;
-      case "nativeColor":
-        //@ts-expect-error
-        createColorAlias(token.value, token.collection, publishedTokens);
-        break;
-      case "coreBorderRadius":
-        //@ts-expect-error
-        createRadiusToken(token.value, token.collection);
-        break;
-      case "aliasBorderRadius":
-        //@ts-expect-error
-        createRadiusAlias(token.value, token.collection, publishedTokens);
-        break;
-      case "coreSpace":
-        //@ts-expect-error
-        createSpacingToken(token.value, token.collection);
-        break;
-      case "aliasSpace":
-        //@ts-expect-error
-        createSpacingAlias(token.value, token.collection, publishedTokens);
-        break;
-      default:
-        break;
+    if (token.type.indexOf("Core") !== -1) {
+      createCoreToken(token.value, token.collection, token.type);
+    } else {
+      console.log("not a core token");
     }
 
-    console.log(`created token ${token.value.tokenName}`);
     return token;
   }
 
@@ -631,7 +175,7 @@ export function processTokens(tokens: string) {
       let tokensList = Object.entries(file.color.core);
       for (const [tokenName, tokenValue] of tokensList) {
         processedTokens.tokensList.push({
-          type: "coreColor",
+          type: "colorCore",
           value: tokenValue,
         });
       }
@@ -641,7 +185,7 @@ export function processTokens(tokens: string) {
       let tokensList = Object.entries(file.color.aliases);
       for (const [tokenName, tokenValue] of tokensList) {
         processedTokens.tokensList.push({
-          type: "aliasColor",
+          type: "colorAlias",
           value: tokenValue,
         });
       }
@@ -651,7 +195,7 @@ export function processTokens(tokens: string) {
       let tokensList = Object.entries(file.color.natives);
       for (const [tokenName, tokenValue] of tokensList) {
         processedTokens.tokensList.push({
-          type: "nativeColor",
+          type: "colorNative",
           value: tokenValue,
         });
       }
@@ -665,7 +209,7 @@ export function processTokens(tokens: string) {
       let tokensList = Object.entries(file.size.spacings);
       for (const [tokenName, tokenValue] of tokensList) {
         processedTokens.tokensList.push({
-          type: "coreSpace",
+          type: "spacingCore",
           value: tokenValue,
         });
       }
@@ -675,7 +219,27 @@ export function processTokens(tokens: string) {
       let tokensList = Object.entries(file.size.spacingAliases);
       for (const [tokenName, tokenValue] of tokensList) {
         processedTokens.tokensList.push({
-          type: "aliasSpace",
+          type: "spacingAlias",
+          value: tokenValue,
+        });
+      }
+    }
+
+    if (file.size.borderWidth) {
+      let tokensList = Object.entries(file.size.borderWidth);
+      for (const [tokenName, tokenValue] of tokensList) {
+        processedTokens.tokensList.push({
+          type: "borderWidthCore",
+          value: tokenValue,
+        });
+      }
+    }
+
+    if (file.size.borderWidthAliases) {
+      let tokensList = Object.entries(file.size.borderWidthAliases);
+      for (const [tokenName, tokenValue] of tokensList) {
+        processedTokens.tokensList.push({
+          type: "borderWidthAlias",
           value: tokenValue,
         });
       }
@@ -685,7 +249,7 @@ export function processTokens(tokens: string) {
       let tokensList = Object.entries(file.size.borderRadius);
       for (const [tokenName, tokenValue] of tokensList) {
         processedTokens.tokensList.push({
-          type: "coreBorderRadius",
+          type: "radiusCore",
           value: tokenValue,
         });
       }
@@ -695,7 +259,27 @@ export function processTokens(tokens: string) {
       let tokensList = Object.entries(file.size.borderRadiusAliases);
       for (const [tokenName, tokenValue] of tokensList) {
         processedTokens.tokensList.push({
-          type: "aliasBorderRadius",
+          type: "radiusAlias",
+          value: tokenValue,
+        });
+      }
+    }
+
+    if (file.size.opacity) {
+      let tokensList = Object.entries(file.size.opacity);
+      for (const [tokenName, tokenValue] of tokensList) {
+        processedTokens.tokensList.push({
+          type: "opacityCore",
+          value: tokenValue,
+        });
+      }
+    }
+
+    if (file.size.opacityAlias) {
+      let tokensList = Object.entries(file.size.opacityAlias);
+      for (const [tokenName, tokenValue] of tokensList) {
+        processedTokens.tokensList.push({
+          type: "opacityAlias",
           value: tokenValue,
         });
       }

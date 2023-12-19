@@ -512,8 +512,10 @@ export const coreColorScale = [
   "1300",
   "1400",
   "1500",
+  "50",
   "75",
   "125",
+  "150",
 ];
 
 export const coreSpacingDLS = ["--gy"];

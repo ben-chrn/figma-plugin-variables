@@ -1,5 +1,4 @@
 import { EventHandler } from "@create-figma-plugin/utilities";
-import { TokenProperties } from "./main";
 
 export type VariableCollectionResult = Pick<VariableCollection, "id" | "name">;
 
@@ -26,4 +25,86 @@ export interface CreateTokensHandler extends EventHandler {
 export interface TokenCreatedHandler extends EventHandler {
   name: "TOKEN_CREATED";
   handler: (tokenName: string) => void;
+}
+
+export type TokenType =
+  | "colorAlias"
+  | "colorNative"
+  | "colorCore"
+  | "radiusCore"
+  | "radiusAlias"
+  | "spacingCore"
+  | "spacingAlias"
+  | "borderWidthCore"
+  | "borderWidthAlias"
+  | "opacityCore"
+  | "opacityAlias";
+
+export interface ProcessedTokens {
+  collectionName: string;
+  tokensList: {
+    type: TokenType;
+    value: ColorToken | SizeToken;
+  }[];
+}
+
+export interface TokenProperties {
+  type: TokenType;
+  value: ColorToken | SizeToken;
+  collection: string;
+}
+
+export interface MultiModeValue {
+  lightmc: string | undefined;
+  darkmc: string | undefined;
+  lightparthb: string | undefined;
+  darkparthb: string | undefined;
+  lightprohb: string | undefined;
+  darkprohb: string | undefined;
+  mc: string | undefined;
+  hb: string | undefined;
+}
+
+export interface TokenObj {
+  dls?: string;
+  branch?: string;
+  family?: string;
+  type?: string;
+  modifier?: string;
+  scale?: string;
+  state?: string;
+  component?: string;
+}
+
+export interface ColorToken extends TokenObj {
+  value: MultiModeValue;
+  tokenName: string;
+  linkedColorCoreToken: MultiModeValue;
+}
+
+export interface SizeToken extends TokenObj {
+  value: string;
+  tokenName: string;
+  linkedSpaceToken?: MultiModeValue;
+  linkedBorderRadiusToken?: MultiModeValue;
+  linkedBorderWidthToken?: MultiModeValue;
+}
+
+export interface TokenCollection {
+  spacings?: SizeToken[];
+  spacingAliases?: SizeToken[];
+  borderRadius?: SizeToken[];
+  borderRadiusAliases?: SizeToken[];
+  borderWidth?: SizeToken[];
+  borderWidthAliases?: SizeToken[];
+  opacity?: SizeToken[];
+  opacityAlias?: SizeToken[];
+  core?: ColorToken[];
+  aliases?: ColorToken[];
+  natives?: ColorToken[];
+}
+
+export interface TokenFile {
+  size?: TokenCollection;
+  color?: TokenCollection;
 }
