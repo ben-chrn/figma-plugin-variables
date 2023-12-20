@@ -13,7 +13,11 @@ import {
   IconCheckCircle32,
   LoadingIndicator,
   Inline,
+  IconWarning16,
 } from "@create-figma-plugin/ui";
+
+import "!./output.css";
+
 import { emit, on, once } from "@create-figma-plugin/utilities";
 import { h } from "preact";
 import { useContext, useEffect, useMemo, useState } from "preact/hooks";
@@ -76,7 +80,7 @@ function Plugin() {
     });
 
     on<ImportFinishedHandler>("IMPORT_FINISHED", (successCount, errorCount) => {
-      console.log("sparta");
+      console.log("import finished");
       setImportInProgress(false);
       setSuccessCount(successCount);
       setErrorCount(errorCount);
@@ -84,68 +88,129 @@ function Plugin() {
   }, []);
 
   return (
-    <Container space="medium">
-      <VerticalSpace space="small" />
-      {loading && (
-        <Stack space="small">
-          <LoadingIndicator />
-          <Text align="center">Loading Tokens from external libraries</Text>
-        </Stack>
-      )}
-      {!loading && (
-        <Stack space="small">
-          <Text align="center">Tokens loaded : you can proceed to import</Text>
-          {!importInProgress && (
-            <FileUploadDropzone
-              acceptedFileTypes={["application/json"]}
-              onSelectedFiles={handleSelectedFiles}
-            >
-              <Text align="center">
-                <Bold>Drop token file here to import</Bold>
-              </Text>
-              <VerticalSpace space="small" />
-              <Text align="center">
-                <Muted>or</Muted>
-              </Text>
-              <VerticalSpace space="small" />
-              <FileUploadButton
+    <div className="bg-neutral-800">
+      <section className="uploadContainer bg-neutral-900 p-4">
+        {loading && (
+          <div className="flex gap-0 justify-between">
+            <p className="text-center font-bold">
+              Importing tokens from published libraries...
+            </p>
+            <LoadingIndicator />
+          </div>
+        )}
+        {!loading && (
+          <div className="mt-3 flex flex-col gap-2">
+            <div class="flex justify-center items-center gap-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                data-slot="icon"
+                class="w-6 h-6"
+                className="stroke-green-400 w-4 h-4"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+              </svg>
+
+              <p className="text-neutral-400">
+                External tokens loaded - you can proceed to import
+              </p>
+            </div>
+            {!importInProgress && (
+              <FileUploadDropzone
                 acceptedFileTypes={["application/json"]}
                 onSelectedFiles={handleSelectedFiles}
               >
-                Select token file to import
-              </FileUploadButton>
-            </FileUploadDropzone>
-          )}
-        </Stack>
-      )}
-      <Stack space="medium">
-        <VerticalSpace space="large" />
+                <div className="flex flex-col gap-2">
+                  <p className="">Drop token file here to import</p>
+                  <p className="text-neutral-400">or</p>
+                  <FileUploadButton
+                    acceptedFileTypes={["application/json"]}
+                    onSelectedFiles={handleSelectedFiles}
+                  >
+                    Select token file to import
+                  </FileUploadButton>
+                </div>
+              </FileUploadDropzone>
+            )}
+          </div>
+        )}
+      </section>
+      <section className="resultContainer p-4">
         {importInProgress && totalCount > 0 && (
-          <Inline space="small">
+          <div className="flex gap-0 justify-between">
+            <p className="text-center font-bold">
+              Importing {totalCount} tokens...
+            </p>
             <LoadingIndicator />
-            <Text>Importing {totalCount} tokens</Text>
-          </Inline>
+          </div>
         )}
         {!importInProgress &&
           totalCount > 0 &&
           (successCount > 0 || errorCount > 0) && (
-            <Stack space="small">
-              <Text>
-                <Bold>Imported {totalCount} tokens</Bold>
-              </Text>
-              <Inline>
-                <IconCheckCircle32 />
-                <Text>{successCount} tokens successfully created</Text>
-              </Inline>
-              <Inline>
-                <IconWarning32 />
-                <Text>{errorCount} tokens failed</Text>
-              </Inline>
-            </Stack>
+            <div className="importResult flex flex-col justify-center gap-2">
+              <p className="text-center font-bold">
+                Imported {totalCount} tokens
+              </p>
+              <div className="flex flex-col gap-2">
+                {successCount > 0 && (
+                  <div class="flex justify-center items-center gap-1">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      data-slot="icon"
+                      class="w-6 h-6"
+                      className="stroke-green-400 w-4 h-4"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                      />
+                    </svg>
+
+                    <p className="text-neutral-400">
+                      {successCount} tokens successfully created
+                    </p>
+                  </div>
+                )}
+                {errorCount > 0 && (
+                  <div class="flex justify-center items-center gap-1">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      data-slot="icon"
+                      class="w-6 h-6"
+                      className="stroke-red-400 w-4 h-4"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
+                      />
+                    </svg>
+                    <p className="text-neutral-400">
+                      {errorCount} tokens failed
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
           )}
-      </Stack>
-      <VerticalSpace space="small" />
-    </Container>
+      </section>
+    </div>
   );
 }
 

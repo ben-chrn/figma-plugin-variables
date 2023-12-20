@@ -320,15 +320,6 @@ export default function () {
         }
       }
 
-      // if (successCount > 0)
-      //   emit<ReportSuccessHandler>(
-      //     "REPORT_SUCCESS",
-      //     `${successCount} tokens successfully created / updated`
-      //   );
-
-      // if (errorCount > 0)
-      //   emit<ReportErrorHandler>("REPORT_ERROR", `${errorCount} tokens failed`);
-
       emit<ImportFinishedHandler>("IMPORT_FINISHED", successCount, errorCount);
     }
   );
