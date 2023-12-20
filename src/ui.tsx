@@ -12,6 +12,7 @@ import {
   Stack,
   IconCheckCircle32,
   LoadingIndicator,
+  Inline,
 } from "@create-figma-plugin/ui";
 import { emit, on, once } from "@create-figma-plugin/utilities";
 import { h } from "preact";
@@ -23,17 +24,17 @@ import {
   CreateTokensHandler,
   LoadPublishedTokensHandler,
   PublishedTokensLoadedHandler,
+  ImportFinishedHandler,
 } from "./types";
 import { processTokens } from "./main";
 import { TokenProperties } from "./types";
 
 function Plugin() {
-  const [errorMsg, setErrorMsg] = useState<string | null>();
-  const [successMsg, setSuccessMsg] = useState<string | null>();
-  const [currCount, setCurrCount] = useState<number>(0);
   const [totalCount, setTotalCount] = useState<number>(0);
-  const [lastCreatedToken, setLastCreatedToken] = useState<string>("");
+  const [errorCount, setErrorCount] = useState<number>(0);
+  const [successCount, setSuccessCount] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
+  const [importInProgress, setImportInProgress] = useState<boolean>(false);
 
   const handleSelectedFiles = (files: Array<File>) => {
     const reader = new FileReader();
@@ -42,7 +43,6 @@ function Plugin() {
     reader.onloadend = async () => {
       if (typeof reader.result === "string") {
         const tokens = processTokens(reader.result);
-        setTotalCount(tokens.tokensList.length);
 
         const tokensArr = [];
         for (const token of tokens.tokensList) {
@@ -54,6 +54,13 @@ function Plugin() {
 
           tokensArr.push(tokenObj);
         }
+
+        // Reset interface
+        setTotalCount(0);
+        setSuccessCount(0);
+        setErrorCount(0);
+        setTotalCount(tokensArr.length);
+        setImportInProgress(true);
 
         await emit<CreateTokensHandler>("CREATE_TOKENS", tokensArr);
       }
@@ -68,29 +75,17 @@ function Plugin() {
       setLoading(false);
     });
 
-    on<ReportErrorHandler>("REPORT_ERROR", (errorMsg) => {
-      setErrorMsg(errorMsg);
-    });
-
-    on<ReportSuccessHandler>("REPORT_SUCCESS", (msg) => {
-      setSuccessMsg(msg);
+    on<ImportFinishedHandler>("IMPORT_FINISHED", (successCount, errorCount) => {
+      console.log("sparta");
+      setImportInProgress(false);
+      setSuccessCount(successCount);
+      setErrorCount(errorCount);
     });
   }, []);
 
   return (
     <Container space="medium">
       <VerticalSpace space="small" />
-
-      {successMsg && (
-        <Banner icon={<IconCheckCircle32 />} variant="success">
-          {successMsg}
-        </Banner>
-      )}
-      {errorMsg && (
-        <Banner icon={<IconWarning32 />} variant="warning">
-          {errorMsg}
-        </Banner>
-      )}
       {loading && (
         <Stack space="small">
           <LoadingIndicator />
@@ -100,27 +95,55 @@ function Plugin() {
       {!loading && (
         <Stack space="small">
           <Text align="center">Tokens loaded : you can proceed to import</Text>
-          <FileUploadDropzone
-            acceptedFileTypes={["application/json"]}
-            onSelectedFiles={handleSelectedFiles}
-          >
-            <Text align="center">
-              <Bold>Drop token file here to import</Bold>
-            </Text>
-            <VerticalSpace space="small" />
-            <Text align="center">
-              <Muted>or</Muted>
-            </Text>
-            <VerticalSpace space="small" />
-            <FileUploadButton
+          {!importInProgress && (
+            <FileUploadDropzone
               acceptedFileTypes={["application/json"]}
               onSelectedFiles={handleSelectedFiles}
             >
-              Select token file to import
-            </FileUploadButton>
-          </FileUploadDropzone>
+              <Text align="center">
+                <Bold>Drop token file here to import</Bold>
+              </Text>
+              <VerticalSpace space="small" />
+              <Text align="center">
+                <Muted>or</Muted>
+              </Text>
+              <VerticalSpace space="small" />
+              <FileUploadButton
+                acceptedFileTypes={["application/json"]}
+                onSelectedFiles={handleSelectedFiles}
+              >
+                Select token file to import
+              </FileUploadButton>
+            </FileUploadDropzone>
+          )}
         </Stack>
       )}
+      <Stack space="medium">
+        <VerticalSpace space="large" />
+        {importInProgress && totalCount > 0 && (
+          <Inline space="small">
+            <LoadingIndicator />
+            <Text>Importing {totalCount} tokens</Text>
+          </Inline>
+        )}
+        {!importInProgress &&
+          totalCount > 0 &&
+          (successCount > 0 || errorCount > 0) && (
+            <Stack space="small">
+              <Text>
+                <Bold>Imported {totalCount} tokens</Bold>
+              </Text>
+              <Inline>
+                <IconCheckCircle32 />
+                <Text>{successCount} tokens successfully created</Text>
+              </Inline>
+              <Inline>
+                <IconWarning32 />
+                <Text>{errorCount} tokens failed</Text>
+              </Inline>
+            </Stack>
+          )}
+      </Stack>
       <VerticalSpace space="small" />
     </Container>
   );

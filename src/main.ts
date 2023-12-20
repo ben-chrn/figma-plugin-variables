@@ -11,14 +11,17 @@ import {
   ProcessedTokens,
   LoadPublishedTokensHandler,
   PublishedTokensLoadedHandler,
+  ReportSuccessHandler,
+  ReportErrorHandler,
+  ImportFinishedHandler,
 } from "./types";
 import { generateVariableName, getFigmaAPIParams } from "./utils";
 
-const createCoreToken = (
+async function createCoreToken(
   token: CoreToken,
   collectionName: string,
   tokenType: TokenType
-) => {
+): Promise<void> {
   if (token.tokenName === undefined) {
     console.log("undefined token");
     console.log(token);
@@ -112,7 +115,7 @@ const createCoreToken = (
       }
     }
   }
-};
+}
 
 async function createAliasToken(
   alias: AliasToken,
@@ -283,25 +286,50 @@ export default function () {
     "CREATE_TOKENS",
     async (tokens: TokenProperties[]) => {
       let coreFile = false;
+      let successCount = 0;
+      let errorCount = 0;
       for (const token of tokens) {
         if (token.type.indexOf("Core") !== -1) {
           coreFile = true;
-          createCoreToken(token.value, token.collection, token.type);
+          try {
+            await createCoreToken(token.value, token.collection, token.type);
+            successCount++;
+          } catch (err) {
+            console.log(err);
+            errorCount++;
+          }
         }
       }
 
       if (!coreFile) {
         console.log(publishedTokens);
         for (const token of tokens) {
-          createAliasToken(
-            //@ts-expect-error
-            token.value,
-            token.collection,
-            token.type,
-            publishedTokens
-          );
+          try {
+            await createAliasToken(
+              //@ts-expect-error
+              token.value,
+              token.collection,
+              token.type,
+              publishedTokens
+            );
+            successCount++;
+          } catch (err) {
+            console.log(err);
+            errorCount++;
+          }
         }
       }
+
+      // if (successCount > 0)
+      //   emit<ReportSuccessHandler>(
+      //     "REPORT_SUCCESS",
+      //     `${successCount} tokens successfully created / updated`
+      //   );
+
+      // if (errorCount > 0)
+      //   emit<ReportErrorHandler>("REPORT_ERROR", `${errorCount} tokens failed`);
+
+      emit<ImportFinishedHandler>("IMPORT_FINISHED", successCount, errorCount);
     }
   );
 

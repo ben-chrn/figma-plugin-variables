@@ -22,9 +22,9 @@ export interface CreateTokensHandler extends EventHandler {
   handler: (tokens: TokenProperties[]) => void;
 }
 
-export interface TokenCreatedHandler extends EventHandler {
-  name: "TOKEN_CREATED";
-  handler: (tokenName: string) => void;
+export interface ImportFinishedHandler extends EventHandler {
+  name: "IMPORT_FINISHED";
+  handler: (successCount: number, errorCount: number) => void;
 }
 
 export interface PublishedTokensLoadedHandler extends EventHandler {
