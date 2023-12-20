@@ -23,7 +23,7 @@
         "fontWeight": null,
         "linkedSpaceToken": null,
         "linkedBorderRadiusToken": {
-          "mc": "{size.borderRadius.--gy-native-border-radius-100.value}",
+          "mc": "{size.borderRadius.--gy-native-border-radius-100000.value}",
           "mineursmc": "{size.borderRadius.--gy-native-border-radius-200.value}",
           "bpfmc": "{size.borderRadius.--gy-native-border-radius-100.value}",
           "hb": "{size.borderRadius.--gy-native-border-radius-300.value}"

@@ -227,18 +227,12 @@ async function createAliasToken(
               modeId,
               figma.variables.createVariableAlias(coreVariable)
             );
+          } else {
+            throw new Error(
+              `Core Token not found for ${variable.name} > ${coreTokenName}`
+            );
           }
         }
-        //else {
-        // if value empty, set hulk value
-        // const rgbColor = chroma("#AFFF04").rgba();
-        // variable.setValueForMode(modeId, {
-        //   r: rgbColor[0] / 255,
-        //   g: rgbColor[1] / 255,
-        //   b: rgbColor[2] / 255,
-        //   a: rgbColor[3],
-        // });
-        //}
 
         // return;
       }
