@@ -19,7 +19,7 @@ export interface ReportSuccessHandler extends EventHandler {
 
 export interface CreateTokensHandler extends EventHandler {
   name: "CREATE_TOKENS";
-  handler: (tokens: TokenProperties[], publishedTokens: Variable[]) => void;
+  handler: (tokens: TokenProperties[]) => void;
 }
 
 export interface TokenCreatedHandler extends EventHandler {
@@ -29,7 +29,7 @@ export interface TokenCreatedHandler extends EventHandler {
 
 export interface PublishedTokensLoadedHandler extends EventHandler {
   name: "PUBLISHED_TOKENS_LOADED";
-  handler: (publishedTokens: Variable[]) => void;
+  handler: () => void;
 }
 
 export interface LoadPublishedTokensHandler extends EventHandler {

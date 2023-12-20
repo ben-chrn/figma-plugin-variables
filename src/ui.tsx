@@ -11,6 +11,7 @@ import {
   IconWarning32,
   Stack,
   IconCheckCircle32,
+  LoadingIndicator,
 } from "@create-figma-plugin/ui";
 import { emit, on, once } from "@create-figma-plugin/utilities";
 import { h } from "preact";
@@ -32,7 +33,7 @@ function Plugin() {
   const [currCount, setCurrCount] = useState<number>(0);
   const [totalCount, setTotalCount] = useState<number>(0);
   const [lastCreatedToken, setLastCreatedToken] = useState<string>("");
-  const [publishedTokens, setPublishedTokens] = useState<Variable[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const handleSelectedFiles = (files: Array<File>) => {
     const reader = new FileReader();
@@ -54,27 +55,18 @@ function Plugin() {
           tokensArr.push(tokenObj);
         }
 
-        console.log(publishedTokens);
-
-        await emit<CreateTokensHandler>(
-          "CREATE_TOKENS",
-          tokensArr,
-          publishedTokens
-        );
+        await emit<CreateTokensHandler>("CREATE_TOKENS", tokensArr);
       }
     };
   };
 
   useEffect(() => {
-    // emit<LoadPublishedTokensHandler>("LOAD_PUBLISHED_TOKENS");
+    emit<LoadPublishedTokensHandler>("LOAD_PUBLISHED_TOKENS");
 
-    on<PublishedTokensLoadedHandler>(
-      "PUBLISHED_TOKENS_LOADED",
-      (publishedTokens) => {
-        console.log(publishedTokens);
-        setPublishedTokens(publishedTokens);
-      }
-    );
+    on<PublishedTokensLoadedHandler>("PUBLISHED_TOKENS_LOADED", () => {
+      console.log("published token loaded");
+      setLoading(false);
+    });
 
     on<ReportErrorHandler>("REPORT_ERROR", (errorMsg) => {
       setErrorMsg(errorMsg);
@@ -88,42 +80,47 @@ function Plugin() {
   return (
     <Container space="medium">
       <VerticalSpace space="small" />
-      <Stack space="small">
-        {successMsg && (
-          <Banner icon={<IconCheckCircle32 />} variant="success">
-            {successMsg}
-          </Banner>
-        )}
-        {errorMsg && (
-          <Banner icon={<IconWarning32 />} variant="warning">
-            {errorMsg}
-          </Banner>
-        )}
-        {totalCount > 0 && <Text>Importing {totalCount} tokens</Text>}
-        {currCount == totalCount && <Text>Import finished</Text>}
-        {lastCreatedToken !== "" && (
-          <Text>Created token {lastCreatedToken}</Text>
-        )}
-        <FileUploadDropzone
-          acceptedFileTypes={["application/json"]}
-          onSelectedFiles={handleSelectedFiles}
-        >
-          <Text align="center">
-            <Bold>Drop token file here to import</Bold>
-          </Text>
-          <VerticalSpace space="small" />
-          <Text align="center">
-            <Muted>or</Muted>
-          </Text>
-          <VerticalSpace space="small" />
-          <FileUploadButton
+
+      {successMsg && (
+        <Banner icon={<IconCheckCircle32 />} variant="success">
+          {successMsg}
+        </Banner>
+      )}
+      {errorMsg && (
+        <Banner icon={<IconWarning32 />} variant="warning">
+          {errorMsg}
+        </Banner>
+      )}
+      {loading && (
+        <Stack space="small">
+          <LoadingIndicator />
+          <Text align="center">Loading Tokens from external libraries</Text>
+        </Stack>
+      )}
+      {!loading && (
+        <Stack space="small">
+          <Text align="center">Tokens loaded : you can proceed to import</Text>
+          <FileUploadDropzone
             acceptedFileTypes={["application/json"]}
             onSelectedFiles={handleSelectedFiles}
           >
-            Select token file to import
-          </FileUploadButton>
-        </FileUploadDropzone>
-      </Stack>
+            <Text align="center">
+              <Bold>Drop token file here to import</Bold>
+            </Text>
+            <VerticalSpace space="small" />
+            <Text align="center">
+              <Muted>or</Muted>
+            </Text>
+            <VerticalSpace space="small" />
+            <FileUploadButton
+              acceptedFileTypes={["application/json"]}
+              onSelectedFiles={handleSelectedFiles}
+            >
+              Select token file to import
+            </FileUploadButton>
+          </FileUploadDropzone>
+        </Stack>
+      )}
       <VerticalSpace space="small" />
     </Container>
   );

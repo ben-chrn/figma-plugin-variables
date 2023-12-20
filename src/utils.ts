@@ -8,6 +8,7 @@ const variableNamingStructure = {
     scale: false,
   },
   colorAlias: {
+    family: true,
     branch: true,
     component: true,
     category: true,
@@ -30,6 +31,7 @@ const variableNamingStructure = {
     scale: true,
   },
   radiusAlias: {
+    family: true,
     branch: true,
     component: true,
     category: true,
@@ -42,6 +44,7 @@ const variableNamingStructure = {
     scale: true,
   },
   spacingAlias: {
+    family: true,
     branch: true,
     component: true,
     category: true,
@@ -53,6 +56,7 @@ const variableNamingStructure = {
     scale: true,
   },
   borderWidthAlias: {
+    family: true,
     branch: true,
     component: true,
     category: true,
@@ -65,6 +69,7 @@ const variableNamingStructure = {
     scale: true,
   },
   opacityAlias: {
+    family: true,
     branch: true,
     component: true,
     category: true,

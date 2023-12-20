@@ -225,16 +225,17 @@ async function createAliasToken(
               figma.variables.createVariableAlias(coreVariable)
             );
           }
-        } else {
-          // if value empty, set hulk value
-          // const rgbColor = chroma("#AFFF04").rgba();
-          // variable.setValueForMode(modeId, {
-          //   r: rgbColor[0] / 255,
-          //   g: rgbColor[1] / 255,
-          //   b: rgbColor[2] / 255,
-          //   a: rgbColor[3],
-          // });
         }
+        //else {
+        // if value empty, set hulk value
+        // const rgbColor = chroma("#AFFF04").rgba();
+        // variable.setValueForMode(modeId, {
+        //   r: rgbColor[0] / 255,
+        //   g: rgbColor[1] / 255,
+        //   b: rgbColor[2] / 255,
+        //   a: rgbColor[3],
+        // });
+        //}
 
         // return;
       }
@@ -243,74 +244,17 @@ async function createAliasToken(
 }
 
 export default function () {
-  on<LoadPublishedTokensHandler>("LOAD_PUBLISHED_TOKENS", async () => {
-    const publishedTokens: Variable[] = [];
+  let publishedTokens: Variable[] = [];
+
+  once<LoadPublishedTokensHandler>("LOAD_PUBLISHED_TOKENS", async () => {
+    // const publishedTokens: Variable[] = [];
     const linkedCollections =
       await figma.teamLibrary.getAvailableLibraryVariableCollectionsAsync();
 
     if (linkedCollections) {
-      for (const collection of linkedCollections) {
-        const linkedVars =
-          await figma.teamLibrary.getVariablesInLibraryCollectionAsync(
-            collection.key
-          );
-
-        if (linkedVars) {
-          for (const linkedVar of linkedVars) {
-            const coreVariable = await figma.variables.importVariableByKeyAsync(
-              linkedVar.key
-            );
-
-            if (coreVariable) {
-              publishedTokens.push(coreVariable);
-            }
-          }
-        }
-      }
-    }
-
-    emit<PublishedTokensLoadedHandler>(
-      "PUBLISHED_TOKENS_LOADED",
-      publishedTokens
-    );
-  });
-
-  on<CreateTokensHandler>(
-    "CREATE_TOKENS",
-    async (tokens: TokenProperties[], publishedTokens: Variable[]) => {
-      // const localTokens = figma.variables.getLocalVariables();
-
-      let coreFile = false;
-      for (const token of tokens) {
-        if (token.type.indexOf("Core") !== -1) {
-          coreFile = true;
-          createCoreToken(token.value, token.collection, token.type);
-        }
-      }
-
-      if (!coreFile) {
-        const publishedTokens2 = await importPublishedTokens();
-        console.log(publishedTokens2);
-        for (const token of tokens) {
-          createAliasToken(
-            //@ts-expect-error
-            token.value,
-            token.collection,
-            token.type,
-            publishedTokens2
-          );
-        }
-      }
-    }
-  );
-
-  async function importPublishedTokens() {
-    const publishedTokens: Variable[] = [];
-    const linkedCollections =
-      await figma.teamLibrary.getAvailableLibraryVariableCollectionsAsync();
-
-    if (linkedCollections) {
-      for (const collection of linkedCollections) {
+      for (const collection of linkedCollections.filter(
+        (collection) => collection.libraryName === "[WIP] Core - Styles"
+      )) {
         const linkedVars =
           await figma.teamLibrary.getVariablesInLibraryCollectionAsync(
             collection.key
@@ -324,7 +268,7 @@ export default function () {
 
             console.log(coreVariable);
 
-            if (coreVariable.id) {
+            if (coreVariable) {
               publishedTokens.push(coreVariable);
             }
           }
@@ -332,8 +276,34 @@ export default function () {
       }
     }
 
-    return publishedTokens;
-  }
+    emit<PublishedTokensLoadedHandler>("PUBLISHED_TOKENS_LOADED");
+  });
+
+  on<CreateTokensHandler>(
+    "CREATE_TOKENS",
+    async (tokens: TokenProperties[]) => {
+      let coreFile = false;
+      for (const token of tokens) {
+        if (token.type.indexOf("Core") !== -1) {
+          coreFile = true;
+          createCoreToken(token.value, token.collection, token.type);
+        }
+      }
+
+      if (!coreFile) {
+        console.log(publishedTokens);
+        for (const token of tokens) {
+          createAliasToken(
+            //@ts-expect-error
+            token.value,
+            token.collection,
+            token.type,
+            publishedTokens
+          );
+        }
+      }
+    }
+  );
 
   showUI({ height: 300, width: 320 });
 }
