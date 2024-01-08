@@ -101,8 +101,6 @@ export function getFigmaAPIParams(tokenType: TokenType, tokenName: string) {
   let scope: VariableScope[] = ["ALL_SCOPES"];
   let variableType: VariableResolvedDataType = "COLOR";
 
-  console.log(tokenName);
-
   switch (tokenType) {
     case "colorAlias":
     case "colorNative":
@@ -113,10 +111,10 @@ export function getFigmaAPIParams(tokenType: TokenType, tokenName: string) {
       if (tokenName.includes("ripple") || tokenName.includes("dataviz"))
         scope = ["FRAME_FILL", "SHAPE_FILL"];
       if (tokenName.includes("border") || tokenName.includes("divider"))
-        scope = ["STROKE"];
+        scope = ["STROKE_COLOR"];
       if (tokenName.includes("text")) scope = ["TEXT_FILL"];
       if (tokenName.includes("icon")) scope = ["SHAPE_FILL"];
-      if (tokenName.includes("all")) scope = ["ALL_FILLS", "STROKE"];
+      if (tokenName.includes("all")) scope = ["ALL_FILLS", "STROKE_COLOR"];
       break;
     case "colorCore":
       scope = ["ALL_SCOPES"];
@@ -139,19 +137,19 @@ export function getFigmaAPIParams(tokenType: TokenType, tokenName: string) {
       variableType = "FLOAT";
       break;
     case "borderWidthCore":
-      scope = ["ALL_SCOPES"];
+      scope = ["STROKE_FLOAT"];
       variableType = "FLOAT";
       break;
     case "borderWidthAlias":
-      scope = ["ALL_SCOPES"];
+      scope = ["STROKE_FLOAT"];
       variableType = "FLOAT";
       break;
     case "opacityCore":
-      scope = ["ALL_SCOPES"];
+      scope = ["OPACITY"];
       variableType = "FLOAT";
       break;
     case "opacityAlias":
-      scope = ["ALL_SCOPES"];
+      scope = ["OPACITY"];
       variableType = "FLOAT";
       break;
   }

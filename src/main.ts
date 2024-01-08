@@ -62,7 +62,6 @@ async function createCoreToken(
   }
 
   // Set Code syntax for true token name
-  //@ts-expect-error
   variable.setVariableCodeSyntax("WEB", token.tokenName);
   variable.scopes = APIParams.scope;
 
@@ -164,8 +163,8 @@ async function createAliasToken(
     }
 
     // Set Code syntax for true token name
-    //@ts-expect-error
     variable.setVariableCodeSyntax("WEB", alias.tokenName);
+    console.log(APIParams.scope);
     variable.scopes = APIParams.scope;
 
     let linkedCore;
@@ -173,6 +172,7 @@ async function createAliasToken(
 
     switch (tokenType) {
       case "colorAlias":
+      case "colorNative":
         linkedCore = alias.linkedColorCoreToken;
         regexString = /{color.core./gi;
         break;
@@ -218,7 +218,6 @@ async function createAliasToken(
             .replace("}", "");
 
           const coreVariable = publishedTokens.find((v) => {
-            //@ts-expect-error
             return v.codeSyntax["WEB"] === coreTokenName;
           });
 
@@ -227,6 +226,7 @@ async function createAliasToken(
               modeId,
               figma.variables.createVariableAlias(coreVariable)
             );
+            console.log(`Update successful for ${modeName}`);
           } else {
             throw new Error(
               `Core Token not found for ${variable.name} > ${coreTokenName}`
@@ -236,6 +236,10 @@ async function createAliasToken(
 
         // return;
       }
+    } else {
+      throw new Error(
+        `Undefined linked core for ${variable.name}. Check token type`
+      );
     }
   }
 }
@@ -248,9 +252,12 @@ export default function () {
     const linkedCollections =
       await figma.teamLibrary.getAvailableLibraryVariableCollectionsAsync();
 
+    console.log(linkedCollections);
+
     if (linkedCollections) {
       for (const collection of linkedCollections.filter(
         (collection) => collection.libraryName === "[WIP] Core - Styles"
+        // collection.libraryName === "[WIP] Project - Styles"
       )) {
         const linkedVars =
           await figma.teamLibrary.getVariablesInLibraryCollectionAsync(
