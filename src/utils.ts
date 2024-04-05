@@ -64,6 +64,16 @@ const variableNamingStructure = {
     modifier: true,
     state: true,
   },
+  borderWidthNative: {
+    // branch: true,
+    family: true,
+    category: true,
+    type: true,
+    component: true,
+    modifier: true,
+    scale: true,
+    state: true,
+  },
   opacityCore: {
     family: true,
     scale: true,
@@ -75,6 +85,16 @@ const variableNamingStructure = {
     category: true,
     type: true,
     modifier: true,
+    state: true,
+  },
+  opacityNative: {
+    // branch: true,
+    family: true,
+    category: true,
+    type: true,
+    component: true,
+    modifier: true,
+    scale: true,
     state: true,
   },
 };
@@ -140,6 +160,7 @@ export function getFigmaAPIParams(tokenType: TokenType, tokenName: string) {
       scope = ["STROKE_FLOAT"];
       variableType = "FLOAT";
       break;
+    case "borderWidthNative":
     case "borderWidthAlias":
       scope = ["STROKE_FLOAT"];
       variableType = "FLOAT";
@@ -149,6 +170,10 @@ export function getFigmaAPIParams(tokenType: TokenType, tokenName: string) {
       variableType = "FLOAT";
       break;
     case "opacityAlias":
+      scope = ["OPACITY"];
+      variableType = "FLOAT";
+      break;
+    case "opacityNative":
       scope = ["OPACITY"];
       variableType = "FLOAT";
       break;

@@ -47,8 +47,10 @@ export type TokenType =
   | "spacingAlias"
   | "borderWidthCore"
   | "borderWidthAlias"
+  | "borderWidthNative"
   | "opacityCore"
-  | "opacityAlias";
+  | "opacityAlias"
+  | "opacityNative";
 
 export interface ProcessedTokens {
   collectionName: string;
@@ -108,8 +110,10 @@ export interface TokenCollection {
   borderRadiusAliases?: AliasToken[];
   borderWidth?: CoreToken[];
   borderWidthAliases?: AliasToken[];
+  borderWidthNatives?: AliasToken[];
   opacity?: CoreToken[];
   opacityAliases?: AliasToken[];
+  opacityNatives?: AliasToken[];
   core?: CoreToken[];
   aliases?: AliasToken[];
   natives?: AliasToken[];

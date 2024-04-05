@@ -185,10 +185,12 @@ async function createAliasToken(
         regexString = /{size.borderRadius./gi;
         break;
       case "borderWidthAlias":
+      case "borderWidthNative":
         linkedCore = alias.linkedBorderWidthToken;
         regexString = /{size.borderWidth./gi;
         break;
       case "opacityAlias":
+      case "opacityNative":
         linkedCore = alias.linkedOpacityToken;
         regexString = /{size.opacity./gi;
         break;
@@ -256,7 +258,7 @@ export default function () {
 
     if (linkedCollections) {
       for (const collection of linkedCollections.filter(
-        (collection) => collection.libraryName === "[WIP] Core - Styles"
+        (collection) => collection.libraryName === "Core - Styles"
         // collection.libraryName === "[WIP] Project - Styles"
       )) {
         const linkedVars =
@@ -278,6 +280,8 @@ export default function () {
           }
         }
       }
+
+      console.log(publishedTokens);
     }
 
     emit<PublishedTokensLoadedHandler>("PUBLISHED_TOKENS_LOADED");
@@ -412,6 +416,16 @@ export function processTokens(tokens: string) {
       }
     }
 
+    if (file.size.borderWidthNatives) {
+      let tokensList = Object.entries(file.size.borderWidthNatives);
+      for (const [tokenName, tokenValue] of tokensList) {
+        processedTokens.tokensList.push({
+          type: "borderWidthNative",
+          value: tokenValue,
+        });
+      }
+    }
+
     if (file.size.borderRadius) {
       let tokensList = Object.entries(file.size.borderRadius);
       for (const [tokenName, tokenValue] of tokensList) {
@@ -447,6 +461,16 @@ export function processTokens(tokens: string) {
       for (const [tokenName, tokenValue] of tokensList) {
         processedTokens.tokensList.push({
           type: "opacityAlias",
+          value: tokenValue,
+        });
+      }
+    }
+
+    if (file.size.opacityNatives) {
+      let tokensList = Object.entries(file.size.opacityNatives);
+      for (const [tokenName, tokenValue] of tokensList) {
+        processedTokens.tokensList.push({
+          type: "opacityNative",
           value: tokenValue,
         });
       }
